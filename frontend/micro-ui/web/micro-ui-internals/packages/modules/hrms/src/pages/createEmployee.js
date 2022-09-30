@@ -256,6 +256,7 @@ const CreateEmployee = ({userType}) => {
           dob: new Date(data?.SelectDateofBirthEmployment?.dob).getTime(),
           roles: mappedroles,
           tenantId: tenantId,
+          photo:profilePic
         },
         serviceHistory: [],
         education: [],
