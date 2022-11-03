@@ -1,0 +1,39 @@
+serviceMaps:
+  serviceName: birth-death-services
+  mappings:   
+      
+  - version: 1.0
+    description: Persists deathSpouseInfo details in eg_death_spouse_info  table
+    fromTopic: save-deathdetails-topic
+    isTransaction: true
+    queryMaps:
+
+    - query: INSERT INTO public.eg_death_spouse_info1 (id, firstname, middlename, lastname, aadharno, emailid, mobileno, createdtime, createdby, deathdtlid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);
+      basePath: deathCerts.*.deathSpouseInfo
+      jsonMaps:
+      - jsonPath: $.deathCerts.*.id
+
+      - jsonPath: $.deathCerts.*.deathSpouseInfo.firstname
+
+      - jsonPath: $.deathCerts.*.deathSpouseInfo.middlename
+
+      - jsonPath: $.deathCerts.*.deathSpouseInfo.lastname
+
+      - jsonPath: $.deathCerts.*.deathSpouseInfo.aadharno
+
+      - jsonPath: $.deathCerts.*.deathSpouseInfo.emailid
+
+      - jsonPath: $.deathCerts.*.deathSpouseInfo.mobileno
+      
+      - jsonPath: $.deathCerts.*.auditDetails.createdtime
+      
+      - jsonPath: $.deathCerts.*.auditDetails.createdby
+      
+      - jsonPath: $.deathCerts.*.deathdtlid
+  
+        type: JSON
+        dbType: JSONB
+
+   
+
+ 
