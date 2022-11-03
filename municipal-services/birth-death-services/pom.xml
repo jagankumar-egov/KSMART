@@ -57,7 +57,7 @@
     <dependency>
     	<groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.2.2.jre7</version>
+      <version>42.5.0</version>
     </dependency>
     <dependency>
       <groupId>org.egov</groupId>
@@ -79,6 +79,16 @@
 			</exclusion>
 		</exclusions>
 	</dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>3.0.0</version>
+    </dependency>
   </dependencies>
 <repositories>
     <repository>

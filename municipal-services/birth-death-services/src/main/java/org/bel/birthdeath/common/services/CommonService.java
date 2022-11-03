@@ -14,6 +14,12 @@ import org.egov.common.contract.request.RequestInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import lombok.extern.slf4j.Slf4j;
+
+
+@Slf4j	
 @Service
 public class CommonService {
 
@@ -42,6 +48,20 @@ public class CommonService {
 	 * @return ImportBirthWrapper
 	 */
 	public ImportBirthWrapper saveBirthImport(BirthResponse importJSon, RequestInfo requestInfo) {
+		
+		/********************************************* */
+		System.out.println("Kasinath : "+ importJSon+"ended");
+         try {
+                 ObjectMapper mapper = new ObjectMapper();
+                 Object obj = importJSon;
+                 mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+                System.out.println("rakhi "+ mapper.writeValueAsString(obj));
+         	}catch(Exception e) {
+             log.error("Exception while fetching from searcher: ",e);
+         }
+
+        /********************************************** */
+		
 		return repository.saveBirthImport(importJSon, requestInfo);
 	}
 

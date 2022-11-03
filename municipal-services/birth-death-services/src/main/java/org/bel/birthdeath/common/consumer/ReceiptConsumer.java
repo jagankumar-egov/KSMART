@@ -64,10 +64,11 @@ public class ReceiptConsumer {
 	@Autowired
 	private DeathRepository repositoryDeath;
 
-	@KafkaListener(topics = {"${kafka.topics.receipt.create}"})
+	//@KafkaListener(topics = {"${kafka.topics.receipt.create}"})
+	@KafkaListener(topics = {"${kafka.topics.receipt.create}","${persister.save.deathdetails.topic}"})
     public void listen(final HashMap<String, Object> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         try {
-        process(record);
+        //process(record);
         } catch (final Exception e) {
             log.error("Error while listening to value: " + record + " on topic: " + topic + ": ", e.getMessage());
         }

@@ -10,6 +10,7 @@ public class ResponseInfoFactory {
     public ResponseInfo createResponseInfoFromRequestInfo(final RequestInfo requestInfo, final Boolean success) {
 
         final String apiId = requestInfo != null ? requestInfo.getApiId() : "";
+        System.out.println("api"+apiId);
         final String ver = requestInfo != null ? requestInfo.getVer() : "";
         Long ts = null;
         if(requestInfo!=null)

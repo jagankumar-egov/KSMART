@@ -22,9 +22,11 @@ import org.bel.birthdeath.common.contract.DeathResponse;
 import org.bel.birthdeath.common.contract.EncryptionDecryptionUtil;
 import org.bel.birthdeath.common.model.AuditDetails;
 import org.bel.birthdeath.common.model.EgHospitalDtl;
+import org.bel.birthdeath.common.producer.BndProducer;
 import org.bel.birthdeath.common.repository.builder.CommonQueryBuilder;
 import org.bel.birthdeath.common.repository.rowmapper.CommonRowMapper;
 import org.bel.birthdeath.common.services.CommonService;
+import org.bel.birthdeath.config.BirthDeathConfiguration;
 import org.bel.birthdeath.death.model.EgDeathDtl;
 import org.bel.birthdeath.death.model.EgDeathFatherInfo;
 import org.bel.birthdeath.death.model.EgDeathMotherInfo;
@@ -43,6 +45,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -75,7 +80,14 @@ public class CommonRepository {
 	
 	@Autowired
 	EncryptionDecryptionUtil encryptionDecryptionUtil;
-
+	
+	//Rakhi S
+	@Autowired
+	BirthDeathConfiguration config;
+	
+	@Autowired
+	BndProducer producer;
+//End
 	@Autowired
 	@Lazy
 	public CommonRepository(CommonService commonService) {
@@ -200,10 +212,12 @@ public class CommonRepository {
 	public ImportBirthWrapper saveBirthImport(BirthResponse response, RequestInfo requestInfo) {
 		ImportBirthWrapper importBirthWrapper = new ImportBirthWrapper();
 		try {
+			
 		Map<String,EgBirthDtl> uniqueList = new HashMap<String, EgBirthDtl>();
 		Map<String, List<EgBirthDtl>> uniqueHospList = new HashMap<String, List<EgBirthDtl>>();
 		Set<String> duplicates = new HashSet<String>();
 		response.getBirthCerts().forEach(bdtl -> {
+			System.out.println("rakhi1");
 			if(null != bdtl.getRejectReason())
 			{
 				importBirthWrapper.updateMaps(BirthDeathConstants.EXCEL_DATA_ERROR, bdtl);
@@ -251,7 +265,9 @@ public class CommonRepository {
 			uniqueList.remove(regno);
 		}
 		modifyHospIdBirth(uniqueHospList , response.getBirthCerts().get(0).getTenantid());
+		System.out.println("modifyHospIdBirth");	
 		AuditDetails auditDetails = commUtils.getAuditDetails(requestInfo.getUserInfo().getUuid(), true);
+		System.out.println("auditDetails");
 		int finalCount=0;
 		for (Entry<String, EgBirthDtl> entry : uniqueList.entrySet()) {
 			EgBirthDtl birthDtl = entry.getValue();
@@ -319,6 +335,7 @@ public class CommonRepository {
 				if(!dbHospNameIdMap.containsKey(hospName))
 				{
 					String id = tenantid.split("\\.")[1] + "_" + (dbHospNameIdMap.keySet().size() + 1);
+					System.out.println("RAkhi:id:"+ id);	
 					jdbcTemplate.update(HOSPITALINSERTSQL, id,hospName,tenantid);
 					dbHospNameIdMap.put(hospName,id);
 				}
@@ -554,6 +571,8 @@ public class CommonRepository {
 		}
 		modifyHospIdDeath(uniqueHospList , response.getDeathCerts().get(0).getTenantid());
 		AuditDetails auditDetails = commUtils.getAuditDetails(requestInfo.getUserInfo().getUuid(), true);
+		
+		
 		int finalCount=0;
 		for (Entry<String, EgDeathDtl> entry : uniqueList.entrySet()) {
 			EgDeathDtl deathDtl = entry.getValue();
@@ -572,14 +591,62 @@ public class CommonRepository {
 				deathDtl.setGender(0);
 				break;
 			}
+			
+			//Rakhi S		
+			deathDtl.setAuditDetails(auditDetails);	
+			
+			/********************************************* */
+			
+	         try {
+	                 ObjectMapper mapper = new ObjectMapper();
+	                 Object obj = response;
+	                 mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+	                System.out.println("jsondet "+ mapper.writeValueAsString(obj));
+	         }catch(Exception e) {
+	             log.error("Exception while fetching from searcher: ",e);
+	         }
+
+	        /********************************************** */
+			//**********
+	         
+	         
 			if(deathValidator.validateUniqueRegNo(deathDtl,importDeathWrapper) && deathValidator.validateImportFields(deathDtl,importDeathWrapper)){
 				try {
 					namedParameterJdbcTemplate.update(DEATHDTLSAVEQRY, getParametersForDeathDtl(deathDtl, auditDetails, true));
 					namedParameterJdbcTemplate.update(DEATHFATHERINFOSAVEQRY, getParametersForFatherInfo(deathDtl, auditDetails, true));
 					namedParameterJdbcTemplate.update(DEATHMOTHERINFOSAVEQRY, getParametersForMotherInfo(deathDtl, auditDetails, true));
-					namedParameterJdbcTemplate.update(DEATHSPOUSEINFOSAVEQRY, getParametersForSpouseInfo(deathDtl, auditDetails, true));
+					
+					//RAkhi S
+					//namedParameterJdbcTemplate.update(DEATHSPOUSEINFOSAVEQRY, getParametersForSpouseInfo(deathDtl, auditDetails, true));
+					
+					
 					namedParameterJdbcTemplate.update(DEATHPERMADDRSAVEQRY, getParametersForPermAddr(deathDtl, auditDetails, true));
 					namedParameterJdbcTemplate.update(DEATHPRESENTADDRSAVEQRY, getParametersForPresentAddr(deathDtl, auditDetails, true));
+					
+					//RAkhi S
+					List<EgDeathDtl> deathDtlList=new ArrayList<>();
+					deathDtlList.add(deathDtl);
+					DeathResponse deathResponse = DeathResponse.builder().deathCerts(deathDtlList).build();
+					
+
+					/********************************************* */
+					
+			         try {
+			                 ObjectMapper mapper = new ObjectMapper();
+			                 Object obj = deathResponse;
+			                 mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+			                System.out.println("deathResponseJson "+ mapper.writeValueAsString(obj));
+			         }catch(Exception e) {
+			             log.error("Exception while fetching from searcher: ",e);
+			         }
+
+			        /********************************************** */
+					
+					
+					System.out.println("topic"+config.getSaveDeathDetailsTopic());
+					producer.push(config.getSaveDeathDetailsTopic(), deathResponse);
+					//**********
+					
 					finalCount++;
 				}
 				catch (Exception e) {

@@ -1,6 +1,13 @@
 package org.bel.birthdeath.death.model;
 
 import java.sql.Timestamp;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.bel.birthdeath.common.model.AuditDetails;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -96,4 +103,9 @@ public class EgDeathDtl{
 	private String rejectReason;
 	
 	private String fullName;
+	
+	   //RAkhi S
+    @JsonProperty("auditDetails")
+    @Valid
+    private AuditDetails auditDetails = null;
 }

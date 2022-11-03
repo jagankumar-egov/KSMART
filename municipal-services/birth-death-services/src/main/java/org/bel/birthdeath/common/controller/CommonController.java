@@ -19,7 +19,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @RestController
 @RequestMapping("/common")
 public class CommonController {
@@ -45,6 +50,20 @@ public class CommonController {
 	@PostMapping(value = { "/savebirthimport"})
     public ResponseEntity<ImportBirthWrapper> saveBirthImport(
     		@RequestBody BirthResponse importJSon) {
+	
+		/********************************************* */
+//		System.out.println("hai : "+ importJSon+"ended");
+//         try {
+//                 ObjectMapper mapper = new ObjectMapper();
+//                 Object obj = importJSon;
+//                 mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+//                System.out.println("rakhi1 "+ mapper.writeValueAsString(obj));
+//         	}catch(Exception e) {
+//             log.error("Exception while fetching from searcher: ",e);
+//         }
+
+        /********************************************** */
+         
         ImportBirthWrapper importBirthWrapper = commonService.saveBirthImport(importJSon,importJSon.getRequestInfo());
         importBirthWrapper.setResponseInfo(responseInfoFactory.createResponseInfoFromRequestInfo(importJSon.getRequestInfo(), true));
         return new ResponseEntity<>(importBirthWrapper, HttpStatus.OK);

@@ -54,6 +54,11 @@ public class BirthDeathConfiguration {
     @Value("${persister.update.death.topic}")
     private String updateDeathTopic;
     
+    
+    //RakhiS
+    @Value("${persister.save.deathdetails.topic}")
+    private String saveDeathDetailsTopic;
+    
     //MDMS
     @Value("${egov.mdms.host}")
     private String mdmsHost;
