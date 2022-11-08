@@ -1,0 +1,365 @@
+serviceMaps:
+  serviceName: birth-death-services
+  mappings:
+    - version: 1.0
+      description: Persists birthCertificate details in eg_birth_cert_request  table
+      fromTopic: save-birth-topic
+      isTransaction: true
+      queryMaps:
+
+        - query: INSERT INTO public.eg_birth_dtls(id, registrationno, hospitalname, dateofreport, dateandtimeofbirth, firstname_en, firstname_ml, middlename_en, middlename_ml, lastname_en, lastname_ml, placeofbirth, informantsname, informantsaddress, createdtime, createdby, lastmodifiedtime, lastmodifiedby, counter, tenantid, gender, remarks, hospitalid, applicationcode, aadharno, informants_mobileno) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthSave.*.birthDetails
+          jsonMaps:
+            - jsonPath: $.birthSave.*.birthDetails.id
+
+            - jsonPath: $.birthSave.*.birthDetails.registrationno
+
+            - jsonPath: $.birthSave.*.birthDetails.hospitalname
+
+            - jsonPath: $.birthSave.*.birthDetails.dateofreport
+
+            - jsonPath: $.birthSave.*.birthDetails.dateandtimeofbirth
+
+            - jsonPath: $.birthSave.*.birthDetails.firstname_en
+
+            - jsonPath: $.birthSave.*.birthDetails.firstname_ml
+
+            - jsonPath: $.birthSave.*.birthDetails.middlename_en
+
+            - jsonPath: $.birthSave.*.birthDetails.middlename_ml
+
+            - jsonPath: $.birthSave.*.birthDetails.lastname_en
+
+            - jsonPath: $.birthSave.*.birthDetails.lastname_ml
+
+            - jsonPath: $.birthSave.*.birthDetails.placeofbirth
+
+            - jsonPath: $.birthSave.*.birthDetails.informantsname
+
+            - jsonPath: $.birthSave.*.birthDetails.informantsaddress
+
+            - jsonPath: $.birthSave.*.birthDetails.createdtime
+
+            - jsonPath: $.birthSave.*.birthDetails.createdby
+
+            - jsonPath: $.birthSave.*.birthDetails.lastmodifiedtime
+
+            - jsonPath: $.birthSave.*.birthDetails.lastmodifiedby
+
+            - jsonPath: $.birthSave.*.birthDetails.counter
+
+            - jsonPath: $.birthSave.*.birthDetails.tenantid
+
+            - jsonPath: $.birthSave.*.birthDetails.gender
+
+            - jsonPath: $.birthSave.*.birthDetails.remarks
+
+            - jsonPath: $.birthSave.*.birthDetails.hospitalid
+
+            - jsonPath: $.birthSave.*.birthDetails.applicationcode
+
+            - jsonPath: $.birthSave.*.birthDetails.aadharno
+
+            - jsonPath: $.birthSave.*.birthDetails.informants_mobileno
+
+        - query: INSERT INTO public.eg_birth_father_info(id, firstname_en, firstname_ml, middlename_en, middlename_ml, lastname_en, lastname_ml, aadharno, emailid, mobileno, educationid, proffessionid, nationality, religionid, createdtime, createdby, lastmodifiedtime, lastmodifiedby, birthdtlid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthsave.*.birthFather
+          jsonMaps:
+
+            - jsonPath: $.birthsave.*.birthFather.id
+
+            - jsonPath: $.birthsave.*.birthFather.firstname_en
+
+            - jsonPath: $.birthsave.*.birthFather.firstname_ml
+
+            - jsonPath: $.birthsave.*.birthFather.middlename_en
+
+            - jsonPath: $.birthsave.*.birthFather.middlename_ml
+
+            - jsonPath: $.birthsave.*.birthFather.lastname_en
+
+            - jsonPath: $.birthsave.*.birthFather.lastname_ml
+
+            - jsonPath: $.birthsave.*.birthFather.aadharno
+
+            - jsonPath: $.birthsave.*.birthFather.emailid
+
+            - jsonPath: $.birthsave.*.birthFather.mobileno
+
+            - jsonPath: $.birthsave.*.birthFather.educationid
+
+            - jsonPath: $.birthsave.*.birthFather.proffessionid
+
+            - jsonPath: $.birthsave.*.birthFather.nationality
+
+            - jsonPath: $.birthsave.*.birthFather.religionid
+
+            - jsonPath: $.birthsave.*.birthFather.createdtime
+
+            - jsonPath: $.birthsave.*.birthFather.createdby
+
+            - jsonPath: $.birthsave.*.birthFather.lastmodifiedtime
+
+            - jsonPath: $.birthsave.*.birthFather.lastmodifiedby
+
+            - jsonPath: $.birthsave.*.birthFather.birthdtlid
+
+        - query: INSERT INTO public.eg_birth_mother_info(id, firstname_en, firstname_ml, middlename_en, middlename_ml, lastname_en, lastname_ml, aadharno, emailid, mobileno, educationid, proffessionid, nationality, religionid, createdtime, createdby, lastmodifiedtime, lastmodifiedby, birthdtlid, dateofmarriage, dateofbirth, no_of_birth_given, no_of_children_alive, maritalstatusid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthsave.*.birthMother
+          jsonMaps:
+            - jsonPath: $.birthsave.*.birthMother.id
+
+            - jsonPath: $.birthsave.*.birthMother.firstname_en
+
+            - jsonPath: $.birthsave.*.birthMother.firstname_ml
+
+            - jsonPath: $.birthsave.*.birthMother.middlename_en
+
+            - jsonPath: $.birthsave.*.birthMother.middlename_ml
+
+            - jsonPath: $.birthsave.*.birthMother.lastname_en
+
+            - jsonPath: $.birthsave.*.birthMother.lastname_ml
+
+            - jsonPath: $.birthsave.*.birthMother.aadharno
+
+            - jsonPath: $.birthsave.*.birthMother.emailid
+
+            - jsonPath: $.birthsave.*.birthMother.mobileno
+
+            - jsonPath: $.birthsave.*.birthMother.educationid
+
+            - jsonPath: $.birthsave.*.birthMother.proffessionid
+
+            - jsonPath: $.birthsave.*.birthMother.nationality
+
+            - jsonPath: $.birthsave.*.birthMother.religionid
+
+            - jsonPath: $.birthsave.*.birthMother.createdtime
+
+            - jsonPath: $.birthsave.*.birthMother.createdby
+
+            - jsonPath: $.birthsave.*.birthMother.lastmodifiedtime
+
+            - jsonPath: $.birthsave.*.birthMother.lastmodifiedby
+
+            - jsonPath: $.birthsave.*.birthMother.birthdtlid
+
+            - jsonPath: $.birthsave.*.birthMother.dateofmarriage
+
+            - jsonPath: $.birthsave.*.birthMother.dateofbirth
+
+            - jsonPath: $.birthsave.*.birthMother.no_of_birth_given
+
+            - jsonPath: $.birthsave.*.birthMother.no_of_children_alive
+
+            - jsonPath: $.birthsave.*.birthMother.maritalstatusid
+
+        - query: INSERT INTO public.eg_birth_permaddr(id, buildingno, houseno, streetname_en, streetname_ml, locality_en, locality_ml, city_en, city_ml, talukid, districtid, pinno, stateid, countryid, createdby, createdtime, lastmodifiedby, lastmodifiedtime, birthdtlid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthsave.*.birthPermanent
+          jsonMaps:
+            - jsonPath: $.birthsave.*.birthPermanent.id
+
+            - jsonPath: $.birthsave.*.birthPermanent.buildingno
+
+            - jsonPath: $.birthsave.*.birthPermanent.houseno
+
+            - jsonPath: $.birthsave.*.birthPermanent.streetname_en
+
+            - jsonPath: $.birthsave.*.birthPermanent.streetname_ml
+
+            - jsonPath: $.birthsave.*.birthPermanent.locality_en
+
+            - jsonPath: $.birthsave.*.birthPermanent.locality_ml
+
+            - jsonPath: $.birthsave.*.birthPermanent.city_en
+
+            - jsonPath: $.birthsave.*.birthPermanent.city_ml
+
+            - jsonPath: $.birthsave.*.birthPermanent.talukid
+
+            - jsonPath: $.birthsave.*.birthPermanent.districtid
+
+            - jsonPath: $.birthsave.*.birthPermanent.pinno
+
+            - jsonPath: $.birthsave.*.birthPermanent.stateid
+
+            - jsonPath: $.birthsave.*.birthPermanent.countryid
+
+            - jsonPath: $.birthsave.*.birthPermanent.createdby
+
+            - jsonPath: $.birthsave.*.birthPermanent.createdtime
+
+            - jsonPath: $.birthsave.*.birthPermanent.lastmodifiedby
+
+            - jsonPath: $.birthsave.*.birthPermanent.lastmodifiedtime
+
+            - jsonPath: $.birthsave.*.birthPermanent.birthdtlid
+
+        - query: INSERT INTO public.eg_birth_presentaddr(id, buildingno, houseno, streetname_en, streetname_ml, locality_en, locality_ml, city_en, city_ml, talukid, districtid, stateid, pinno, countryid, createdby, createdtime, lastmodifiedby, lastmodifiedtime, birthdtlid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthsave.*.birthPresent
+          jsonMaps:
+            - jsonPath: $.birthsave.*.birthPresent.id
+
+            - jsonPath: $.birthsave.*.birthPresent.buildingno
+
+            - jsonPath: $.birthsave.*.birthPresent.houseno
+
+            - jsonPath: $.birthsave.*.birthPresent.streetname_en
+
+            - jsonPath: $.birthsave.*.birthPresent.streetname_ml
+
+            - jsonPath: $.birthsave.*.birthPresent.locality_en
+
+            - jsonPath: $.birthsave.*.birthPresent.locality_ml
+
+            - jsonPath: $.birthsave.*.birthPresent.city_en
+
+            - jsonPath: $.birthsave.*.birthPresent.city_ml
+
+            - jsonPath: $.birthsave.*.birthPresent.talukid
+
+            - jsonPath: $.birthsave.*.birthPresent.districtid
+
+            - jsonPath: $.birthsave.*.birthPresent.pinno
+
+            - jsonPath: $.birthsave.*.birthPresent.stateid
+
+            - jsonPath: $.birthsave.*.birthPresent.countryid
+
+            - jsonPath: $.birthsave.*.birthPresent.createdby
+
+            - jsonPath: $.birthsave.*.birthPresent.createdtime
+
+            - jsonPath: $.birthsave.*.birthPresent.lastmodifiedby
+
+            - jsonPath: $.birthsave.*.birthPresent.lastmodifiedtime
+
+            - jsonPath: $.birthsave.*.birthPresent.birthdtlid
+
+        - query: INSERT INTO public.eg_birth_death_non_institution(id, non_institutiontype_id, address1_en, address1_ml, address2_en, address2_ml, locality_en, locality_ml, talukid, districtid, pincode, stateid, mobileno, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthsave.*.birthNonInstitution
+          jsonMaps:
+            - jsonPath: $.birthsave.*.birthNonInstitution.id
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.non_institutiontype_id
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.address1_en
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.address1_ml
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.address2_en
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.address2_ml
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.locality_en
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.locality_ml
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.talukid
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.districtid
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.pinno
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.stateid
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.mobileno
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.createdby
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.createdtime
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.lastmodifiedby
+
+            - jsonPath: $.birthsave.*.birthNonInstitution.lastmodifiedtime
+
+        - query: INSERT INTO public.eg_birth_death_hospitals(id, hospitalname, tenantid, createdby, createdtime, lastmodifiedby, lastmodifiedtime, birthdtlid) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthsave.*.birthHospital
+          jsonMaps:
+            - jsonPath: $.birthsave.*.birthHospital.id
+
+            - jsonPath: $.birthsave.*.birthHospital.hospitalname
+
+            - jsonPath: $.birthsave.*.birthHospital.tenantid
+
+            - jsonPath: $.birthsave.*.birthHospital.createdby
+
+            - jsonPath: $.birthsave.*.birthHospital.createdtime
+
+            - jsonPath: $.birthsave.*.birthHospital.lastmodifiedby
+
+            - jsonPath: $.birthsave.*.birthHospital.lastmodifiedtime
+
+            - jsonPath: $.birthsave.*.birthHospital.birthdtlid
+
+        - query: INSERT INTO public.eg_birth_death_home(id, buildingno, houseno, streetname_en, streetname_ml, locality_en, locality_ml, talukid, districtid, city_en, city_ml, stateid, pinno, countryid, createdtime, createdby, lastmodifiedtime, lastmodifiedby) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthsave.*.birthHome
+          jsonMaps:
+            - jsonPath: $.birthsave.*.birthHome.id
+
+            - jsonPath: $.birthsave.*.birthHome.buildingno
+
+            - jsonPath: $.birthsave.*.birthHome.houseno
+
+            - jsonPath: $.birthsave.*.birthHome.streetname_en
+
+            - jsonPath: $.birthsave.*.birthHome.streetname_ml
+
+            - jsonPath: $.birthsave.*.birthHome.locality_en
+
+            - jsonPath: $.birthsave.*.birthHome.locality_ml
+
+            - jsonPath: $.birthsave.*.birthHome.talukid
+
+            - jsonPath: $.birthsave.*.birthHome.districtid
+
+            - jsonPath: $.birthsave.*.birthHome.city_en
+
+            - jsonPath: $.birthsave.*.birthHome.city_ml
+
+            - jsonPath: $.birthsave.*.birthHome.stateid
+
+            - jsonPath: $.birthsave.*.birthHome.pinno
+
+            - jsonPath: $.birthsave.*.birthHome.countryid
+
+            - jsonPath: $.birthsave.*.birthHome.createdtime
+
+            - jsonPath: $.birthsave.*.birthHome.createdby
+
+            - jsonPath: $.birthsave.*.birthHome.lastmodifiedtime
+
+            - jsonPath: $.birthsave.*.birthHome.lastmodifiedby
+
+        - query: INSERT INTO public.statitical_info(id, weight_of_child, height_of_child, duration_of_pregnancy_in_week, nature_of_medical_attention, delivery_method, birthdtlid, createdby, createdtime, lastmodifiedtime, lastmodifiedby) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: birthsave.*.birthStatitical
+          jsonMaps:
+            - jsonPath: $.birthsave.*.birthStatitical.id
+
+            - jsonPath: $.birthsave.*.birthStatitical.weight_of_child
+
+            - jsonPath: $.birthsave.*.birthStatitical.height_of_child
+
+            - jsonPath: $.birthsave.*.birthStatitical.duration_of_pregnancy_in_week
+
+            - jsonPath: $.birthsave.*.birthStatitical.nature_of_medical_attention
+
+            - jsonPath: $.birthsave.*.birthStatitical.delivery_method
+
+            - jsonPath: $.birthsave.*.birthStatitical.birthdtlid
+
+            - jsonPath: $.birthsave.*.birthStatitical.createdby
+
+            - jsonPath: $.birthsave.*.birthStatitical.createdtime
+
+            - jsonPath: $.birthsave.*.birthStatitical.lastmodifiedtime
+
+            - jsonPath: $.birthsave.*.birthStatitical.lastmodifiedby
+
+
+
+
+
+
+

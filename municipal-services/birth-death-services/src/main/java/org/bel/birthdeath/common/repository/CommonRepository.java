@@ -20,8 +20,11 @@ import org.bel.birthdeath.birth.validator.BirthValidator;
 import org.bel.birthdeath.common.contract.BirthResponse;
 import org.bel.birthdeath.common.contract.DeathResponse;
 import org.bel.birthdeath.common.contract.EncryptionDecryptionUtil;
+import org.bel.birthdeath.common.enrichment.birth.BirthDetailsEnrichment;
 import org.bel.birthdeath.common.model.AuditDetails;
 import org.bel.birthdeath.common.model.EgHospitalDtl;
+import org.bel.birthdeath.common.model.birthmodel.BirthDetails;
+import org.bel.birthdeath.common.model.birthmodel.BirthDetailsRequest;
 import org.bel.birthdeath.common.producer.BndProducer;
 import org.bel.birthdeath.common.repository.builder.CommonQueryBuilder;
 import org.bel.birthdeath.common.repository.rowmapper.CommonRowMapper;
@@ -38,7 +41,6 @@ import org.bel.birthdeath.death.validator.DeathValidator;
 import org.bel.birthdeath.utils.BirthDeathConstants;
 import org.bel.birthdeath.utils.CommonUtils;
 import org.egov.common.contract.request.RequestInfo;
-import org.egov.tracer.model.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -54,7 +56,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Repository
 public class CommonRepository {
-	
+
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 	
@@ -87,6 +89,9 @@ public class CommonRepository {
 	
 	@Autowired
 	BndProducer producer;
+
+	@Autowired
+	BirthDetailsEnrichment birthDetailsEnrichment;
 //End
 	@Autowired
 	@Lazy
@@ -209,6 +214,122 @@ public class CommonRepository {
         return hospitalDtls;
 	}
 
+	public List<BirthDetails> saveBirthImportNew(BirthDetailsRequest request) {
+		birthDetailsEnrichment.enrichCreate(request);
+		System.out.println("birth");
+		producer.push(config.getSaveBirthDetailsTopic(), request.getBirthDetails());
+		return request.getBirthDetails();
+	}
+	public ImportBirthWrapper saveBirthImportNew1(BirthResponse response, RequestInfo requestInfo) {
+		ImportBirthWrapper importBirthWrapper = new ImportBirthWrapper();
+		try {
+			Map<String,EgBirthDtl> uniqueList = new HashMap<String, EgBirthDtl>();
+			Map<String, List<EgBirthDtl>> uniqueHospList = new HashMap<String, List<EgBirthDtl>>();
+			Set<String> duplicates = new HashSet<String>();
+			response.getBirthCerts().forEach(bdtl -> {
+				if(null != bdtl.getRejectReason())
+				{
+					importBirthWrapper.updateMaps(BirthDeathConstants.EXCEL_DATA_ERROR, bdtl);
+				}
+				else
+				{
+					if (bdtl.getRegistrationno() != null) {
+						if (uniqueList.get(bdtl.getRegistrationno()) == null)
+						{
+							birthValidator.removeSpaceChars(bdtl);
+							uniqueList.put(bdtl.getRegistrationno(), bdtl);
+							if (null != bdtl.getHospitalname() && !bdtl.getHospitalname().trim().isEmpty() )
+							{
+								if(bdtl.getHospitalname().length() >500) {
+									importBirthWrapper.updateMaps(BirthDeathConstants.HOSPNAME_LARGE, bdtl);
+									importBirthWrapper.setServiceError(BirthDeathConstants.HOSPNAME_LARGE);
+									uniqueList.remove(bdtl.getRegistrationno());
+								}
+								else {
+									bdtl.setHospitalname(bdtl.getHospitalname().trim());
+									if(!uniqueHospList.containsKey(bdtl.getHospitalname()))
+									{
+										uniqueHospList.put(bdtl.getHospitalname(),new ArrayList<EgBirthDtl>());
+									}
+									uniqueHospList.get(bdtl.getHospitalname()).add(bdtl);
+								}
+							}
+						}
+						else {
+							importBirthWrapper.updateMaps(BirthDeathConstants.DUPLICATE_REG_EXCEL, bdtl);
+							importBirthWrapper.setServiceError(BirthDeathConstants.DUPLICATE_REG_EXCEL);
+							duplicates.add(bdtl.getRegistrationno());
+						}
+					}
+					else
+					{
+						importBirthWrapper.updateMaps(BirthDeathConstants.REG_EMPTY, bdtl);
+						importBirthWrapper.setServiceError(BirthDeathConstants.REG_EMPTY);
+					}
+				}
+			});
+			for (String regno : duplicates) {
+				importBirthWrapper.updateMaps(BirthDeathConstants.DUPLICATE_REG_EXCEL, uniqueList.get(regno));
+				importBirthWrapper.setServiceError(BirthDeathConstants.DUPLICATE_REG_EXCEL);
+				uniqueList.remove(regno);
+			}
+			modifyHospIdBirth(uniqueHospList , response.getBirthCerts().get(0).getTenantid());
+			AuditDetails auditDetails = commUtils.getAuditDetails(requestInfo.getUserInfo().getUuid(), true);
+			int finalCount=0;
+			for (Entry<String, EgBirthDtl> entry : uniqueList.entrySet()) {
+				EgBirthDtl birthDtl = entry.getValue();
+				birthDtl.setGenderStr(birthDtl.getGenderStr()==null?"":birthDtl.getGenderStr().trim().toLowerCase());
+				switch (birthDtl.getGenderStr()) {
+					case "male":
+						birthDtl.setGender(1);
+						break;
+					case "female":
+						birthDtl.setGender(2);
+						break;
+					case "others":
+						birthDtl.setGender(3);
+						break;
+					default:
+						birthDtl.setGender(0);
+						break;
+				}
+
+
+				if(birthValidator.validateUniqueRegNo(birthDtl,importBirthWrapper) && birthValidator.validateImportFields(birthDtl,importBirthWrapper)){
+					try {
+						List<EgBirthDtl> birthDetails=new ArrayList<>();
+						birthDetails.add(birthDtl);
+						BirthResponse birthResponse = BirthResponse.builder().birthCerts(birthDetails).build();
+						producer.push(config.getSaveDeathDetailsTopic(), birthResponse);
+						finalCount++;
+					}
+					catch (Exception e) {
+						birthDtl.setRejectReason(BirthDeathConstants.DATA_ERROR);
+						importBirthWrapper.updateMaps(BirthDeathConstants.DATA_ERROR, birthDtl);
+						Map<String, String> params = new HashMap<>();
+						params.put("tenantid", birthDtl.getTenantid());
+						params.put("registrationno", birthDtl.getRegistrationno());
+						namedParameterJdbcTemplate.update(BIRTHDTLDELETEQRY, params);
+						e.printStackTrace();
+					}
+				}
+			}
+
+			log.info("completed " + finalCount);
+			importBirthWrapper.finaliseStats(response.getBirthCerts().size(),finalCount);
+			List<EgHospitalDtl> hospitaldtls = getHospitalDtls(response.getBirthCerts().get(0).getTenantid());
+			List<String> hospitals = new ArrayList<String>();
+			for(EgHospitalDtl hospitalDtl: hospitaldtls) {
+				hospitals.add(hospitalDtl.getName());
+			}
+			importBirthWrapper.setHospitals(hospitals);
+		}
+		catch (Exception e) {
+			importBirthWrapper.setServiceError("Service Error in importing");
+			e.printStackTrace();
+		}
+		return importBirthWrapper;
+	}
 	public ImportBirthWrapper saveBirthImport(BirthResponse response, RequestInfo requestInfo) {
 		ImportBirthWrapper importBirthWrapper = new ImportBirthWrapper();
 		try {

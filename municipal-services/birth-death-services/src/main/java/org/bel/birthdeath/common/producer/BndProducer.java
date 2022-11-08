@@ -16,21 +16,7 @@ public class BndProducer {
 	@Autowired
 	private CustomKafkaTemplate<String, Object> kafkaTemplate;
 
-	public void push(String topic, Object value) {
-		
-		 /********************************************* */
-		System.out.println("TopicDet"+topic);
-         try {
-                 ObjectMapper mapper = new ObjectMapper();
-                 Object obj = value;
-                 mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-                System.out.println("rakhi "+ mapper.writeValueAsString(obj));
-         }catch(Exception e) {
-             log.error("Exception while fetching from searcher: ",e);
-         }
-
-        /********************************************** */
-		
-            kafkaTemplate.send(topic, value);
-	}
+    public void push(String topic, Object value) {
+        kafkaTemplate.send(topic, value);
+    }
 }

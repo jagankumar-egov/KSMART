@@ -65,7 +65,7 @@ public class ReceiptConsumer {
 	private DeathRepository repositoryDeath;
 
 	//@KafkaListener(topics = {"${kafka.topics.receipt.create}"})
-	@KafkaListener(topics = {"${kafka.topics.receipt.create}","${persister.save.deathdetails.topic}"})
+	@KafkaListener(topics = {"${kafka.topics.receipt.create}","${persister.save.deathdetails.topic}","${persister.save.birthdet.topic}"})
     public void listen(final HashMap<String, Object> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         try {
         //process(record);

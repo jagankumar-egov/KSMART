@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 /**
  * Collection of audit related fields used by most models
@@ -19,20 +20,18 @@ import javax.validation.Valid;
 @Builder
 public class AuditDetails {
 
+  @Size(max = 64)
   @JsonProperty("createdBy")
-  @Valid
-  private String createdBy = null;
+  private String createdBy;
 
+  @Size(max = 64)
   @JsonProperty("lastModifiedBy")
-  @Valid
-  private String lastModifiedBy = null;
+  private String lastModifiedBy;
 
   @JsonProperty("createdTime")
-  @Valid
-  private Long createdTime = null;
+  private Long createdTime;
 
   @JsonProperty("lastModifiedTime")
-  @Valid
-  private Long lastModifiedTime = null;
+  private Long lastModifiedTime;
 
 }

@@ -1,6 +1,5 @@
 package org.bel.birthdeath.common.services;
 
-import java.lang.annotation.Documented;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +7,8 @@ import org.bel.birthdeath.birth.model.ImportBirthWrapper;
 import org.bel.birthdeath.common.contract.BirthResponse;
 import org.bel.birthdeath.common.contract.DeathResponse;
 import org.bel.birthdeath.common.model.EgHospitalDtl;
+import org.bel.birthdeath.common.model.birthmodel.BirthDetails;
+import org.bel.birthdeath.common.model.birthmodel.BirthDetailsRequest;
 import org.bel.birthdeath.common.repository.CommonRepository;
 import org.bel.birthdeath.death.model.ImportDeathWrapper;
 import org.egov.common.contract.request.RequestInfo;
@@ -63,6 +64,12 @@ public class CommonService {
         /********************************************** */
 		
 		return repository.saveBirthImport(importJSon, requestInfo);
+	}
+
+
+
+	public List<BirthDetails> saveBirthImportNew(BirthDetailsRequest request) {
+		return repository.saveBirthImportNew(request);
 	}
 
 	/**

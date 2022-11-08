@@ -6,11 +6,10 @@ import javax.validation.Valid;
 
 import org.bel.birthdeath.birth.model.ImportBirthWrapper;
 import org.bel.birthdeath.birth.model.SearchCriteria;
-import org.bel.birthdeath.common.contract.BirthResponse;
-import org.bel.birthdeath.common.contract.DeathResponse;
-import org.bel.birthdeath.common.contract.HospitalResponse;
-import org.bel.birthdeath.common.contract.RequestInfoWrapper;
+import org.bel.birthdeath.common.contract.*;
 import org.bel.birthdeath.common.model.EgHospitalDtl;
+import org.bel.birthdeath.common.model.birthmodel.BirthDetails;
+import org.bel.birthdeath.common.model.birthmodel.BirthDetailsRequest;
 import org.bel.birthdeath.common.services.CommonService;
 import org.bel.birthdeath.death.model.ImportDeathWrapper;
 import org.bel.birthdeath.utils.ResponseInfoFactory;
@@ -67,6 +66,13 @@ public class CommonController {
         ImportBirthWrapper importBirthWrapper = commonService.saveBirthImport(importJSon,importJSon.getRequestInfo());
         importBirthWrapper.setResponseInfo(responseInfoFactory.createResponseInfoFromRequestInfo(importJSon.getRequestInfo(), true));
         return new ResponseEntity<>(importBirthWrapper, HttpStatus.OK);
+    }
+
+
+    @PostMapping(value = { "/savebirthimportnew"})
+    public ResponseEntity<?> saveBirthImportNew(@RequestBody BirthDetailsRequest request) {
+        List<BirthDetails> birthDetails = commonService.saveBirthImportNew(request);
+        return new ResponseEntity<>(birthDetails, HttpStatus.OK);
     }
 	
 	@PostMapping(value = { "/savedeathimport"})
