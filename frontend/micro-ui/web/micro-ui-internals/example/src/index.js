@@ -14,6 +14,7 @@ import { initReceiptsComponents, ReceiptsModule } from "@egovernments/digit-ui-m
 import { initMCollectComponents } from "@egovernments/digit-ui-module-mcollect";
 import { initTLComponents } from "@egovernments/digit-ui-module-tl";
 import { initDFMComponents } from "@egovernments/digit-ui-module-dfm";
+import { initCRComponents } from "@egovernments/digit-ui-module-cr";
 import { PaymentModule, PaymentLinks, paymentConfigs } from "@egovernments/digit-ui-module-common";
 import { HRMSModule } from "@egovernments/digit-ui-module-hrms";
 import { initOBPSComponents } from "@egovernments/digit-ui-module-obps";
@@ -91,6 +92,7 @@ const initDigitUI = () => {
   initHRMSComponents();
   initTLComponents();
   initDFMComponents();
+  initCRComponents();
   initReceiptsComponents();
   initOBPSComponents();
   initEngagementComponents();

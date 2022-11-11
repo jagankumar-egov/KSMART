@@ -203,6 +203,30 @@ const tmpInitData ={
             }
         ]
     },
+    {
+        "module": "CR",
+        "code": "CR",
+        "bannerImage": "https://egov-uat-assets.s3.amazonaws.com/TL.png",
+        "active": true,
+        "order": 2,
+        "tenants": [
+            {
+                "code": "kl.cochin"
+            },
+            {
+                "code": "kl.kollam"
+            },
+            {
+                "code": "kl.kannur"
+            },
+            {
+                "code": "kl.kozhikode"
+            },
+            {
+                "code": "kl.thiruvananthapuram"
+            }
+        ]
+    },
       {
           "module": "HRMS",
           "code": "HRMS",
