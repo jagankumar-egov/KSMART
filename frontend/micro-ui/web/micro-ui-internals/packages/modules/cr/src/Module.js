@@ -13,7 +13,7 @@ import { useRouteMatch } from "react-router-dom";
 // import SelectProofIdentity from "./pageComponents/SelectProofIdentity";
 // import SelectOwnershipProof from "./pageComponents/SelectOwnershipProof";
 // import SelectTradeName from "./pageComponents/SelectTradeName";
-import SelectStructureType from "./pageComponents/SelectStructureType";
+// import SelectStructureType from "./pageComponents/SelectStructureType";
 // import SelectVehicleType from "./pageComponents/SelectVehicleType";
 // import SelectBuildingType from "./pageComponents/SelectBuildingType";
 // import SelectCommencementDate from "./pageComponents/SelectCommencementDate";
@@ -110,7 +110,7 @@ const componentsToRegister = {
   // SelectTLWater,
   // TradeLicense,
   // SelectTradeName,
-  SelectStructureType,
+  // SelectStructureType,
   // SelectVehicleType,
   // SelectBuildingType,
   // SelectCommencementDate,

@@ -7,7 +7,7 @@ import Inbox from "./Inbox";
 // import Search from "./Search";
 // import Response from "../Response";
 import ApplicationDetails from "./ApplicationDetails";
-import CrFlow from "./route-item/CrFlow";
+import CrFlow from "./route-item";
 //import ReNewApplication from "./ReNewApplication";
 
 const CRBreadCrumb = ({ location }) => {
@@ -23,6 +23,7 @@ const CRBreadCrumb = ({ location }) => {
   const isResponse = location?.pathname?.includes("tl/response");
   const isMobile = window.Digit.Utils.browser.isMobile();
   const isCrFlow = location?.pathname?.includes("cr-flow");
+  const isStructureType = location?.pathname?.includes("structure-type");
   const [search, setSearch] = useState(false);
 
   const locationsForTLEmployee = window.location.href;
@@ -85,6 +86,11 @@ const CRBreadCrumb = ({ location }) => {
       path: "/digit-ui/employee/cr/cr-flow",
       content: t("Birth Registration"),
       show: breadCrumbUrls.includes("cr-flow") || isCrFlow
+    },
+    {
+      path: "/digit-ui/employee/cr/cr-flow/structure-type",
+      content: t("Structure Type"),
+      show: breadCrumbUrls.includes("cr-flow/structure-type") || isStructureType
     },
     // {
     //   path: "/digit-ui/employee/cr/cr-flow/trade-lisense",
@@ -177,8 +183,6 @@ const EmployeeApp = ({ path, url, userType }) => {
           <CRBreadCrumb location={location} />
         </div>
         <PrivateRoute parentRoute={path} path={`${path}/cr-flow`} component={() => <CrFlow parentUrl={url} />} />
-        <PrivateRoute  parentRoute={path} path={`${path}/trade-lisense`} component={() => <TradeLisense parentUrl={path} />} />
-
       </div>
     </React.Fragment>
   </Switch>

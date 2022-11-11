@@ -11,15 +11,15 @@ import { newConfig as newConfigCR } from "../../../config/config";
 const CrFlowApp = ({ parentUrl }) => {
   const { path } = useRouteMatch();
   console.log(parentUrl);
-  let { data: newConfig, isLoading } = Digit.Hooks.tl.useMDMS.getFormConfig(stateId, {});
-  newConfig = newConfigCR;
+  // let { data: newConfig, isLoading } = Digit.Hooks.tl.useMDMS.getFormConfig(stateId, {});
+  // newConfig = newConfigCR;
   return (
     <React.Fragment>
       <Switch>
         <Route path={`${path}`} exact>
           <CrFlow  path={path}/>
         </Route>
-        <PrivateRoute  parentRoute={path} path={`${path}/cr-flow`} component={() => <SelectStructureType parentUrl={path} />} />
+        <PrivateRoute  parentRoute={path} path={`${path}/structure-type`} component={() => <SelectStructureType parentUrl={path} />} />
       </Switch>
     </React.Fragment>
   );

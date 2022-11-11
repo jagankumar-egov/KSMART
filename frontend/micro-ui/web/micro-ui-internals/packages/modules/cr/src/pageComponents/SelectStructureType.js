@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CardLabel, TypeSelectCard } from "@egovernments/digit-ui-react-components";
 // import React, { useState,useEffect } from "react";
 // import { CardLabel, TypeSelectCard,Dropdown } from "@egovernments/digit-ui-react-components";
-import { FormStep, RadioOrSelect, RadioButtons } from "@egovernments/digit-ui-react-components";
+import { FormStep, RadioOrSelect,Dropdown, RadioButtons } from "@egovernments/digit-ui-react-components";
 import Timeline from "../components/TLTimeline";
 
 const SelectStructureType = ({ t, config, onSelect, userType, formData }) => {
@@ -97,7 +97,7 @@ const SelectStructureType = ({ t, config, onSelect, userType, formData }) => {
       <Dropdown
         t={t}
         optionKey="code"
-        isMandatory={config.isMandatory}
+        // isMandatory={config.isMandatory}
         option={cmbPlace}
         selected={setPlaceofActivity}
         select={selectPlaceofactivity}
@@ -118,7 +118,7 @@ const SelectStructureType = ({ t, config, onSelect, userType, formData }) => {
       <Dropdown
         t={t}
         optionKey="name"
-        isMandatory={config.isMandatory}
+        // isMandatory={config.isMandatory}
         option={activities}
         selected={StructureType}
         select={selectStructuretype}
