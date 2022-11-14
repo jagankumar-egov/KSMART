@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, useLocation, Link } from "react-router-dom";
 import { PrivateRoute, BreadCrumb } from "@egovernments/digit-ui-react-components";
-import { ReactComponent as BankIcon } from "../Img/BankIcon.svg";
-import { ReactComponent as FileProtected } from "../Img/FileProtected.svg";
+import { ReactComponent as BankIcon } from "../../Img/BankIcon.svg";
+import { ReactComponent as FileProtected } from "../../Img/FileProtected.svg";
 
 const DeathCrFlow = ({ path }) => {
   console.log(path);

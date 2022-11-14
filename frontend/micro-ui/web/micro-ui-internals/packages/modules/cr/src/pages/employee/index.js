@@ -8,9 +8,10 @@ import Inbox from "./Inbox";
 // import Response from "../Response";
 import ApplicationDetails from "./ApplicationDetails";
 import CrFlow from "./route-item";
-import DeathCrFlow from "./route-item/DeathCrFlow"
+import DeathCrFlow from "./route-item/DeathFlow"
+// import DeathCrFlow from "./route-item/DeathCrFlow"
 //import ReNewApplication from "./ReNewApplication";
-import { TradeLisense } from "./route-item/DeathRegistraion";
+import { TradeLisense } from "./route-item/DeathFlow/DeathRegistraion";
 
 
 const CRBreadCrumb = ({ location }) => {
