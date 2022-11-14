@@ -4,7 +4,7 @@ import { PrivateRoute, BreadCrumb } from "@egovernments/digit-ui-react-component
 import { ReactComponent as BankIcon } from "../Img/BankIcon.svg";
 import { ReactComponent as FileProtected } from "../Img/FileProtected.svg";
 
-const CrFlow = ({ path }) => {
+const DeathCrFlow = ({ path }) => {
   console.log(path);
   const cardMenuData = [
     {
@@ -14,15 +14,15 @@ const CrFlow = ({ path }) => {
     },
 
     {
-      tilinktle: "Name Inclusion",
+      title: "Name Inclusion",
       subTitle: "Inbox",
       img: <FileProtected />,
-      link: `${path}/structure-type`,
+      link: `${path}/death-registration`,
     },
     {
       title: "Correction",
       subTitle: "Inbox",
-      img: <FileProtected />,
+      img: <FileProtected />, 
     },
     {
       title: "Suspension",
@@ -45,7 +45,7 @@ const CrFlow = ({ path }) => {
     <div>
       <div className="fileText">
         {" "}
-        <h3>Select Functional Modules</h3>
+        <h3>Select Functional Modules Death</h3>
       </div>
       <div className="FileFlowWrapper">
         <div className="cardWrapper">
@@ -80,4 +80,4 @@ const CrFlow = ({ path }) => {
   );
 };
 
-export default CrFlow;
+export default DeathCrFlow;

@@ -8,12 +8,16 @@ import Inbox from "./Inbox";
 // import Response from "../Response";
 import ApplicationDetails from "./ApplicationDetails";
 import CrFlow from "./route-item";
+import DeathCrFlow from "./route-item/DeathCrFlow"
 //import ReNewApplication from "./ReNewApplication";
+import { TradeLisense } from "./route-item/DeathRegistraion";
+
 
 const CRBreadCrumb = ({ location }) => {
   const { t } = useTranslation();
   const isSearch = location?.pathname?.includes("search");
   const isInbox = location?.pathname?.includes("inbox");
+  const isDeathRegistration= location?.pathname?.includes("death-registration");
   const isApplicationSearch = location?.pathname?.includes("search/application");
   const isLicenceSearch = location?.pathname?.includes("search/license");
   const isEditApplication = location?.pathname?.includes("edit-application-details");
@@ -24,6 +28,8 @@ const CRBreadCrumb = ({ location }) => {
   const isMobile = window.Digit.Utils.browser.isMobile();
   const isCrFlow = location?.pathname?.includes("cr-flow");
   const isStructureType = location?.pathname?.includes("structure-type");
+  const isDeathCrFlow = location?.pathname?.includes("death-cr");
+
   const [search, setSearch] = useState(false);
 
   const locationsForTLEmployee = window.location.href;
@@ -91,6 +97,17 @@ const CRBreadCrumb = ({ location }) => {
       path: "/digit-ui/employee/cr/cr-flow/structure-type",
       content: t("Structure Type"),
       show: breadCrumbUrls.includes("cr-flow/structure-type") || isStructureType
+    },
+    {
+      path: "/digit-ui/employee/cr/death-cr",
+      content: t("Death Registration"),
+      show: breadCrumbUrls.includes("death-cr") || isDeathCrFlow
+    },
+    {
+      path: "/digit-ui/employee/cr/death-registration",
+      // path: "/digit-ui/employee/dfm/trade-lisense",
+      content: t("Death NewRegistration"),
+      show: breadCrumbUrls.includes("death-cr/death-registration") || isDeathRegistration
     },
     // {
     //   path: "/digit-ui/employee/cr/cr-flow/trade-lisense",
@@ -183,6 +200,8 @@ const EmployeeApp = ({ path, url, userType }) => {
           <CRBreadCrumb location={location} />
         </div>
         <PrivateRoute parentRoute={path} path={`${path}/cr-flow`} component={() => <CrFlow parentUrl={url} />} />
+        <PrivateRoute parentRoute={path} path={`${path}/death-cr`} component={() => <DeathCrFlow parentUrl={url} />} />
+
       </div>
     </React.Fragment>
   </Switch>
