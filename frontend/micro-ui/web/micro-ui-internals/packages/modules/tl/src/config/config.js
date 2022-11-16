@@ -265,7 +265,10 @@ export const newConfig = [
         key: "TradeDetails",
         withoutLabel: true,
         hideInEmployee: true,
-        nextStep:"land-type",
+        nextStep: "land-type",
+        // sessionStorage.getItem("routeElement"),
+        // sessionStorage.setItem("routeElement"
+        // "land-type",
         // nextStep: {
         //   TL_COMMON_LAND: "land-type",
         //   TL_COMMON_BUILDING: "building-det",
@@ -279,7 +282,7 @@ export const newConfig = [
         component: "SelectLand",
         texts: {
           // headerCaption: "TL_STRUCTURE_TYPE",
-          header: "Land Details",
+          header: "TL_STRUCTURE_TYPE_LAND",
           // cardText: "TL_STRUCTURE_TYPE_TEXT",
           submitBarLabel: "CS_COMMON_NEXT",
         },
@@ -314,6 +317,23 @@ export const newConfig = [
         texts: {
           // headerCaption: "TL_STRUCTURE_TYPE",
           header: "Vechicle Details",
+          // cardText: "TL_STRUCTURE_TYPE_TEXT",
+          submitBarLabel: "CS_COMMON_NEXT",
+        },
+        key: "TradeDetails",
+        withoutLabel: true,
+        hideInEmployee: true,
+        nextStep: "commencement-date",
+        
+      },
+      {
+        type: "component",
+        route: "water-det",
+        isMandatory: true,
+        component: "SelectTLWater",
+        texts: {
+          // headerCaption: "TL_STRUCTURE_TYPE",
+          header: "Water Details",
           // cardText: "TL_STRUCTURE_TYPE_TEXT",
           submitBarLabel: "CS_COMMON_NEXT",
         },
@@ -398,7 +418,7 @@ export const newConfig = [
         component: "SelectBusinessCategory",
         texts: {
           headerCaption: "",
-          header: "Business Category",
+          header: "TL_TRADE_BUISINESS_CATEGORY",
           // cardText: "TL_TRADE_UNITS_TEXT",
           submitBarLabel: "CS_COMMON_NEXT",
         },

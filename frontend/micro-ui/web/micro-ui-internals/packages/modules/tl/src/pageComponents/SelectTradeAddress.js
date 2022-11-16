@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
-import { CardLabel, TypeSelectCard,Dropdown,TextInput } from "@egovernments/digit-ui-react-components";
-import { FormStep, RadioOrSelect, RadioButtons } from "@egovernments/digit-ui-react-components";
+import { CardLabel, Dropdown } from "@egovernments/digit-ui-react-components";
+import { FormStep } from "@egovernments/digit-ui-react-components";
 import Timeline from "../components/TLTimeline";
 
 const SelectTradeAddress = ({ t, config, onSelect, userType, formData }) => {
@@ -9,11 +9,13 @@ const SelectTradeAddress = ({ t, config, onSelect, userType, formData }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const stateId = Digit.ULBService.getStateId();
   const { data: boundaryList = {}, isLoad } = Digit.Hooks.tl.useTradeLicenseMDMS("kl.cochin", "cochin/egov-location", "boundary-data");
-  const [Zonal, setZonal] = useState(formData.TradeDetails?.Zonal);
-  const [WardNo, setWardNo] = useState(formData.TradeDetails?.WardNo);
+  const [Zonal, setZonal] = useState();
+  const [WardNo, setWardNo] = useState();
   const [wards, setFilterWard] = useState(0);
   const [isInitialRender, setIsInitialRender] = useState(true);
   const isEdit = window.location.href.includes("/edit-application/") || window.location.href.includes("renew-trade");
+  // console.log(formData?.address.Zonal);
+  // console.log(formData?.address.WardNo);
   let cmbZonal = [];
   let cmbWard = [];
   let code =null;
@@ -24,7 +26,6 @@ const SelectTradeAddress = ({ t, config, onSelect, userType, formData }) => {
   });
   function setSelectZonalOffice(e) {
     setIsInitialRender(true);
-    // console.log(e);
     setZonal(e);
     setWardNo(null);
     setFilterWard(null);
@@ -33,12 +34,10 @@ const SelectTradeAddress = ({ t, config, onSelect, userType, formData }) => {
     setWardNo(e);
   }
   React.useEffect(() => {
-
+    
     if (isInitialRender) {
-      console.log(isInitialRender);
       if(Zonal){
         setIsInitialRender(false);
-        console.log(Zonal.children); 
         setFilterWard(Zonal.children)
       }
     }
@@ -46,17 +45,18 @@ const SelectTradeAddress = ({ t, config, onSelect, userType, formData }) => {
  
  
   function goNext() {
-    sessionStorage.setItem("Zonal", Zonal);
-    onSelect(config.key, { Zonal });
-    sessionStorage.setItem("WardNo", WardNo);
-    onSelect(config.key, { WardNo });
+    sessionStorage.setItem("ZonalDet", Zonal.name);
+    sessionStorage.setItem("WardDet", WardNo.name);
+    onSelect(config.key, { Zonal,WardNo });
+    // onSelect(config.key, { Zonal });
+
   }
   return (
     <React.Fragment>
     {window.location.href.includes("/citizen") ? <Timeline /> : null}
     <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isEdit={[!Zonal]} >
   
-      <CardLabel>Zonal Office</CardLabel>
+      <CardLabel>{`${t("TL_LOCALIZATION_ZONAL_OFFICE")}`}</CardLabel>
       <Dropdown
         t={t}
         optionKey="name"
@@ -65,8 +65,9 @@ const SelectTradeAddress = ({ t, config, onSelect, userType, formData }) => {
         selected={setZonal}
         select={setSelectZonalOffice}
         disabled={isEdit}
+        {...(validation = { isRequired: true, title: t("TL_INVALID_ZONAL_NAME") })}
       />
-      <CardLabel>Ward No</CardLabel>
+      <CardLabel>{`${t("TL_LOCALIZATION_WARD_NO")}`}</CardLabel>
       <Dropdown
         t={t}
         optionKey="name"
@@ -75,6 +76,7 @@ const SelectTradeAddress = ({ t, config, onSelect, userType, formData }) => {
         selected={setWardNo}
         select={setSelectWard}
         disabled={isEdit}
+        {...(validation = { isRequired: true, title: t("TL_INVALID_WARD_NO") })}
       />
       
         
