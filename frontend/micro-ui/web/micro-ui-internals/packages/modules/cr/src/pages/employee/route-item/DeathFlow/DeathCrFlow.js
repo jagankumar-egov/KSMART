@@ -4,6 +4,11 @@ import { PrivateRoute, BreadCrumb } from "@egovernments/digit-ui-react-component
 import { ReactComponent as BankIcon } from "../../Img/BankIcon.svg";
 import { ReactComponent as FileProtected } from "../../Img/FileProtected.svg";
 
+const mystyle = {
+  maxWidth: "64%",
+  
+};
+
 const DeathCrFlow = ({ path }) => {
   console.log(path);
   const cardMenuData = [
@@ -14,23 +19,18 @@ const DeathCrFlow = ({ path }) => {
     },
 
     {
-      title: "Name Inclusion",
+      title: "Correction",
       subTitle: "Inbox",
       img: <FileProtected />,
       link: `${path}/death-registration`,
     },
     {
-      title: "Correction",
+      title: "Suspension",
       subTitle: "Inbox",
       img: <FileProtected />, 
     },
     {
-      title: "Suspension",
-      subTitle: "Inbox",
-      img: <FileProtected />,
-    },
-    {
-      title: "Cancellation",
+      title: "Cancelation",
       subTitle: "Inbox",
       img: <FileProtected />,
     },
@@ -47,7 +47,7 @@ const DeathCrFlow = ({ path }) => {
         {" "}
         <h3>Select Functional Modules Death</h3>
       </div>
-      <div className="FileFlowWrapper">
+      <div className="FileFlowWrapper" style={mystyle}>
         <div className="cardWrapper">
           {cardMenuData?.map((item, index) => (
            item.link?(
