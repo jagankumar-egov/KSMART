@@ -73,10 +73,6 @@ public class TLCalculatorConstants {
 
     public static final Long TIMEZONE_OFFSET = 19800000l;
 
-    public static final String STRUCTURE_TYPE = "NA";
-
-    public static final String TRADE_TYPE = "ALL";
-
     //Values for Billing Slab Creation
 
     public static final String STRUCTURE_TYPE = "NA";
