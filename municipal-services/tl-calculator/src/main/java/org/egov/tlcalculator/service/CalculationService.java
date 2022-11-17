@@ -17,7 +17,6 @@ import org.egov.tlcalculator.web.models.*;
 import org.egov.tlcalculator.web.models.enums.CalculationType;
 import org.egov.tlcalculator.web.models.FeeAndBillingSlabIds;
 import org.egov.tlcalculator.web.models.tradelicense.TradeLicense;
-import org.egov.tlcalculator.web.models.tradelicense.TradeLicenseDetail;
 import org.egov.tlcalculator.web.models.demand.Category;
 import org.egov.tlcalculator.web.models.demand.TaxHeadEstimate;
 import org.egov.tlcalculator.web.models.tradelicense.TradeUnit;
@@ -27,14 +26,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.jayway.jsonpath.JsonPath;
-
 import java.math.BigDecimal;
 import java.util.*;
-import java.text.*;
-import java.time.LocalDate;
 
 import static org.egov.tlcalculator.utils.TLCalculatorConstants.businessService_TL;
 
@@ -84,12 +77,9 @@ public class CalculationService {
      */
     public List<Calculation> calculate(CalculationReq calculationReq, Boolean isEstimate) {
         String tenantId = calculationReq.getCalulationCriteria().get(0).getTenantId();
-
         Object mdmsData = mdmsService.mDMSCall(calculationReq.getRequestInfo(), tenantId);
         List<Calculation> calculations = getCalculation(calculationReq.getRequestInfo(),
                 calculationReq.getCalulationCriteria(), mdmsData);
-       
-
         CalculationRes calculationRes = CalculationRes.builder().calculations(calculations).build();
         if (!isEstimate) {
             demandService.generateDemand(calculationReq.getRequestInfo(), calculations, mdmsData, businessService_TL);
@@ -107,7 +97,8 @@ public class CalculationService {
      * @return List of calculations for all applicationNumbers or tradeLicenses in
      *         criterias
      */
-    public List<Calculation> getCalculation(RequestInfo requestInfo, List<CalulationCriteria> criterias, Object mdmsData) {
+    public List<Calculation> getCalculation(RequestInfo requestInfo, List<CalulationCriteria> criterias,
+            Object mdmsData) {
         List<Calculation> calculations = new LinkedList<>();
         for (CalulationCriteria criteria : criterias) {
             TradeLicense license;
@@ -173,7 +164,8 @@ public class CalculationService {
      * @param requestInfo        The requestInfo of the calculation request
      * @return TaxHeadEstimates and the billingSlabs used to calculate it
      */
-    private EstimatesAndSlabs getTaxHeadEstimates(CalulationCriteria calulationCriteria, RequestInfo requestInfo, Object mdmsData) {
+    private EstimatesAndSlabs getTaxHeadEstimates(CalulationCriteria calulationCriteria, RequestInfo requestInfo,
+            Object mdmsData) {
         List<TaxHeadEstimate> estimates = new LinkedList<>();
         EstimatesAndSlabs estimatesAndSlabs = getBaseTax(calulationCriteria, requestInfo, mdmsData);
 
@@ -198,17 +190,20 @@ public class CalculationService {
      * @param requestInfo        The requestInfo of the calculation request
      * @return BaseTax taxHeadEstimate and billingSlabs used to calculate it
      */
-    private EstimatesAndSlabs getBaseTax(CalulationCriteria calulationCriteria, RequestInfo requestInfo, Object mdmsData) {
+    private EstimatesAndSlabs getBaseTax(CalulationCriteria calulationCriteria, RequestInfo requestInfo,
+            Object mdmsData) {
         TradeLicense license = calulationCriteria.getTradelicense();
         EstimatesAndSlabs estimatesAndSlabs = new EstimatesAndSlabs();
         BillingSlabSearchCriteria searchCriteria = new BillingSlabSearchCriteria();
         searchCriteria.setTenantId(license.getTenantId());
+
         // searchCriteria.setStructureType(license.getTradeLicenseDetail().getStructureType());
         // searchCriteria.setLicenseType(license.getLicenseType().toString());
-        searchCriteria.setEnterprisetype(license.getTradeLicenseDetail().getEnterpriseType().toString());
+        searchCriteria.setEnterpriseType(license.getTradeLicenseDetail().getEnterpriseType().toString()); // Added for
+                                                                                                          // EnterpriseType
+
 
         Map calculationTypeMap = mdmsService.getCalculationType(requestInfo, license, mdmsData);
-
         String tradeUnitCalculationType = (String) calculationTypeMap
                 .get(TLCalculatorConstants.MDMS_CALCULATIONTYPE_TRADETYPE);
         String accessoryCalculationType = (String) calculationTypeMap
@@ -222,18 +217,19 @@ public class CalculationService {
         BigDecimal accessoryFee = new BigDecimal(0);
 
         Calculation calculation=getTaxHead(license, requestInfo, mdmsData);
-        
-        
 
-        // if(!CollectionUtils.isEmpty(license.getTradeLicenseDetail().getAccessories())){
+
+        // if
+        // (!CollectionUtils.isEmpty(license.getTradeLicenseDetail().getAccessories()))
+        // {
         // FeeAndBillingSlabIds accessoryFeeAndBillingSlabIds =
-        // getAccessoryFeeAndBillingSlabIds(license,CalculationType
+        // getAccessoryFeeAndBillingSlabIds(license,
+        // CalculationType
         // .fromValue(accessoryCalculationType));
         // accessoryFee = accessoryFeeAndBillingSlabIds.getFee();
         // estimatesAndSlabs.setAccessoryFeeAndBillingSlabIds(accessoryFeeAndBillingSlabIds);
         // }
 
-        
 
         // TaxHeadEstimate estimate = new TaxHeadEstimate();
         // List<TaxHeadEstimate> estimateList = new ArrayList<>();
@@ -241,11 +237,10 @@ public class CalculationService {
 
         if (totalTax.compareTo(BigDecimal.ZERO) == -1)
             throw new CustomException("INVALID AMOUNT", "Tax amount is negative");
-        EstimatesAndSlabs estimateandslabs=getTaxHeadEstimate(license,calculation,totalTax);
-        
+            EstimatesAndSlabs estimateandslabs=getTaxHeadEstimate(license,calculation,totalTax);
+
         // estimate.setEstimateAmount(totalTax);
         // estimate.setCategory(Category.TAX);
-        
         // if (license.getApplicationType() != null
         //         && license.getApplicationType().toString().equals(TLCalculatorConstants.APPLICATION_TYPE_RENEWAL)) {
         //     estimate.setTaxHeadCode(config.getRenewTaxHead());
@@ -255,8 +250,7 @@ public class CalculationService {
         //     estimate.setTaxHeadCode(config.getBaseTaxHead());
         //     estimateList.add(estimate);
         // }
-        // estimate.setTaxHeadCode(estimate.getTaxHeadCode());
-        // estimateList.add(estimate);
+
         // estimatesAndSlabs.setEstimates(estimateList);
 
         return estimateandslabs;
@@ -299,7 +293,8 @@ public class CalculationService {
      * @param calculationType Calculation logic to be used
      * @return TradeUnit Fee and billingSlab used to calculate it
      */
-    private FeeAndBillingSlabIds getTradeUnitFeeAndBillingSlabIds(TradeLicense license, CalculationType calculationType) {
+    private FeeAndBillingSlabIds getTradeUnitFeeAndBillingSlabIds(TradeLicense license,
+            CalculationType calculationType) {
 
         List<BigDecimal> tradeUnitFees = new LinkedList<>();
         List<TradeUnit> tradeUnits = license.getTradeLicenseDetail().getTradeUnits();
@@ -310,28 +305,49 @@ public class CalculationService {
                 List<Object> preparedStmtList = new ArrayList<>();
                 BillingSlabSearchCriteria searchCriteria = new BillingSlabSearchCriteria();
                 searchCriteria.setTenantId(license.getTenantId());
+
+
+                /******* Commented. EnterpriseType is required in search condition ****/
                 // searchCriteria.setStructureType(license.getTradeLicenseDetail().getStructureType());
                 // searchCriteria.setApplicationType(license.getApplicationType().toString());
                 // searchCriteria.setLicenseType(license.getLicenseType().toString());
                 // searchCriteria.setTradeType(tradeUnit.getTradeType());
-                // if(tradeUnit.getUomValue()!=null)
-                // {
+                // if (tradeUnit.getUomValue() != null) {
                 // searchCriteria.setUomValue(Double.parseDouble(tradeUnit.getUomValue()));
                 // searchCriteria.setUom(tradeUnit.getUom());
                 // }
-                searchCriteria.setEnterprisetype(license.getTradeLicenseDetail().getEnterpriseType());
                 // Call the Search
+                searchCriteria.setEnterpriseType(license.getTradeLicenseDetail().getEnterpriseType());// Added for
+                                                                                                      // enterprise type
+
+
                 String query = queryBuilder.getSearchQuery(searchCriteria, preparedStmtList);
                 log.info("query " + query);
                 log.info("preparedStmtList " + preparedStmtList.toString());
                 List<BillingSlab> billingSlabs = repository.getDataFromDB(query, preparedStmtList);
+
                 if (billingSlabs.size() > 1)
                     throw new CustomException("BILLINGSLAB ERROR",
                             "Found multiple BillingSlabs for the given TradeType");
-                if (CollectionUtils.isEmpty(billingSlabs))
-                    throw new CustomException("BILLINGSLAB ERROR", "No BillingSlab Found for the given tradeType");
-                System.out
-                        .println("TradeUnit: " + tradeUnit.getTradeType() + " rate: " + billingSlabs.get(0).getRate());
+
+                // if (CollectionUtils.isEmpty(billingSlabs))
+                // throw new CustomException("BILLINGSLAB ERROR", "No BillingSlab Found for the
+                // given tradeType");
+
+                if (CollectionUtils.isEmpty(billingSlabs)) {
+                    preparedStmtList.clear();
+                    searchCriteria.setTenantId(license.getTenantId().toString().split("\\.")[0]);
+                    query = queryBuilder.getSearchQuery(searchCriteria, preparedStmtList);
+                    log.info("query " + query);
+                    log.info("preparedStmtList " + preparedStmtList.toString());
+                    billingSlabs = repository.getDataFromDB(query, preparedStmtList);
+                    if (billingSlabs.size() > 1)
+                        throw new CustomException("BILLINGSLAB ERROR",
+                                "Found multiple BillingSlabs for the given TradeType");
+                    if (CollectionUtils.isEmpty(billingSlabs))
+                        throw new CustomException("BILLINGSLAB ERROR", "No BillingSlab Found for the given tradeType");
+                }
+
 
                 billingSlabIds.add(billingSlabs.get(0).getId() + "|" + i + "|" + tradeUnit.getId());
 
@@ -364,7 +380,8 @@ public class CalculationService {
      * @param calculationType Calculation logic to be used
      * @return Accessory Fee and billingSlab used to calculate it
      */
-    private FeeAndBillingSlabIds getAccessoryFeeAndBillingSlabIds(TradeLicense license, CalculationType calculationType) {
+    private FeeAndBillingSlabIds getAccessoryFeeAndBillingSlabIds(TradeLicense license,
+            CalculationType calculationType) {
 
         List<BigDecimal> accessoryFees = new LinkedList<>();
         List<String> billingSlabIds = new LinkedList<>();
@@ -389,8 +406,10 @@ public class CalculationService {
                 if (billingSlabs.size() > 1)
                     throw new CustomException("BILLINGSLAB ERROR",
                             "Found multiple BillingSlabs for the given accessories ");
+
                 if (CollectionUtils.isEmpty(billingSlabs))
                     throw new CustomException("BILLINGSLAB ERROR", "No BillingSlab Found for the given accessory");
+
                 System.out.println(
                         "Accessory: " + accessory.getAccessoryCategory() + " rate: " + billingSlabs.get(0).getRate());
                 billingSlabIds.add(billingSlabs.get(0).getId() + "|" + i + "|" + accessory.getId());
@@ -448,7 +467,8 @@ public class CalculationService {
 
         return totalFee;
     }
-    /**
+
+     /**
      * @param license         TradeLicense for which fee has to be calculated
      * @param calculationType Calculation logic to be used
      * @return TradeUnit Fee and billingSlab used to calculate it

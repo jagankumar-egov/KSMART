@@ -394,6 +394,14 @@ config:
         image-name: "xstate-webchat-db"
                 
 #Municipal Services
+  - name: "builds/upyog/municipal-services/egov-filemgmnt"
+    build:
+      - work-dir: "municipal-services/egov-filemgmnt"
+        image-name: "egov-filemgmnt"
+        dockerfile: "build/maven/Dockerfile"
+      - work-dir: "municipal-services/egov-filemgmnt/src/main/resources/db"
+        image-name: "egov-filemgmnt-db"
+
 
   - name: "builds/upyog/municipal-services/egov-user-event"
     build:

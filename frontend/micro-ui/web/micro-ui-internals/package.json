@@ -14,8 +14,8 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "SKIP_PREFLIGHT_CHECK=true run-s build start:dev",
-    "sprint": "SKIP_PREFLIGHT_CHECK=true run-s start:script",
+    "start": "run-s build start:dev",
+    "sprint": "run-s start:script",
     "start:dev": "run-p dev:**",
     "start:script": "./scripts/create.sh",
     "dev:css": "cd packages/css && yarn start",
@@ -57,6 +57,12 @@
     "build:noc": "cd packages/modules/noc && yarn build",
     "buildWS:ws": "cd packages/modules/ws && yarn build",
     "deploy:jenkins": "./scripts/jenkins.sh"
+  },
+  "resolutions": {
+    "**/babel-loader": "8.2.2",
+    "**/@babel/core": "7.14.0",
+    "**/@babel/preset-env": "7.14.0",
+    "**/@babel/plugin-transform-modules-commonjs": "7.14.0"
   },
   "devDependencies": {
     "husky": "7.0.4",
