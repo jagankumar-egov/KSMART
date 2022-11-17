@@ -53,4 +53,8 @@ public class Calculation {
 	@JsonProperty("accessoryBillingIds")
 	FeeAndBillingSlabIds accessoryBillingIds;
 
+	/******************For Identify Head is Adv, Arr, Cur******************* */
+	@JsonProperty("taxType")
+	String taxType;
+	/******************For Identify Head is Adv, Arr, Cur******************* */
 }

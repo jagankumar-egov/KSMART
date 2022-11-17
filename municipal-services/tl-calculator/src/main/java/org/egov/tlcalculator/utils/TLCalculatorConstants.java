@@ -2,6 +2,8 @@ package org.egov.tlcalculator.utils;
 
 import java.math.BigDecimal;
 
+import org.egov.tlcalculator.web.models.BillingSlab.LicenseTypeEnum;
+
 public class TLCalculatorConstants {
 
 
@@ -71,6 +73,21 @@ public class TLCalculatorConstants {
     public static final BigDecimal HUNDRED = BigDecimal.valueOf(100);
 
     public static final Long TIMEZONE_OFFSET = 19800000l;
+
+
+    //Values for Billing Slab Creation
+
+    public static final String STRUCTURE_TYPE = "NA";
+
+    public static final String TRADE_TYPE = "ALL";  
+
+    public static final String TRADE_ADV = "ADV";  
+
+    public static final String TRADE_ARR = "ARR"; 
+
+    public static final String TRADE_CUR = "CUR"; 
+
+    //Values for Billing Slab Creation
 
 
 }

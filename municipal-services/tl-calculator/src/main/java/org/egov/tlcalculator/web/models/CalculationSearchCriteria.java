@@ -12,4 +12,7 @@ public class CalculationSearchCriteria {
 
     private String aplicationNumber;
 
+    private String taxType;
+
+
 }

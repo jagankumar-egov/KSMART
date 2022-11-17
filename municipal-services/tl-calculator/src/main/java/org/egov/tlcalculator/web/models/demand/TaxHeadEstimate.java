@@ -17,5 +17,17 @@ public class TaxHeadEstimate {
 
     private BigDecimal estimateAmount;
 
-    private Category category;
+    private Category category;    
+
+    /***********************************************/
+    private String id;   
+
+    private String headname;   
+
+    private String type;
+    
+    private BigDecimal rate;
+     
+     /************************************************/
+
 }
