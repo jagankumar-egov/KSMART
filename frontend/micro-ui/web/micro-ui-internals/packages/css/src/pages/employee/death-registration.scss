@@ -1,0 +1,12 @@
+.tittle {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.maindeath {
+  padding: 10px 50px 10px 50px;
+  .maindiv {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+}

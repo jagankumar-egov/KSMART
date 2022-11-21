@@ -1,11 +1,10 @@
 // import { Dropdown, NewRadioButton } from "@egovernments/digit-ui-react-components";
-import { DatePicker, InputCard, NewRadioButton, TextInput, SubmitBar } from "@egovernments/digit-ui-react-components";
+import { DatePicker, InputCard, NewRadioButton, TextInput } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import styled from "styled-components";
 import InfoDecease from "./InfoDecease";
-import FormDeath from "./FormDeath";
 
-export const DeathRegistration = () => {
+export const NewDeathRegistration = () => {
   return (
     <ReactFragment>
       <Wrapper>
@@ -33,16 +32,14 @@ export const DeathRegistration = () => {
             </HourSelect> */}
           </DateLeft>
           <DateLeft>
-            <DivLabel>
-              <Label>To Date</Label>
-              <DatePicker />
+          <DivLabel>
+            <Label>To Date</Label>
+            <DatePicker />
             </DivLabel>
           </DateLeft>
         </Date>
       </Wrapper>
-      <Wrapper>
-        <FormDeath />
-      </Wrapper>
+      <InfoDecease />
     </ReactFragment>
   );
 };
@@ -85,12 +82,12 @@ const Date = styled.div`
   }
 `;
 const DateLeft = styled.div`
-  display: flex;
-  align-items: end;
-  justify-content: space-around;
-  width: 25%;
-  margin-left: 20px;
-  @media (max-width: 1281px) {
+      display: flex;
+    align-items: end;
+    justify-content: space-around;
+    width: 25%;
+    margin-left: 20px;
+    @media (max-width: 1281px) {
     width: 70%;
   }
 `;
@@ -103,4 +100,5 @@ const DivLabel = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+ 
 `;

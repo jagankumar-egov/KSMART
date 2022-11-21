@@ -29,6 +29,7 @@ const CRBreadCrumb = ({ location }) => {
   const isMobile = window.Digit.Utils.browser.isMobile();
   const isCrFlow = location?.pathname?.includes("cr-flow");
   const isStructureType = location?.pathname?.includes("structure-type");
+
   const isDeathCrFlow = location?.pathname?.includes("death-cr");
 
   const [search, setSearch] = useState(false);
@@ -107,7 +108,7 @@ const CRBreadCrumb = ({ location }) => {
     {
       path: "/digit-ui/employee/cr/death-registration",
       // path: "/digit-ui/employee/dfm/trade-lisense",
-      content: t("Death NewRegistration"),
+      content: t("Death Registration"),
       show: breadCrumbUrls.includes("death-cr/death-registration") || isDeathRegistration
     },
     // {

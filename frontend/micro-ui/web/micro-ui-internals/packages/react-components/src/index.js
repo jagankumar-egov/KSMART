@@ -189,7 +189,9 @@ import { FilterForm, FilterFormField } from "./molecules/FilterForm";
 import OpenLinkContainer from "./atoms/OpenLinkContainer";
 import UploadPitPhoto from "./molecules/UploadPitPhoto";
 import ULBHomeCard from "./atoms/ULBHomeCard";
+import NewRadioButton from "./atoms/NewRadioButton";
 export {
+  NewRadioButton,
   Phone,
   Body,
   Loader,

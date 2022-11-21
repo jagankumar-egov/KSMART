@@ -5,7 +5,7 @@ import { ReactComponent as BankIcon } from "../../Img/BankIcon.svg";
 import { ReactComponent as FileProtected } from "../../Img/FileProtected.svg";
 
 const mystyle = {
-  maxWidth: "64%",
+  maxWidth: "66%",
   
 };
 
@@ -16,13 +16,14 @@ const DeathCrFlow = ({ path }) => {
       title: "New Registration",
       subTitle: "Inbox",
       img: <BankIcon />,
+      link: `${path}/death-registration`,
+
     },
 
     {
       title: "Correction",
       subTitle: "Inbox",
       img: <FileProtected />,
-      link: `${path}/death-registration`,
     },
     {
       title: "Suspension",
