@@ -1,70 +1,62 @@
 import { Dropdown, TextInput } from '@egovernments/digit-ui-react-components'
 import React from 'react'
 
-const formData = [
+const StatisticalData = [
   {
-    id: 1,
-    label: "Name (English)",
-  },
-  {
-    id: 2,
-    label: "Name (Malayalam)",
-  },
-  {
-    id: 3,
-    label: "Gender",
-  },
-  {
-    id: 4,
-    label: "Age",
+    id: 111,
+    label: "Type of medical attention received before death",
   },
   {
     id: 111,
-    label: "Age unit",
+    label: "Was the cause of death medically certified ?",
+  },
+  {
+    id: 111,
+    label: "Name of Illness / Actual cause of death (Main part)",
+  },
+  {
+    id: 111,
+    label: "Name of Illness / Actual cause of death (Sub part)",
+  },
+  {
+    id: 1,
+    label: "Name of Illness / Actual cause of death (Other) (Malayalam)",
   },
   {
     id: 6,
-    label: "Aadhaar No",
+    label: "In case this is a female death, did the death occur While",
   },
   {
     id: 7,
-    label: "EID No",
+    label: "If used to habitually smoke for how many Years ? YES/NO",
   },
   {
     id: 9,
-    label: "First Name (English)",
+    label: "years",
   },
   {
     id: 8,
-    label: "Middle Name (English)",
+    label: "If used to habitually chew tobacco in any form for how many years ? YES/NO",
   },
   {
     id: 8,
-    label: "Last Name (English)",
+    label: "years",
   },
   {
     id: 8,
-    label: "First Name (Malayalam)",
+    label: "If used to habitually chew arecanut in any form (including pan masala)-for how many years ? YES/NO",
   },
   {
     id: 8,
-    label: "Middle Name (Malayalam)",
+    label: "years",
   },
   {
     id: 8,
-    label: "Last Name (Malayalam)",
+    label: "If used to habitually drink alcohol for how many years ? YES/NO",
   },
   {
-    id: 111,
-    label: "Occupation",
-  },
-  {
-    id: 111,
-    label: "Religion",
-  },
-  {
-    id: 111,
-    label: "Nationality",
+    id: 1,
+    label: "ICD Code",
   },
 ];
 function StatisticalInfo() {
@@ -75,7 +67,7 @@ function StatisticalInfo() {
       </div>
       <div className="maindeath">
         <div className="maindiv">
-        {formData?.map((item, index) => (
+        {StatisticalData?.map((item, index) => (
           <div className="inner">
             <label htmlFor="">{item.label}</label>
             {item.id === 111 ? (
@@ -84,7 +76,7 @@ function StatisticalInfo() {
               <TextInput />
               )}
           </div>
-          ))}s
+          ))}
         </div>
       </div>
     </div>

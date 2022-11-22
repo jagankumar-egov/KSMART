@@ -9,4 +9,31 @@
     display: grid;
     grid-template-columns: auto auto auto;
   }
+  .inner{
+    width: 85%;
+  }
+}
+.buttonflex{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .switch{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+    margin-right: 28px;
+  }
+
+  .next-button{
+    background: #f47738;
+    height: 2.5rem;
+    width: 150px;
+    color: #fff;
+    border-radius: 0.5rem;
+
+  }
+.submit-death{
+}
+
 }

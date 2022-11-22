@@ -2,7 +2,7 @@ import { Dropdown, InputCard, SubmitBar, TextInput } from "@egovernments/digit-u
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function InfoDecease({ t, config, onSelect, userType, }) {
+export default function InfoDecease({ t, config, onSelect, userType, formDatas, setFormData }) {
   const formData = [
     {
       id: 1,
@@ -91,8 +91,6 @@ export default function InfoDecease({ t, config, onSelect, userType, }) {
   }
   return (
   <div>
-
-  
       <Tittle>Information Of Deceased</Tittle>
       <MainDiv>
         <Div>
@@ -101,6 +99,7 @@ export default function InfoDecease({ t, config, onSelect, userType, }) {
               <Label>{item.label}</Label>
               {item.id === 111 ? (
                 <Dropdown
+                value={formDatas.dropdown}
                   t={t}
                   optionKey="code"
                   // isMandatory={config.isMandatory}
@@ -110,7 +109,10 @@ export default function InfoDecease({ t, config, onSelect, userType, }) {
                   disabled={isEdit}
                 />
               ) : (
-                <TextInput />
+                <TextInput 
+                value={formDatas.input}
+                onChange={(event) => setFormData({...formDatas, input: event.target.value})}
+                />
               )}
             </InnerDiv>
           ))}
