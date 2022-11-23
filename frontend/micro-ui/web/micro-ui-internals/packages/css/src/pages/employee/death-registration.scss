@@ -8,6 +8,10 @@
   .maindiv {
     display: grid;
     grid-template-columns: auto auto auto;
+    @media (max-width: 1281px) {
+      grid-template-columns: repeat(1, 1fr);
+      justify-items: center;
+    }
   }
   .inner{
     width: 85%;
@@ -17,6 +21,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  @media (max-width: 1281px) {
+    flex-wrap: wrap;
+  }
   .switch{
     display: flex;
     align-items: center;

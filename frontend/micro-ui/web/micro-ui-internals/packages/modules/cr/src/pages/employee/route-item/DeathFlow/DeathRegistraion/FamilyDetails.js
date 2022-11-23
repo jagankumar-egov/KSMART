@@ -1,5 +1,5 @@
-import { Dropdown, TextInput } from '@egovernments/digit-ui-react-components'
-import React from 'react'
+import { Dropdown, TextInput } from "@egovernments/digit-ui-react-components";
+import React from "react";
 
 const StatisticalData = [
   {
@@ -62,24 +62,20 @@ const StatisticalData = [
 function FamilyDetails() {
   return (
     <div>
-      <div className="tittle">
-Family Details      </div>
+      <div className="tittle">Family Details </div>
       <div className="maindeath">
         <div className="maindiv">
-        {StatisticalData?.map((item, index) => (
-          <div className="inner">
-            <label htmlFor="">{item.label}</label>
-            {item.id === 111 ? (
-            <Dropdown />
-            ) : (
-              <TextInput />
-              )}
-          </div>
-          ))}s
+          {StatisticalData?.map((item, index) => (
+            <div className="inner">
+              <label htmlFor="">{item.label}</label>
+              {item.id === 111 ? <Dropdown /> : <TextInput />}
+            </div>
+          ))}
+          s
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default FamilyDetails
+export default FamilyDetails;

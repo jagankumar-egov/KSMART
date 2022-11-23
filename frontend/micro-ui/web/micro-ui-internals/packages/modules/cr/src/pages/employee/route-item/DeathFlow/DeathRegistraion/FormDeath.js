@@ -1,10 +1,9 @@
 import React, { Suspense, useState } from "react";
 import { SubmitBar } from "@egovernments/digit-ui-react-components";
-
-const InfoDecease = React.lazy(() => import("./InfoDecease"));
-const StatisticalInfo = React.lazy(() => import("./StatisticalInfo"));
-const FamilyDetails = React.lazy(() => import("./FamilyDetails"));
-const DeathInstitution = React.lazy(() => import("./DeathInstitution"));
+import InfoDecease from "./InfoDecease";
+import StatisticalInfo from "./StatisticalInfo";
+import FamilyDetails from "./FamilyDetails";
+import DeathInstitution from "./DeathInstitution";
 
 function FormDeath() {
   const [page, setPage] = useState(1);
@@ -16,21 +15,13 @@ function FormDeath() {
   return (
     <div>
       {page == 1 ? (
-        <Suspense fallback={<div>Loading</div>}>
-          <InfoDecease formDatas={formDatas} setFormData={setFormData} />
-        </Suspense>
+        <InfoDecease formDatas={formDatas} setFormData={setFormData} />
       ) : page == 2 ? (
-        <Suspense fallback={<div>Loading</div>}>
-          <StatisticalInfo />
-        </Suspense>
+        <StatisticalInfo />
       ) : page == 3 ? (
-        <Suspense fallback={<div>Loading</div>}>
-          <FamilyDetails />
-        </Suspense>
+        <FamilyDetails />
       ) : (
-        <Suspense fallback={<div>Loading</div>}>
-          <DeathInstitution />
-        </Suspense>
+        <DeathInstitution />
       )}
       <div className="buttonflex">
         <button className="switch">
