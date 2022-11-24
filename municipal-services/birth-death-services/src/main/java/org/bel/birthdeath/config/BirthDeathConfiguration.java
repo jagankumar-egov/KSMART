@@ -40,6 +40,12 @@ public class BirthDeathConfiguration {
     @Value("${persister.update.birth.topic}")
     private String updateBirthTopic;
 
+    @Value("${persister.save.details.birth.topic}")
+    private String saveBirthDetailsTopic;
+
+    @Value("${persister.update.details.birth.topic}")
+    private String updateBirthDetailsTopic;
+
     @Value("${egov.idgen.deathapplnum.name}")
     private String deathApplNumberIdgenName;
 

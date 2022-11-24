@@ -17,10 +17,15 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication(scanBasePackages = "org.bel.birthdeath" )
 @EnableAutoConfiguration
 //@Import({TracerConfiguration.class})
+@EnableSwagger2
 @Import({TracerConfiguration.class,EncryptionConfiguration.class})
 public class BirthDeathApplication {
 
@@ -30,7 +35,12 @@ public class BirthDeathApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BirthDeathApplication.class, args);
 	}
-	
+
+    public Docket apis()
+    {
+        return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("org.bel.birthdeath")).build();
+
+    }
 	@Bean
     public ObjectMapper objectMapperBnd(){
         return new ObjectMapper()

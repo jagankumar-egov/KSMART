@@ -45,7 +45,10 @@ public class BirthController {
     public void loadTenants() {
     	liveCitizenTenantsList = Arrays.asList(liveCitizenTenants);
     }
-	
+
+
+
+
     
 	@PostMapping(value = { "/_search"})
     public ResponseEntity<BirthResponse> search(@RequestBody RequestInfoWrapper requestInfoWrapper,
