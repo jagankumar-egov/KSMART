@@ -47,6 +47,6 @@ public class BirthDetailsEnrichment implements BaseEnrichment {
         AuditDetails auditDetails = buildAuditDetails(userInfo.getUuid(), Boolean.FALSE);
 
         request.getBirthDetails()
-                .forEach(personal -> personal.setAuditDetails(auditDetails));
+                .forEach(birth -> birth.setAuditDetails(auditDetails));
     }
 }

@@ -119,7 +119,7 @@ public class BirthDetail {
     private String status;
 
     @JsonProperty("birthPlace")
-    private BirthFatherInfo birthPlace;
+    private BirthPlace birthPlace;
 
     @JsonProperty("birthFather")
     private BirthFatherInfo birthFatherInfo;
