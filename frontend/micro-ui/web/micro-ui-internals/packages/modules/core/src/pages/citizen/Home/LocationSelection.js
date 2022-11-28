@@ -67,15 +67,20 @@ const LocationSelection = () => {
   // }, [cities, t, selectedCity]);
 
   function onSubmit() {
-    if (selectedCity) {
-      Digit.SessionStorage.set("CITIZEN.COMMON.HOME.CITY", selectedCity);
-      history.push("/digit-ui/citizen");
-    } else if (selectedDistrict) {
+    if (selectedDistrict) {
       Digit.SessionStorage.set("CITIZEN.COMMON.HOME.DISTRICT", selectedDistrict);
       history.push("/digit-ui/citizen");
+      if (selectedCity) {
+        Digit.SessionStorage.set("CITIZEN.COMMON.HOME.CITY", selectedCity);
+        history.push("/digit-ui/citizen");
+      } 
+      else {
+        setShowError(true);
+      }
     } else {
       setShowError(true);
     }
+    
   }
   
   return isLoading ,isLoad? (
@@ -85,10 +90,10 @@ const LocationSelection = () => {
       <BackButton />
       <PageBasedInput texts={texts} onSubmit={onSubmit}>
         <CardHeader>
-          Choose Your Local Body
-          {/* {t("CS_COMMON_CHOOSE_LOCATION")} */}
+          {/* Choose Your Local Body */}
+          {t("CS_COMMON_CHOOSE_LOCATION")}
         </CardHeader>
-        <CardLabel>Districts</CardLabel>
+        <CardLabel>{t("CS_COMMON_DISTRICT")}</CardLabel>
         <RadioOrSelect 
           options={districts}
           selectedOption={selectedDistrict}
@@ -99,7 +104,7 @@ const LocationSelection = () => {
           // onChange={(e) => onChangeLB(e.target.value)}
         //  disabled={isEdit}
         />
-        <CardLabel>Local Body</CardLabel>
+        <CardLabel>{t("CS_COMMON_LB")}</CardLabel>
         <RadioOrSelect 
          options={lbs}
          selectedOption={selectedCity}

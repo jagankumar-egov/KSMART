@@ -98,9 +98,9 @@ public class ApplicantPersonalService {
 
         enrichmentService.enrichUpdate(request);
 
-        wfIntegrator.callWorkFlow(request);
-
         producer.push(fmConfig.getUpdateApplicantPersonalTopic(), request);
+
+        wfIntegrator.callWorkFlow(request);
 
         return request.getApplicantPersonals();
     }
