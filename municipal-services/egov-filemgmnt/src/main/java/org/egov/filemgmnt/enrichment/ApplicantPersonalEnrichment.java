@@ -18,6 +18,16 @@ import org.egov.tracer.model.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * The Class ApplicantPersonalEnrichment.
+ * 
+ * <p>
+ * Enrich applicant personal by adding primary keys (uuid), audit details,
+ * filcode using
+ * {@link IdgenUtil#getIdList(RequestInfo, String, String, String, Integer)}.
+ * while creating/updating applicant personal
+ * </p>
+ */
 @Component
 public class ApplicantPersonalEnrichment implements BaseEnrichment {
 
@@ -33,9 +43,19 @@ public class ApplicantPersonalEnrichment implements BaseEnrichment {
     /**
      * Enrich applicant personal create request.
      *
-     * @param request the
-     *                {@link org.egov.filemgmnt.web.models.ApplicantPersonalRequest
-     *                ApplicantPersonalRequest}
+     * <p>
+     * Sets primary keys by generating uuids, {@link UUID#randomUUID()}
+     * </p>
+     * <p>
+     * Create and sets audit details
+     * {@link BaseEnrichment#buildAuditDetails(String, Boolean)}
+     * </p>
+     * <p>
+     * Generate and sets file code,
+     * {@link #getFileCodes(RequestInfo, String, String, String, int)}
+     * </p>
+     * 
+     * @param request the {@link ApplicantPersonalRequest}
      */
     public void enrichCreate(ApplicantPersonalRequest request) {
 
@@ -74,10 +94,13 @@ public class ApplicantPersonalEnrichment implements BaseEnrichment {
 
     /**
      * Enrich applicant personal update request.
-     *
-     * @param request the
-     *                {@link org.egov.filemgmnt.web.models.ApplicantPersonalRequest
-     *                ApplicantPersonalRequest}
+     * 
+     * <p>
+     * Create and sets audit details for update request
+     * {@link BaseEnrichment#buildAuditDetails(String, Boolean)}
+     * </p>
+     * 
+     * @param request the {@link ApplicantPersonalRequest}
      */
     public void enrichUpdate(ApplicantPersonalRequest request) {
 

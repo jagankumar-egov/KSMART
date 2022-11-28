@@ -75,12 +75,12 @@ public class WorkflowIntegrator {
                 List<Map<String, String>> uuidmaps = new LinkedList<>();
 
                 if (!CollectionUtils.isEmpty(personal.getFileDetail()
-                                                     .getAssignee())) {
+                                                     .getAssignees())) {
 
                     // Adding assignes to processInstance
 
                     personal.getFileDetail()
-                            .getAssignee()
+                            .getAssignees()
                             .forEach(assignee -> {
 
                                 Map<String, String> uuidMap = new HashMap<>();
@@ -105,7 +105,7 @@ public class WorkflowIntegrator {
                         personal.getFileDetail()
                                 .getComment());
                 if (!CollectionUtils.isEmpty(personal.getFileDetail()
-                                                     .getAssignee())) {
+                                                     .getAssignees())) {
                     obj.put(FMConstants.ASSIGNEEKEY, uuidmaps);
                 }
                 obj.put(FMConstants.DOCUMENTSKEY,

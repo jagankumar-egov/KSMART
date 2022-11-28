@@ -19,16 +19,16 @@ public class ApplicantPersonalSearchCriteria {
     private String tenantId;
 
     @JsonProperty("id")
-    private String id;
+    private String id; // applicant id
 
     @JsonProperty("fileCode")
     private String fileCode;
 
     @JsonProperty("fromDate")
-    private Long fromDate;
+    private Long fromDate; // file arising date
 
     @JsonProperty("toDate")
-    private Long toDate;
+    private Long toDate; // file arising date
 
     @JsonProperty("aadhaarNo")
     private String aadhaarNo;

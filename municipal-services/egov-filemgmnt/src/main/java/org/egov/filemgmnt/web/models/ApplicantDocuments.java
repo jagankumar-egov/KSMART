@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Schema(description = "A Object holds the basic data for a Applicant Documents")
+@Schema(name = "ApplicantDocument", description = "A Object holds the basic data for a Applicant Documents")
 @Validated
 
 @Getter
@@ -25,7 +25,7 @@ import lombok.Setter;
 
 public class ApplicantDocuments {
 
-    @Schema(type = "string", format = "uuid", description = "Applicant Document id")
+    @Schema(type = "string", format = "uuid", description = "Applicant dDocument id")
     @Size(max = 64)
     @JsonProperty("id")
     private String id;

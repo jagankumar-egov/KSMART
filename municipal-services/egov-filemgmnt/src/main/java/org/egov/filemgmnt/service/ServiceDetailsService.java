@@ -53,8 +53,7 @@ public class ServiceDetailsService {
     public List<ServiceDetails> search(ServiceDetailsSearchCriteria criteria) {
 
         if (CollectionUtils.isEmpty(criteria.getIds())) {
-//            throw new GlobalException(ErrorCodes.APPLICANT_SERVICE_INVALID_SEARCH_CRITERIA,
-//                    "At least one applicant id is required.");
+
         }
 
         return repository.getApplicantServices(criteria);

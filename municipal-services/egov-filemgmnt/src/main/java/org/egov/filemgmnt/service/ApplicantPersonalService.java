@@ -16,72 +16,104 @@ import org.egov.filemgmnt.workflow.WorkflowIntegrator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The Class ApplicantPersonalService, provides methods for creating, updating
+ * and searching applicant personals.
+ * 
+ * @see ApplicantPersonalValidator
+ * @see ApplicantPersonalEnrichment
+ * @see ApplicantPersonalRepository
+ */
 @Service
 public class ApplicantPersonalService {
 
-	private final ApplicantPersonalValidator validatorService;
-	private final ApplicantPersonalEnrichment enrichmentService;
-	private final ApplicantPersonalRepository repository;
-	private final Producer producer;
-	private final MdmsUtil mdmsUtil;
-	private final FMConfiguration filemgmntConfig;
-	private final WorkflowIntegrator wfIntegrator;
+    private final ApplicantPersonalValidator validatorService;
+    private final ApplicantPersonalEnrichment enrichmentService;
+    private final ApplicantPersonalRepository repository;
+    private final Producer producer;
+    private final MdmsUtil mdmsUtil;
+    private final FMConfiguration fmConfig;
+    private final WorkflowIntegrator wfIntegrator;
 
-	@Autowired
-	ApplicantPersonalService(ApplicantPersonalValidator validatorService, ApplicantPersonalEnrichment enrichmentService,
-			ApplicantPersonalRepository repository, Producer producer, MdmsUtil mdmsUtil,
-			FMConfiguration filemgmntConfig, WorkflowIntegrator wfIntegrator) {
-		this.validatorService = validatorService;
-		this.enrichmentService = enrichmentService;
-		this.repository = repository;
-		this.producer = producer;
-		this.mdmsUtil = mdmsUtil;
-		this.filemgmntConfig = filemgmntConfig;
-		this.wfIntegrator = wfIntegrator;
-	}
+    @Autowired
+    ApplicantPersonalService(ApplicantPersonalValidator validatorService, ApplicantPersonalEnrichment enrichmentService,
+                             ApplicantPersonalRepository repository, Producer producer, MdmsUtil mdmsUtil,
+                             FMConfiguration fmConfig, WorkflowIntegrator wfIntegrator) {
+        this.validatorService = validatorService;
+        this.enrichmentService = enrichmentService;
+        this.repository = repository;
+        this.producer = producer;
+        this.mdmsUtil = mdmsUtil;
+        this.fmConfig = fmConfig;
+        this.wfIntegrator = wfIntegrator;
+    }
 
-	public List<ApplicantPersonal> create(ApplicantPersonalRequest request) {
-		String tenantId = request.getApplicantPersonals().get(0).getTenantId();
+    /**
+     * Creates applicant personal.
+     *
+     * @param request the {@link ApplicantPersonalRequest}
+     * @return the list of {@link ApplicantPersonal}
+     */
+    public List<ApplicantPersonal> create(ApplicantPersonalRequest request) {
+        String tenantId = request.getApplicantPersonals()
+                                 .get(0)
+                                 .getTenantId();
 
-		// validate mdms data
-		Object mdmsData = mdmsUtil.mdmsCall(request.getRequestInfo(), tenantId);
+        // validate mdms data
+        Object mdmsData = mdmsUtil.mdmsCall(request.getRequestInfo(), tenantId);
 
-		// validate request
-		validatorService.validateCreate(request, mdmsData);
+        // validate request
+        validatorService.validateCreate(request, mdmsData);
 
-		// enrich request
-		enrichmentService.enrichCreate(request);
+        // enrich request
+        enrichmentService.enrichCreate(request);
 
-		producer.push(filemgmntConfig.getSaveApplicantPersonalTopic(), request);
+        producer.push(fmConfig.getSaveApplicantPersonalTopic(), request);
 
-		wfIntegrator.callWorkFlow(request);
+        wfIntegrator.callWorkFlow(request);
 
-		return request.getApplicantPersonals();
+        return request.getApplicantPersonals();
 
-	}
+    }
 
-	public List<ApplicantPersonal> update(ApplicantPersonalRequest request) {
+    /**
+     * Update applicant personal details.
+     *
+     * @param request the {@link ApplicantPersonalRequest}
+     * @return the list of {@link ApplicantPersonal}
+     */
+    public List<ApplicantPersonal> update(ApplicantPersonalRequest request) {
 
-		String id = request.getApplicantPersonals().get(0).getId();
+        String id = request.getApplicantPersonals()
+                           .get(0)
+                           .getId();
 
-		// search database
-		List<ApplicantPersonal> searchResult = repository
-				.getApplicantPersonals(ApplicantPersonalSearchCriteria.builder().id(id).build());
+        // search database
+        List<ApplicantPersonal> searchResult = repository.getApplicantPersonals(ApplicantPersonalSearchCriteria.builder()
+                                                                                                               .id(id)
+                                                                                                               .build());
 
-		// validate request
-		validatorService.validateUpdate(request, searchResult);
+        // validate request
+        validatorService.validateUpdate(request, searchResult);
 
-		enrichmentService.enrichUpdate(request);
+        enrichmentService.enrichUpdate(request);
 
-		wfIntegrator.callWorkFlow(request);
+        wfIntegrator.callWorkFlow(request);
 
-		producer.push(filemgmntConfig.getUpdateApplicantPersonalTopic(), request);
+        producer.push(fmConfig.getUpdateApplicantPersonalTopic(), request);
 
-		return request.getApplicantPersonals();
-	}
+        return request.getApplicantPersonals();
+    }
 
-	public List<ApplicantPersonal> search(ApplicantPersonalSearchCriteria criteria, RequestInfo requestInfo) {
-		validatorService.validateSearch(requestInfo, criteria);
-		return repository.getApplicantPersonals(criteria);
-	}
+    /**
+     * Search applicant personal(s).
+     *
+     * @param criteria    the {@link ApplicantPersonalSearchCriteria}
+     * @param requestInfo the {@link RequestInfo}
+     * @return the list of {@link ApplicantPersonal}
+     */
+    public List<ApplicantPersonal> search(ApplicantPersonalSearchCriteria criteria, RequestInfo requestInfo) {
+        validatorService.validateSearch(requestInfo, criteria);
+        return repository.getApplicantPersonals(criteria);
+    }
 }

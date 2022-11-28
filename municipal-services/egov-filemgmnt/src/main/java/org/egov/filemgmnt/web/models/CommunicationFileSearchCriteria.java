@@ -38,7 +38,7 @@ public class CommunicationFileSearchCriteria {
     }
 
     public boolean tenantIdOnly() {
-        // return (tenantId != null);
+
         return (StringUtils.isNotBlank(tenantId) && StringUtils.isEmpty(fileCode));
     }
 

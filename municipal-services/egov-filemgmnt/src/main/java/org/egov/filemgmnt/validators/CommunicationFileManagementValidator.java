@@ -59,11 +59,6 @@ public class CommunicationFileManagementValidator {
             throw new CustomException(INVALID_SEARCH.getCode(), "Search based only on tenantId is not allowed");
         }
 
-//        String allowedSearchParams = config.getAllowedCitizenSearchParams();
-//
-//        if (StringUtils.isBlank(allowedSearchParams) && !criteria.isEmpty()) {
-//            throw new CustomException(INVALID_SEARCH.getCode(), "No search parameters are expected");
-//        }
     }
 
 }

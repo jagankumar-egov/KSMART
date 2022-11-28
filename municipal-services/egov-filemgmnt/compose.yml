@@ -50,7 +50,7 @@ services:
       - '8082:8082'
     environment:
       - SERVER_PORT=8082
-      - EGOV_PERSIST_YML_REPO_PATH=file:///filemgmnt.yml
+      - EGOV_PERSIST_YML_REPO_PATH=file:///filemgmnt.yml,file:///egov-workflow-v2-persister.yml
       - SPRING_KAFKA_BOOTSTRAPSERVERS=kafka:9093
       - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/egov_filemgmnt
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -59,11 +59,31 @@ services:
 #      - 'host.docker.internal:host-gateway'
     volumes:
       - './src/main/resources/persister/filemgmnt.yml:/filemgmnt.yml'
+      - './egov-workflow-v2-persister.yml:/egov-workflow-v2-persister.yml'
     networks:
       - ksmart
     depends_on:
       kafka:
         condition: service_healthy 
+  workflowv2:
+    container_name: workflowv2
+    image: 'egovio/egov-workflow-v2:v1.2.1-dc9ffb98f8-2'
+    pull_policy: missing
+    restart: 'on-failure'
+    ports:
+      - '8280:8280'
+    environment:
+      - SERVER_PORT=8280
+      - SPRING_KAFKA_BOOTSTRAPSERVERS=kafka:9093
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/egov_filemgmnt
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=123
+#    extra_hosts:
+#      - 'host.docker.internal:host-gateway'
+    networks:
+      - ksmart
+    depends_on:
+      - persister
 
 networks:
   ksmart:

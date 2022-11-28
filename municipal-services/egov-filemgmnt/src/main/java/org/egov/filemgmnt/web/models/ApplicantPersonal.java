@@ -48,6 +48,7 @@ public class ApplicantPersonal {
     @Schema(type = "string", description = "First name")
     @Size(max = 64)
     @NotNull
+
     @JsonProperty("firstName")
     private String firstName;
 
@@ -75,37 +76,37 @@ public class ApplicantPersonal {
     @JsonProperty("tenantId")
     private String tenantId;
 
-    @Schema(type = "string", description = "Father First Name")
+    @Schema(type = "string", description = "Father first name")
     @Size(max = 64)
     @JsonProperty("fatherFirstName")
     private String fatherFirstName;
 
-    @Schema(type = "string", description = "Father Last Name")
+    @Schema(type = "string", description = "Father last name")
     @Size(max = 64)
     @JsonProperty("fatherLastName")
     private String fatherLastName;
 
-    @Schema(type = "string", description = "Mother First Name")
+    @Schema(type = "string", description = "Mother first name")
     @Size(max = 64)
     @JsonProperty("motherFirstName")
     private String motherFirstName;
 
-    @Schema(type = "string", description = "Mother Last Name")
+    @Schema(type = "string", description = "Mother last name")
     @Size(max = 64)
     @JsonProperty("motherLastName")
     private String motherLastName;
 
-    @Schema(type = "string", description = "Category of Applicant")
+    @Schema(type = "string", description = "Applicant category")
     @Size(max = 64)
     @JsonProperty("applicantCategory")
     private String applicantCategory;
 
-    @Schema(type = "string", description = "Date of Birth")
-    @Size(max = 64)
+    @Schema(type = "integer", format = "int64", description = "Date of birth")
+    // @NotNull
     @JsonProperty("dateOfBirth")
-    private String dateOfBirth;
+    private Long dateOfBirth;
 
-    @Schema(type = "string", description = "Bank Account Number")
+    @Schema(type = "string", description = "Bank account number")
     @Size(max = 64)
     @JsonProperty("bankAccountNo")
     private String bankAccountNo;
