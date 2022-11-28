@@ -73,9 +73,9 @@ public class ApplicantPersonalService {
 
 		enrichmentService.enrichUpdate(request);
 
-		wfIntegrator.callWorkFlow(request);
-
 		producer.push(filemgmntConfig.getUpdateApplicantPersonalTopic(), request);
+
+		wfIntegrator.callWorkFlow(request);
 
 		return request.getApplicantPersonals();
 	}
