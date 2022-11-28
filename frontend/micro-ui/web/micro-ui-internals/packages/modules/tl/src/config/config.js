@@ -229,6 +229,42 @@ export const newConfig = [
     head: "ES_NEW_APPLICATION_PROPERTY_ASSESSMENT",
     body: [
       {
+        isMandatory: true,
+        type: "component",
+        route: "units-details",
+        key: "TradeDetails",
+        component: "SelectTradeUnits",
+        texts: {
+          headerCaption: "",
+          header: "TL_TRADE_UNITS_HEADER",
+          cardText: "TL_TRADE_UNITS_TEXT",
+          submitBarLabel: "CS_COMMON_NEXT",
+        },
+        withoutLabel: true,
+        nextStep: "licensee-select",
+        hideInEmployee: true,
+      },
+      {
+        type: "component",
+        route: "licensee-select",
+        isMandatory: true,
+        component: "SelectLicensee",
+        texts: {
+          headerCaption: "",
+          header: "TL_LICENSEE_TYPE",
+          cardText: "TL_LICENSEE_UNIT_MSG",
+          submitBarLabel: "CS_COMMON_NEXT",
+        },
+        key: "TradeDetails",
+        withoutLabel: true,
+        hideInEmployee: true,
+        //nextStep: "property-usage-type",
+        nextStep: {
+          "TL_COMMON_YES": "Building-type",
+          "TL_COMMON_NO": "vehicle-type",
+        },
+      },
+      {
         route: "info",
         component: "TradeLicense",
         nextStep: "map",
@@ -265,7 +301,10 @@ export const newConfig = [
         key: "TradeDetails",
         withoutLabel: true,
         hideInEmployee: true,
-        nextStep:"land-type",
+        nextStep: "land-type",
+        // sessionStorage.getItem("routeElement"),
+        // sessionStorage.setItem("routeElement"
+        // "land-type",
         // nextStep: {
         //   TL_COMMON_LAND: "land-type",
         //   TL_COMMON_BUILDING: "building-det",
@@ -279,7 +318,7 @@ export const newConfig = [
         component: "SelectLand",
         texts: {
           // headerCaption: "TL_STRUCTURE_TYPE",
-          header: "Land Details",
+          header: "TL_STRUCTURE_TYPE_LAND",
           // cardText: "TL_STRUCTURE_TYPE_TEXT",
           submitBarLabel: "CS_COMMON_NEXT",
         },
@@ -314,6 +353,23 @@ export const newConfig = [
         texts: {
           // headerCaption: "TL_STRUCTURE_TYPE",
           header: "Vechicle Details",
+          // cardText: "TL_STRUCTURE_TYPE_TEXT",
+          submitBarLabel: "CS_COMMON_NEXT",
+        },
+        key: "TradeDetails",
+        withoutLabel: true,
+        hideInEmployee: true,
+        nextStep: "commencement-date",
+        
+      },
+      {
+        type: "component",
+        route: "water-det",
+        isMandatory: true,
+        component: "SelectTLWater",
+        texts: {
+          // headerCaption: "TL_STRUCTURE_TYPE",
+          header: "Water Details",
           // cardText: "TL_STRUCTURE_TYPE_TEXT",
           submitBarLabel: "CS_COMMON_NEXT",
         },
@@ -377,28 +433,12 @@ export const newConfig = [
       {
         isMandatory: true,
         type: "component",
-        route: "units-details",
-        key: "TradeDetails",
-        component: "SelectTradeUnits",
-        texts: {
-          headerCaption: "",
-          header: "TL_TRADE_UNITS_HEADER",
-          cardText: "TL_TRADE_UNITS_TEXT",
-          submitBarLabel: "CS_COMMON_NEXT",
-        },
-        withoutLabel: true,
-        nextStep: "business-category",
-        hideInEmployee: true,
-      },
-      {
-        isMandatory: true,
-        type: "component",
         route: "business-category",
         key: "TradeDetails",
         component: "SelectBusinessCategory",
         texts: {
           headerCaption: "",
-          header: "Business Category",
+          header: "TL_TRADE_BUISINESS_CATEGORY",
           // cardText: "TL_TRADE_UNITS_TEXT",
           submitBarLabel: "CS_COMMON_NEXT",
         },
