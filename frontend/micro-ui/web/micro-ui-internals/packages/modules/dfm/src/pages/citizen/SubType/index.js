@@ -86,7 +86,7 @@ const SubType = ({ path ,handleNext}) => {
           {/* <h1>{t("MODULE_" + code.toUpperCase())}</h1> */}
         </div>
         <div className="moduleLinkHomePageModuleLinks">
-       <div className="CitizenHomeCard">
+       <div className="FileFlowWrapper">
        <FormInputGroup 
             type="Dropdown" handleChange={handleChange}   t={t} value={subtypeData.subtype} name="subtype" label="Sub Type"
             selectOptions={subtypeOptions} 
