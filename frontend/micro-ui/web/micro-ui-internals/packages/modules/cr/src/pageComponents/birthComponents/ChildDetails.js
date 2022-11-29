@@ -61,16 +61,16 @@ const ChildDetails = ({ config, onSelect, userType, formData }) => {
     </div>
     <div className="row">
         <div className="col-md-4" >
-            <CardLabel>{t("Date of Birth")}</CardLabel>
+            <CardLabel>{t("CR_DATE_OF_BIRTH_TIME")}</CardLabel>
             {/* date={CommencementDate} */}
             <DatePicker date={CommencementDate} name="CommencementDate" onChange={selectCommencementDate}  />
         </div>
         <div className="col-md-4" >
-            <CardLabel>{t("Date of Reporting")}</CardLabel>
+            <CardLabel>{t("CR_DATE_OF_REPORTING")}</CardLabel>
             <DatePicker date={CommencementDate} name="CommencementDate" onChange={selectCommencementDate}  />
         </div>
         <div className="col-md-4" >
-            <CardLabel>{`${t("Gender")}`}</CardLabel>
+            <CardLabel>{`${t("CR_GENDER")}`}</CardLabel>
             <Dropdown
                 t={t}
                 optionKey="code"
@@ -99,7 +99,7 @@ const ChildDetails = ({ config, onSelect, userType, formData }) => {
     </div>
     <div className="row">    
         <div className="col-md-4" > 
-            <CardLabel>{`${t("First Name (English)")}`}</CardLabel>
+            <CardLabel>{`${t("CR_FIRST_NAME")}`}</CardLabel>
             <TextInput       
             t={t}
             isMandatory={false}
@@ -113,7 +113,7 @@ const ChildDetails = ({ config, onSelect, userType, formData }) => {
             />
         </div>
         <div className="col-md-4" >
-            <CardLabel>{`${t("Middle Name (English)")}`}</CardLabel>
+            <CardLabel>{`${t("CR_MIDDLE_NAME")}`}</CardLabel>
             <TextInput       
             t={t}
             isMandatory={false}
@@ -127,7 +127,7 @@ const ChildDetails = ({ config, onSelect, userType, formData }) => {
             />
         </div>
         <div className="col-md-4" >
-            <CardLabel>{`${t("Last Name (English)")}`}</CardLabel>
+            <CardLabel>{`${t("CR_LAST_NAME")}`}</CardLabel>
             <TextInput       
             t={t}
             isMandatory={false}
@@ -143,7 +143,7 @@ const ChildDetails = ({ config, onSelect, userType, formData }) => {
     </div>
     <div className="row">    
         <div className="col-md-4" > 
-            <CardLabel>{`${t("First Name (Malayalam)")}`}</CardLabel>
+            <CardLabel>{`${t("CR_FIRST_NAME")}`}</CardLabel>
             <TextInput       
             t={t}
             isMandatory={false}
@@ -157,7 +157,7 @@ const ChildDetails = ({ config, onSelect, userType, formData }) => {
             />
         </div>
         <div className="col-md-4" >
-            <CardLabel>{`${t("Middle Name (Malayalam)")}`}</CardLabel>
+            <CardLabel>{`${t("CR_MIDDLE_NAME")}`}</CardLabel>
             <TextInput       
             t={t}
             isMandatory={false}
@@ -171,7 +171,7 @@ const ChildDetails = ({ config, onSelect, userType, formData }) => {
             />
         </div>
         <div className="col-md-4">
-            <CardLabel>{`${t("Last Name (Malayalam)")}`}</CardLabel>
+            <CardLabel>{`${t("CR_LAST_NAME")}`}</CardLabel>
             <TextInput       
             t={t}
             isMandatory={false}
@@ -185,7 +185,7 @@ const ChildDetails = ({ config, onSelect, userType, formData }) => {
             />  
         </div>
     </div>     
-      
+    
     </FormStep>
     </React.Fragment>
   );
