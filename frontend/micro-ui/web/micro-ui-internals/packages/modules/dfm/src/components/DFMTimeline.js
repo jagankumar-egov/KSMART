@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { TickMark } from "@egovernments/digit-ui-react-components";
-
+ 
 let actions = [];
 
 const getAction = (flow) => {
@@ -9,11 +9,17 @@ const getAction = (flow) => {
     case "STAKEHOLDER": actions = []
       break;
     default: actions = [
-      'TL_COMMON_TR_DETAILS',
-      'TL_LOCATION_AND_OWNER_DETAILS',
-      'TL_DOCUMENT_DETAIL',
-      'TL_COMMON_SUMMARY',
+      'Applicant Basic Details',
+      'Address Details',
+      'Service Details',
+      'Document Details',
     ]
+    // default: actions = [
+    //   'TL_COMMON_TR_DETAILS',
+    //   'TL_LOCATION_AND_OWNER_DETAILS',
+    //   'TL_DOCUMENT_DETAIL',
+    //   'TL_COMMON_SUMMARY',
+    // ]
   }
 }
 const Timeline = ({ currentStep = 1, flow = "" }) => {
