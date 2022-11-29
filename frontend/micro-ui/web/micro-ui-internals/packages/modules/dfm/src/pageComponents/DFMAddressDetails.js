@@ -28,7 +28,7 @@ const DFMAddressDetails = ({ t, config, onSelect, value, userType, formData }) =
           pincode: "",
           resAssociationNo: "",
           localPlace: "",
-          MainPlace: "",
+          mainPlace: "",
           wardNo: [],
         }
   );
@@ -76,8 +76,8 @@ const DFMAddressDetails = ({ t, config, onSelect, value, userType, formData }) =
       tempdata.localPlace = text;
       setAddressData(tempdata);
     }
-    if (type === "MainPlace") {
-      tempdata.MainPlace = text;
+    if (type === "mainPlace") {
+      tempdata.mainPlace = text;
       setAddressData(tempdata);
     }
     if (type === "wardNo") {
