@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Schema(description = "A Object holds the  data for a Service Document Details")
+@Schema(name = "ApplicantServiceDocument", description = "A Object holds the  data for a Service Document Details")
 @Validated
 
 @Getter
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Builder
 public class ApplicantServiceDocuments {
 
-    @Schema(type = "string", format = "uuid", description = "Applicant service documents id")
+    @Schema(type = "string", format = "uuid", description = "Applicant service document id")
     @Size(max = 64)
     @JsonProperty("id")
     private String id;
@@ -38,7 +38,7 @@ public class ApplicantServiceDocuments {
     @JsonProperty("serviceDetailsId")
     private String serviceDetailsId;
 
-    @Schema(type = "string", description = "Document Type id")
+    @Schema(type = "string", description = "Document type id")
     @Size(max = 64)
 //    @NotNull
     @JsonProperty("documentTypeId")
@@ -61,7 +61,7 @@ public class ApplicantServiceDocuments {
     @JsonProperty("documentNumber")
     private String documentNumber;
 
-    @Schema(type = "string", description = "Application Details")
+    @Schema(type = "string", description = "Application details")
     @Size(max = 64)
     @JsonProperty("applicationDetails")
     private String applicationdetails;

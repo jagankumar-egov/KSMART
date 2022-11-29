@@ -33,6 +33,8 @@ public class ApplicantPersonalRequest {
 
     @JsonProperty("ApplicantPersonals")
     @NotEmpty(message = "Applicant personal is required")
+    // @Size(min = 1, max = 1, message = "Supports single applicant personal request
+    // only")
     private List<@Valid ApplicantPersonal> applicantPersonals;
 
     public ApplicantPersonalRequest addApplicantPersonal(ApplicantPersonal applicantPersonal) {

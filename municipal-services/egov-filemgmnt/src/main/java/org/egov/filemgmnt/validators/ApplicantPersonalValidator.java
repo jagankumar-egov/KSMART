@@ -25,6 +25,15 @@ import org.springframework.stereotype.Component;
 
 /**
  * The Class ApplicantPersonalValidator.
+ * 
+ * <p>
+ * Validate applicant personal create and update requests
+ * </p>
+ * <p>
+ * Validate applicant personal search criteria
+ * </p>
+ * 
+ * @see ApplicantPersonalRepository
  */
 @Component
 public class ApplicantPersonalValidator {
@@ -45,9 +54,7 @@ public class ApplicantPersonalValidator {
     /**
      * Validate applicant personal create request.
      *
-     * @param request the
-     *                {@link org.egov.filemgmnt.web.models.ApplicantPersonalRequest
-     *                ApplicantPersonalRequest}
+     * @param request the {@link ApplicantPersonalRequest}
      */
     public void validateCreate(ApplicantPersonalRequest request, Object mdmsData) {
         List<ApplicantPersonal> applicantPersonals = request.getApplicantPersonals();
@@ -68,9 +75,7 @@ public class ApplicantPersonalValidator {
     /**
      * Validate applicant personal update request.
      *
-     * @param request the
-     *                {@link org.egov.filemgmnt.web.models.ApplicantPersonalRequest
-     *                ApplicantPersonalRequest}
+     * @param request the {@link ApplicantPersonalRequest}
      */
     public void validateUpdate(ApplicantPersonalRequest request, List<ApplicantPersonal> searchResult) {
         List<ApplicantPersonal> applicantPersonals = request.getApplicantPersonals();
@@ -91,10 +96,10 @@ public class ApplicantPersonalValidator {
     }
 
     /**
-     * Validates if the search parameters are valid
-     * 
-     * @param requestInfo The requestInfo of the incoming request
-     * @param criteria    The TradeLicenseSearch Criteria
+     * Validate search criteria.
+     *
+     * @param requestInfo the {@link RequestInfo}
+     * @param criteria    the {@link ApplicantPersonalSearchCriteria}
      */
     public void validateSearch(RequestInfo requestInfo, ApplicantPersonalSearchCriteria criteria) {
         if (StringUtils.isBlank(criteria.getTenantId())) {
@@ -127,34 +132,5 @@ public class ApplicantPersonalValidator {
         FMUtils.validateSearchParam(bw, "offset", allowedParams);
         FMUtils.validateSearchParam(bw, "limit", allowedParams);
     }
-
-//    private void validateApplicantPersonalRequiredFields(ApplicantPersonalRequest request) {
-//        Map<String, String> errorMap = new HashMap<>();
-//        request.getApplicantPersonals()
-//               .forEach(personal -> {
-//                   if (StringUtils.isBlank(personal.getFileDetail()
-//                                                   .getFinancialYear()))
-//                       errorMap.put("NULL_FINANCIALYEAR", " Financial Year cannot be null");
-//                   if (StringUtils.isBlank(personal.getServiceDetails()
-//                                                   .getServiceCode()))
-//                       errorMap.put("NULL_SERVICESUBTYPE", " Service Sub Type cannot be null");
-//               });
-//        if (MapUtils.isNotEmpty(errorMap)) {
-//            throw new CustomException(errorMap);
-//        }
-//
-//        request.getApplicantPersonals()
-//               .forEach(personal -> {
-//                   if (StringUtils.isEmpty(personal.getApplicantAddress()
-//                                                   .getHouseNo())) {
-//                       throw new CustomException("NULL_HOUSENO", " House Number cannot be null");
-//                   }
-//                   if (StringUtils.isEmpty(personal.getApplicantAddress()
-//                                                   .getHouseName())) {
-//                       throw new CustomException("NULL_HOUSENAME", " House Name cannot be null");
-//                   }
-//
-//               });
-//    }
 
 }

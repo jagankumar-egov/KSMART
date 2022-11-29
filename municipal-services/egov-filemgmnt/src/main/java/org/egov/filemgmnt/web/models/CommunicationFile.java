@@ -60,16 +60,6 @@ public class CommunicationFile {
     @JsonProperty("details")
     private String details;
 
-//    @Schema(type = "string", description = "Tenant identification number")
-//    @Size(max = 64)
-//    @NotNull
-//    @JsonProperty("tenantId")
-//    private String tenantId;
-
-//    @Schema(type = "int", format = "int64", description = "Document date  in milliseconds")
-//    @JsonProperty("DocumentTime")
-//    private Long DocumentTime;
-
     @JsonProperty("auditDetails")
     private AuditDetails auditDetails;
 

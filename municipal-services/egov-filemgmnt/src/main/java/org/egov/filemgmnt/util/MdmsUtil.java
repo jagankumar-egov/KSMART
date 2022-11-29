@@ -77,7 +77,6 @@ public class MdmsUtil {
                                                   .moduleName(FMConstants.FILEMANAGEMENT_MODULE)
                                                   .build();
 
-        // return Arrays.asList(fmModuleDetail);
         return Collections.singletonList(fmModuleDetail);
 
     }

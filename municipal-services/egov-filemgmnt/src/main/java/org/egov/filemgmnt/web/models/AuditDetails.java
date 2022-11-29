@@ -24,7 +24,7 @@ public class AuditDetails {
     @JsonProperty("createdBy")
     private String createdBy;
 
-    @Schema(type = "int", format = "int64", description = "Created time  in milliseconds")
+    @Schema(type = "integer", format = "int64", description = "Created time  in milliseconds")
     @JsonProperty("createdTime")
     private Long createdTime;
 
@@ -33,7 +33,7 @@ public class AuditDetails {
     @JsonProperty("lastModifiedBy")
     private String lastModifiedBy;
 
-    @Schema(type = "int", format = "int64", description = "Last modified time in milliseconds")
+    @Schema(type = "integer", format = "int64", description = "Last modified time in milliseconds")
     @JsonProperty("lastModifiedTime")
     private Long lastModifiedTime;
 }

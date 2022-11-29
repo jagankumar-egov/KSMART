@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Schema(description = "A Object holds the  data for a Service Details")
+@Schema(name = "ServiceDetail", description = "A Object holds the  data for a Service Details")
 @Validated
 
 @Getter
@@ -49,4 +49,15 @@ public class ServiceDetails {
     @JsonProperty("serviceCode")
     private String serviceCode;
 
+    @Schema(type = "string", description = "Service Sub Type")
+    @Size(max = 64)
+    @NotBlank(message = "Service Sub Type is required")
+    @JsonProperty("serviceSubType")
+    private String serviceSubType;
+
+    @Schema(type = "string", description = "Service Minor Type")
+    @Size(max = 64)
+    @NotBlank(message = "Service Minor Type is required")
+    @JsonProperty("serviceMinorType")
+    private String serviceMinorType;
 }

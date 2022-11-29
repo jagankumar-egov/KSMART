@@ -8,7 +8,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.SafeHtml;
+import org.egov.filemgmnt.constraints.Html;
+
+//import org.hibernate.validator.constraints.SafeHtml;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -40,23 +42,28 @@ public class FileDetail {
     @JsonProperty("tenantId")
     private String tenantId;
 
-    @Schema(type = "string", description = "Foreign key servicedetails")
+    @Schema(type = "string", description = "Applicant id")
+    @Size(max = 64)
+    @JsonProperty("applicantPersonalId")
+    private String applicantPersonalId;
+
+    @Schema(type = "string", description = "Foreign key service details")
     @Size(max = 64)
     @JsonProperty("serviceDetailsId")
     private String serviceDetailsId;
 
-    @Schema(type = "string", description = "File Number")
+    @Schema(type = "string", description = "File number")
     @Size(max = 64)
     @NotNull
     @JsonProperty("fileNumber")
     private String fileNumber;
 
-    @Schema(type = "string", description = "File Code")
+    @Schema(type = "string", description = "File code")
     @Size(max = 64)
     @JsonProperty("fileCode")
     private String fileCode;
 
-    @Schema(type = "string", description = "File Name")
+    @Schema(type = "string", description = "File name")
     @Size(max = 64)
     @NotNull
     @JsonProperty("fileName")
@@ -68,37 +75,35 @@ public class FileDetail {
     @JsonProperty("fileArisingMode")
     private String fileArisingMode;
 
-    @Schema(type = "int", format = "int64", description = "fileArisingDate")
-    @Size(max = 64)
+    @Schema(type = "integer", format = "int64", description = "File arising date")
     // @NotNull
     @JsonProperty("fileArisingDate")
-    private String fileArisingDate;
+    private Long fileArisingDate;
 
-    @Schema(type = "string", description = "FinancialYear")
+    @Schema(type = "string", description = "Financial year")
     @Size(min = 4, max = 4, message = "Invalid financial year")
     @Pattern(regexp = "^[1-9][0-9]{3}$", message = "Invalid financial year")
     @NotNull(message = "Financial year is required")
     @JsonProperty("financialYear")
     private String financialYear;
 
-    @Schema(type = "int", format = "int64", description = "Application submitted Date")
-    @Size(max = 64)
+    @Schema(type = "integer", format = "int64", description = "Application submitted date")
     // @NotNull
     @JsonProperty("applicationDate")
-    private String applicationDate;
+    private Long applicationDate;
 
-    @Schema(type = "string", description = "workflow code")
+    @Schema(type = "string", description = "Workflow code")
     @Size(max = 64)
     @NotNull
     @JsonProperty("workflowCode")
     private String workflowCode;
 
-    @Schema(type = "string", description = "workflow action")
+    @Schema(type = "string", description = "Workflow action")
     @Size(max = 64)
     @JsonProperty("action")
     private String action;
 
-    @Schema(type = "string", description = "status of a file")
+    @Schema(type = "string", description = "Status of file")
     @Size(max = 64)
     @NotNull
     @JsonProperty("fileStatus")
@@ -112,11 +117,12 @@ public class FileDetail {
     @JsonProperty("auditDetails")
     private AuditDetails auditDetails;
 
-    @JsonProperty("assignee")
-    private List<String> assignee = null;
+    @JsonProperty("assignees")
+    private List<String> assignees;
 
+    @Schema(type = "string", description = "Comments")
     @Size(max = 128)
-    @SafeHtml
+    @Html
     private String comment;
 
     @Valid

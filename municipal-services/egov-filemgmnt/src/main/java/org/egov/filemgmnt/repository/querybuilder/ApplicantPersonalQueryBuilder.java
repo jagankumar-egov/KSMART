@@ -34,12 +34,6 @@ public class ApplicantPersonalQueryBuilder extends BaseQueryBuilder {
                            query,
                            preparedStmtValues);
 
-//        if (criteria.getFromDate() != null) {
-//            addWhereClause(preparedStmtValues, query);
-//            query.append(" fd.filearisingdate >= ?");
-//            preparedStmtValues.add(criteria.getFromDate());
-//        }
-
         return query.toString();
     }
 

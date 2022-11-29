@@ -50,7 +50,7 @@ serviceMaps:
       - jsonPath: $.ApplicantPersonals.*.auditDetails.lastModifiedTime
       
     - query: >
-        INSERT INTO eg_fm_servicedetail(id, applicantpersonalid, serviceid, servicecode, businessservice, workflowcode, createdby, createdtime, lastmodifiedby, lastmodifiedtime) 
+        INSERT INTO eg_fm_servicedetail(id, applicantpersonalid, serviceid, servicecode, servicesubtype,  serviceminortype, createdby, createdtime, lastmodifiedby, lastmodifiedtime) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       basePath: ApplicantPersonals.*.serviceDetails
       jsonMaps:
@@ -60,12 +60,12 @@ serviceMaps:
       
       - jsonPath: $.ApplicantPersonals.*.serviceDetails.serviceId 
       
-      - jsonPath: $.ApplicantPersonals.*.serviceDetails.serviceCode 
+      - jsonPath: $.ApplicantPersonals.*.serviceDetails.serviceCode   
       
-      - jsonPath: $.ApplicantPersonals.*.serviceDetails.businessService 
+      - jsonPath: $.ApplicantPersonals.*.serviceDetails.servicesubtype    
       
-      - jsonPath: $.ApplicantPersonals.*.serviceDetails.workflowCode 
-      
+      - jsonPath: $.ApplicantPersonals.*.serviceDetails.serviceminortype 
+    
       - jsonPath: $.ApplicantPersonals.*.auditDetails.createdBy
 
       - jsonPath: $.ApplicantPersonals.*.auditDetails.createdTime
@@ -165,13 +165,15 @@ serviceMaps:
      
       
     - query: >
-        INSERT INTO eg_fm_filedetail(id, tenantid, servicedetailsid, filenumber, filecode, filename, filearisingmode, filearisingdate, financialyear, applicationdate, workflowcode, action, filestatus, createdby, createddate, lastmodifiedby, lastmodifieddate)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ? )        
+        INSERT INTO eg_fm_filedetail(id, tenantid, applicantpersonalid, servicedetailsid, filenumber, filecode, filename, filearisingmode, filearisingdate, financialyear, applicationdate, workflowcode, businessservice, action, filestatus, createdby, createddate, lastmodifiedby, lastmodifieddate)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?)        
       basePath: ApplicantPersonals.*.fileDetail
       jsonMaps:    
       - jsonPath: $.ApplicantPersonals.*.fileDetail.id         
       
       - jsonPath: $.ApplicantPersonals.*.fileDetail.tenantId
+      
+      - jsonPath: $.ApplicantPersonals.*.id
       
       - jsonPath: $.ApplicantPersonals.*.serviceDetails.id
 
@@ -190,6 +192,8 @@ serviceMaps:
       - jsonPath: $.ApplicantPersonals.*.fileDetail.applicationDate 
       
       - jsonPath: $.ApplicantPersonals.*.fileDetail.workflowCode 
+      
+      - jsonPath: $.ApplicantPersonals.*.fileDetail.businessService 
       
       - jsonPath: $.ApplicantPersonals.*.fileDetail.action 
       
@@ -307,15 +311,15 @@ serviceMaps:
       
     - query: >      
         UPDATE eg_fm_servicedetail
-        SET servicecode = ?, businessservice = ?, workflowcode = ?        
+        SET servicecode = ? ,servicesubtype =?, serviceminortype=?      
         WHERE applicantpersonalid = ?;
       basePath: ApplicantPersonals.*.serviceDetails
       jsonMaps:
-      - jsonPath: $.ApplicantPersonals.*.serviceDetails.serviceCode 
+      - jsonPath: $.ApplicantPersonals.*.serviceDetails.serviceCode  
       
-      - jsonPath: $.ApplicantPersonals.*.serviceDetails.businessService  
+      - jsonPath: $.ApplicantPersonals.*.serviceDetails.servicesubtype 
       
-      - jsonPath: $.ApplicantPersonals.*.serviceDetails.workflowCode             
+      - jsonPath: $.ApplicantPersonals.*.serviceDetails.serviceminortype               
          
       - jsonPath: $.ApplicantPersonals.*.serviceDetails.applicantpersonalid 
             

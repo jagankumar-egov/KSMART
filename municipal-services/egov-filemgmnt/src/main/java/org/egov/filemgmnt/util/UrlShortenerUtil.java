@@ -1,6 +1,7 @@
 package org.egov.filemgmnt.util;
 
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,22 @@ public class UrlShortenerUtil {
 
     public String getShortenedUrl(String url) {
 
-        HashMap<String, String> body = new HashMap<>();
-        body.put("url", url);
-        StringBuilder builder = new StringBuilder(urlShortnerHost);
-        builder.append(urShortnerPath);
-        String res = restTemplate.postForObject(builder.toString(), body, String.class);
+//        HashMap<String, String> body = new HashMap<>();
+//        body.put("url", url);
+//        StringBuilder builder = new StringBuilder(urlShortnerHost);
+//        builder.append(urShortnerPath);
+//        String response = restTemplate.postForObject(builder.toString(), body, String.class);
 
-        if (StringUtils.isEmpty(res)) {
+        Map<String, String> body = Collections.singletonMap("url", url);
+
+        String response = restTemplate.postForObject(urlShortnerHost, body, String.class);
+
+        if (StringUtils.isEmpty(response)) {
             log.error("URL_SHORTENING_ERROR", "Unable to shorten url: " + url);
             return url;
-        } else {
-            return res;
         }
+
+        return response;
     }
 
 }
