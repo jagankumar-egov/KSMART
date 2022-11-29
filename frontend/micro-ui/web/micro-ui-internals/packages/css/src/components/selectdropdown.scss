@@ -106,7 +106,8 @@
   @apply mb-lg relative;
 
   .select {
-    @apply relative block w-full h-10 border border-solid border-input-border;
+    @apply relative block w-full h-10 ;
+    border: 1px solid #c9cccf !important;
 
     input[type="text"] {
       width: calc(100% - 32px);
@@ -282,7 +283,8 @@
   @apply mb-lg relative;
 
   .select {
-    @apply relative block w-full h-10 border border-solid border-input-border;
+    @apply relative block w-full h-10 ;
+    border: 1px solid #c9cccf !important;
 
     input[type="text"] {
       width: calc(100% - 32px);
