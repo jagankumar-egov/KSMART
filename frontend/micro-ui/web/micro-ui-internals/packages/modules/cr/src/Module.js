@@ -2,21 +2,19 @@ import { Header, CitizenHomeCard, CaseIcon, HomeLink } from "@egovernments/digit
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouteMatch } from "react-router-dom";
-import childDetails from "../src/pageComponents/birthComponents/childDetails";
+import ChildDetails from "./pageComponents/birthComponents/ChildDetails";
 import StatisticalInformation from "./pageComponents/birthComponents/StatisticalInformation";
 import BirthVehicle from "./pageComponents/birthComponents/BirthVehicle";
 import PublicPlace from "./pageComponents/birthComponents/PublicPlace";
 import BirthPlace from "./pageComponents/birthComponents/BirthPlace";
 import Address from "./pageComponents/birthComponents/Address";
 import AddressOutsideIndia from "./pageComponents/birthComponents/AddressOutsideIndia";
-import childDetails from "../src/pageComponents/birthComponents/ChildDetails";
 import FatherInformation from "../src/pageComponents/birthComponents/FatherInformation";
 import MotherInformation from "./pageComponents/birthComponents/MotherInformation";
 import PlaceofBirth from "./pageComponents/birthComponents/PlaceofBirth";
 import HospitalDetails from "./pageComponents/birthComponents/HospitalDetails";
 import OtherCountry from "./pageComponents/birthComponents/OtherCountry";
 import InstitutionDetails from "./pageComponents/birthComponents/InstitutionDetails";
-import ChildDetails from "../src/pageComponents/birthComponents/ChildDetails";
 // import TLSelectGeolocation from "../src/pageComponents/TLSelectGeolocation";
 // import TLSelectAddress from "./pageComponents/TLSelectAddress";
 // import TLSelectPincode from "./pageComponents/TLSelectPincode";
@@ -117,7 +115,7 @@ const componentsToRegister = {
   CRModule,
   CRLinks,
   CRCard,
-  childDetails,
+  ChildDetails,
   StatisticalInformation,
   BirthVehicle,
   PublicPlace,
@@ -129,8 +127,7 @@ const componentsToRegister = {
   PlaceofBirth,
   HospitalDetails,
   OtherCountry,
-  InstitutionDetails,
-  ChildDetails,
+  InstitutionDetails,  
   // SelectLand,
   // SelectBuilding,
   // SelectBusinessCategory,
