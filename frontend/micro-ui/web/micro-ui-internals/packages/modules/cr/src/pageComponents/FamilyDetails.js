@@ -71,7 +71,6 @@ function FamilyDetails() {
               {item.id === 111 ? <Dropdown /> : <TextInput />}
             </div>
           ))}
-          s
         </div>
       </div>
     </div>

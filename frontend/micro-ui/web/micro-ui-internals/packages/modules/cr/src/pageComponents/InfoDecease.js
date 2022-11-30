@@ -90,8 +90,8 @@ export default function InfoDecease({ t, config, onSelect, userType, formDatas, 
     setActivity(null);
   }
   return (
-  <div>
-      <Tittle>Information Of Deceased</Tittle>
+    <React.Fragment>
+       <Tittle>Information Of Deceased</Tittle>
       <MainDiv>
         <Div>
           {formData?.map((item, index) => (
@@ -118,8 +118,8 @@ export default function InfoDecease({ t, config, onSelect, userType, formDatas, 
           ))}
         </Div>
       </MainDiv>
-
-      </div>
+    </React.Fragment>
+ 
   );
 }
 const Wrapper = styled.div`

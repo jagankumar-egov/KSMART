@@ -7,8 +7,8 @@ const SelectBusinessCategory = ({ t, config, onSelect, userType, formData, }) =>
   let validation = {};
   const stateId = Digit.ULBService.getStateId();
   const { data: sector = {}, isLoad } = Digit.Hooks.tl.useTradeLicenseMDMS(stateId, "TradeLicense", "EnterpriseType");
-  const [setSector, setSelectedSector] = useState(formData?.TradeDetails?.setPlaceofActivity);
-  const [CapitalAmount, setCapitalAmount] = useState(formData.TradeDetails?.BlockNo);
+  const [setSector, setSelectedSector] = useState(formData?.TradeDetails?.setSector);
+  const [CapitalAmount, setCapitalAmount] = useState(formData.TradeDetails?.CapitalAmount);
   const [isInitialRender, setIsInitialRender] = useState(true);
   let cmbSector = [];
   let cmbSectorFileterData = [];
@@ -28,49 +28,60 @@ const SelectBusinessCategory = ({ t, config, onSelect, userType, formData, }) =>
        
   }
   function selectedsetCapitalAmount(e) {
-    setCapitalAmount(e.target.value);
-    // setIsInitialRender(true);
-    if(setSector){
-        cmbSectorFileterData.push((cmbSector.filter( (cmbSector) => cmbSector.code.includes(setSector.code))));
-        console.log(cmbSectorFileterData);
-        cmbSectorFileterData[0].forEach(element => {
-            console.log('element',parseFloat(CapitalAmount).toString());
-            console.log('element',parseFloat(element.investmentTo).toString());
-            if(parseFloat(CapitalAmount).toString()<=parseFloat(element.investmentTo).toString()){
-                console.log(element.typeName);
-            }
-            
-        //    this.deductionAmountTemp=+element.amount ;
-        //    this.deductionAmountTotal=this.deductionAmountTotal+this.deductionAmountTemp;
-      });
-    }
-    //    this.paymentorderForm.controls.pamount.setValue(this.paymentorderForm.controls.grossamount.value-this.deductionAmountTotal);
+    setCapitalAmount(e.target.value);    
   }
 
-//   useEffect(() => {
-//     if (isInitialRender) {
-//       if(setSector){
-//         setIsInitialRender(false);
-//         cmbSectorFileterData.push((cmbSector.filter( (cmbSector) => cmbSector.code.includes(setSector.code))));
-//       }
-//     }
-//   }, [isInitialRender]);
+  // useEffect(() => {
+  //   if (isInitialRender) {
+  //     // if(setSector){
+  //     //   setIsInitialRender(false);
+  //     //   cmbSectorFileterData.push((cmbSector.filter( (cmbSector) => cmbSector.code.includes(setSector.code))));
+  //     //   console.log(cmbSectorFileterData);
+  //     //   if(setCapitalAmount){
+  //     //     cmbSectorFileterData[0].forEach(element => {
+  //     //       console.log('element',parseFloat(CapitalAmount).toString());
+  //     //       console.log('element',parseFloat(element.investmentTo).toString());
+  //     //       if(parseFloat(CapitalAmount).toString()<=parseFloat(element.investmentTo).toString()){
+  //     //           console.log(element.code);
+  //     //       }
+  //     //     });
+  //     //   }
+        
+  //     // }
+  //   }
+  // }, [isInitialRender]);
  
-  function goNext() {
-   
+  function goNext() { 
+    let accessories =[];
+    let details =[];
+    let enterpriseType = null;
+    // details.propertyId ="PG-PT-2022-09-14-006185";
+    sessionStorage.setItem("details", details.propertyId ="PG-PT-2022-09-14-006185");
+    sessionStorage.setItem("accessories", accessories);
     sessionStorage.setItem("setSector", setSector.sectorName);
-    onSelect(config.key, { setSector });
-    sessionStorage.setItem("CapitalAmount", CapitalAmount);
-    onSelect(config.key, { CapitalAmount });
-    // onSelect(config.key, { routeElement });
-    
+    sessionStorage.setItem("CapitalAmount", CapitalAmount);   
+    if(sessionStorage.getItem("CapitalAmount")){
+      cmbSectorFileterData.push((cmbSector.filter( (cmbSector) => cmbSector.code.includes(setSector.code))));
+      console.log(cmbSectorFileterData);      
+        cmbSectorFileterData[0].forEach(element => {
+          if(parseFloat(CapitalAmount) >= parseFloat(element.investmentFrom) && parseFloat(CapitalAmount) <= parseFloat(element.investmentTo)){
+              console.log(element.code);
+              enterpriseType = element.code;
+              
+          }
+        });
+          
+    } 
+    sessionStorage.setItem("enterpriseType", enterpriseType);    
+    onSelect(config.key, { accessories,setSector,CapitalAmount,details,enterpriseType });  
+     
   }
   return (
     <React.Fragment>
     {window.location.href.includes("/citizen") ? <Timeline /> : null}
     <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isDisabled={!setSector}>
       
-      <CardLabel>Sector</CardLabel>
+      <CardLabel>{`${t("TL_LOCALIZATION_SECTOR")}`}</CardLabel>
       <Dropdown
         t={t}
         optionKey="name"
@@ -79,9 +90,9 @@ const SelectBusinessCategory = ({ t, config, onSelect, userType, formData, }) =>
         selected={setSector}
         select={selectSector}
         // disabled={isEdit}
-        {...(validation = { isRequired: true, title: t("TL_INVALID_TRADE_NAME") })}
+        {...(validation = { isRequired: true, title: t("TL_INVALID_SECTOR_NAME") })}
       />
-     <CardLabel>Amount Of Capital Investment</CardLabel>
+     <CardLabel>{`${t("TL_LOCALIZATION_CAPITAL_AMOUNT")}`}</CardLabel>
        <TextInput
           t={t}
           isMandatory={false}
@@ -90,8 +101,9 @@ const SelectBusinessCategory = ({ t, config, onSelect, userType, formData, }) =>
           name="CapitalAmount"
           value={CapitalAmount}
           onChange={selectedsetCapitalAmount}
+          // onBlur={() => selectedsetCapitalAmount()}
         //   disable={isEdit}
-          {...(validation = { pattern: "^[0-9 ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+          {...(validation = { pattern: "^[0-9 ]*$", isRequired: true, type: "text", title: t("TL_INVALID_CAPITAL_AMOUNT") })}
         />
     </FormStep>
     </React.Fragment>

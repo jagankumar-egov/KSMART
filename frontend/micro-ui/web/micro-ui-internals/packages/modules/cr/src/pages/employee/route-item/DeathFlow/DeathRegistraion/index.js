@@ -2,7 +2,7 @@
 import { DatePicker, InputCard, NewRadioButton, TextInput, SubmitBar } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import styled from "styled-components";
-import InfoDecease from "./InfoDecease";
+// import InfoDecease from "../../../../../pageComponents/InfoDecease";
 import FormDeath from "./FormDeath";
 
 export const DeathRegistration = () => {
