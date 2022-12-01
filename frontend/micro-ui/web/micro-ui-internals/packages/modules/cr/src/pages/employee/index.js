@@ -8,7 +8,7 @@ import Inbox from "./Inbox";
 // import Response from "../Response";
 import ApplicationDetails from "./ApplicationDetails";
 import CrFlow from "./route-item";
-import SubDashboard from "./SubDashboard";
+import DeathCrFlow from "./route-item/DeathCr"
 // import DeathCrFlow from "./route-item/DeathFlow";
 // import DeathCrFlow from "./route-item/DeathCrFlow"
 //import ReNewApplication from "./ReNewApplication";
@@ -205,7 +205,7 @@ const EmployeeApp = ({ path, url, userType }) => {
             <CRBreadCrumb location={location} />
           </div>
           <PrivateRoute parentRoute={path} path={`${path}/cr-flow`} component={() => <CrFlow parentUrl={url} />} />
-          <PrivateRoute parentRoute={path} path={`${path}/submenu`} component={() => <SubDashboard />} />
+          <PrivateRoute parentRoute={path} path={`${path}/Deathcr-flow`} component={() => <DeathCrFlow parentUrl={url} />} />
 
           {/* <PrivateRoute path={`${path}/submenu`} component={() => < SubDashboard/>}/>   */}
         </div>

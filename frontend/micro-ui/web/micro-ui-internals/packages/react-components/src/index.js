@@ -61,6 +61,7 @@ import SectionalDropdown from "./atoms/SectionalDropdown";
 import { LastRow, MediaRow, Row, StatusTable } from "./atoms/StatusTable";
 import SubmitBar from "./atoms/SubmitBar";
 import StandaloneSearchBar from "./atoms/StandaloneSearchBar";
+import CommonDashboard from "./atoms/CommonDashboard"
 import {
   AnnouncementIcon,
   ArrowDown,
@@ -191,6 +192,7 @@ import UploadPitPhoto from "./molecules/UploadPitPhoto";
 import ULBHomeCard from "./atoms/ULBHomeCard";
 import NewRadioButton from "./atoms/NewRadioButton";
 export {
+  CommonDashboard,
   NewRadioButton,
   Phone,
   Body,
