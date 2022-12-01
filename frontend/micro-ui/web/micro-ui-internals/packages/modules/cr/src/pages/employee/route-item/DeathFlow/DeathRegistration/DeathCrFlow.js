@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, useLocation, Link } from "react-router-dom";
 import { PrivateRoute, BreadCrumb } from "@egovernments/digit-ui-react-components";
-import { ReactComponent as BankIcon } from "../../Img/BankIcon.svg";
-import { ReactComponent as FileProtected } from "../../Img/FileProtected.svg";
+// import { ReactComponent as BankIcon } from "../../Img/BankIcon.svg";
+// import { ReactComponent as FileProtected } from "../../Img/FileProtected.svg";
 
 const CrFlow = ({ path }) => {
   console.log(path);
@@ -11,9 +11,8 @@ const CrFlow = ({ path }) => {
       title: "New Registration",
       subTitle: "Inbox",
       // img: <BankIcon />,
-      link: `${path}/child-details`,
+      link: `${path}/information-death`,
     },
-
     {
       title: "Name Inclusion",
       subTitle: "Inbox",

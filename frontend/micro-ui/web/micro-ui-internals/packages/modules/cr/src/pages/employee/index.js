@@ -8,17 +8,19 @@ import Inbox from "./Inbox";
 // import Response from "../Response";
 import ApplicationDetails from "./ApplicationDetails";
 import CrFlow from "./route-item";
-import DeathCrFlow from "./route-item/DeathCr"
-// import DeathCrFlow from "./route-item/DeathFlow";
+import DeathFlow from "./route-item/DeathFlow"
 // import DeathCrFlow from "./route-item/DeathCrFlow"
 //import ReNewApplication from "./ReNewApplication";
 // import { TradeLisense } from "./route-item/DeathFlow/DeathRegistraion";
+
 
 const CRBreadCrumb = ({ location }) => {
   const { t } = useTranslation();
   const isSearch = location?.pathname?.includes("search");
   const isInbox = location?.pathname?.includes("inbox");
-  const isDeathRegistration = location?.pathname?.includes("death-registration");
+  const isInformationDeath = location?.pathname?.includes("information-death");
+
+  const isDeathRegistration= location?.pathname?.includes("death-registration");
   const isApplicationSearch = location?.pathname?.includes("search/application");
   const isLicenceSearch = location?.pathname?.includes("search/license");
   const isEditApplication = location?.pathname?.includes("edit-application-details");
@@ -88,28 +90,41 @@ const CRBreadCrumb = ({ location }) => {
     {
       path: "/digit-ui/employee",
       content: t("ES_COMMON_HOME"),
-      show: true,
+      show: true
     },
     {
       path: "/digit-ui/employee/cr/cr-flow",
       content: t("Birth Registration"),
-      show: breadCrumbUrls.includes("cr-flow") || isCrFlow,
+      show: breadCrumbUrls.includes("cr-flow") || isCrFlow
     },
     {
       path: "/digit-ui/employee/cr/cr-flow/structure-type",
       content: t("Structure Type"),
-      show: breadCrumbUrls.includes("cr-flow/structure-type") || isStructureType,
+      show: breadCrumbUrls.includes("cr-flow/structure-type") || isStructureType
     },
+   
     {
       path: "/digit-ui/employee/cr/death-cr",
       content: t("Death Registration"),
-      show: breadCrumbUrls.includes("death-cr") || isDeathCrFlow,
+      show: breadCrumbUrls.includes("death-cr") || isDeathCrFlow
+    },
+
+    {
+      path: "/digit-ui/employee/cr/death-cr/information-death",
+      content: t("information-death"),
+      show: breadCrumbUrls.includes("information-death") || isDeathCrFlow
     },
     {
       path: "/digit-ui/employee/cr/death-registration",
       // path: "/digit-ui/employee/dfm/trade-lisense",
       content: t("Death Registration"),
-      show: breadCrumbUrls.includes("death-cr/death-registration") || isDeathRegistration,
+      show: breadCrumbUrls.includes("death-cr/death-registration") || isDeathRegistration
+    },
+    {
+      path: "/digit-ui/employee/cr/death-registration",
+      // path: "/digit-ui/employee/dfm/trade-lisense",
+      content: t("Death Registration"),
+      show: breadCrumbUrls.includes("death-cr/death-registration") || isDeathRegistration
     },
     // {
     //   path: "/digit-ui/employee/cr/cr-flow/trade-lisense",
@@ -126,49 +141,49 @@ const CRBreadCrumb = ({ location }) => {
     //   path: "/digit-ui/employee/tl/search/application",
     //   content: t("ES_COMMON_SEARCH_APPLICATION"),
     //   show: isApplicationSearch ||
-    //   breadCrumbUrls.includes("home/search") ||
+    //   breadCrumbUrls.includes("home/search") || 
     //   breadCrumbUrls.includes("inbox/search")
     // },
     // {
     //   path: "/digit-ui/employee/tl/search/license",
     //   content: t("TL_SEARCH_TRADE_HEADER"),
-    //   show: isLicenceSearch ||
-    //   breadCrumbUrls.includes("home/license") ||
+    //   show: isLicenceSearch || 
+    //   breadCrumbUrls.includes("home/license") || 
     //   breadCrumbUrls.includes("inbox/license")
     // },
     // {
     //   path: sessionStorage.getItem("applicationNumber") ? `/digit-ui/employee/tl/application-details/${sessionStorage.getItem("applicationNumber")}` : "",
     //   content: t("TL_DETAILS_HEADER_LABEL"),
     //   show: isApplicationDetails ||
-    //   breadCrumbUrls.includes("inbox/appDetails") ||
-    //   breadCrumbUrls.includes("home/license/appDetails") ||
-    //   breadCrumbUrls.includes("inbox/license/appDetails") ||
-    //   breadCrumbUrls.includes("home/search/appDetails") ||
+    //   breadCrumbUrls.includes("inbox/appDetails") || 
+    //   breadCrumbUrls.includes("home/license/appDetails") || 
+    //   breadCrumbUrls.includes("inbox/license/appDetails") || 
+    //   breadCrumbUrls.includes("home/search/appDetails") || 
     //   breadCrumbUrls.includes("inbox/search/appDetails")
     // },
     // {
     //   path: "/digit-ui/employee/tl/new-application",
     //   content: t("TL_HOME_SEARCH_RESULTS_NEW_APP_BUTTON"),
-    //   show: isNewApplication ||
-    //   breadCrumbUrls.includes("home/newApp") ||
+    //   show: isNewApplication || 
+    //   breadCrumbUrls.includes("home/newApp") || 
     //   breadCrumbUrls.includes("inbox/newApp")
     // },
     // {
     //   content: t("ES_TITLE_RENEW_TRADE_LICESE_APPLICATION"),
     //   show: isRenewalApplication  ||
-    //   breadCrumbUrls.includes("inbox/appDetails/renew") ||
-    //   breadCrumbUrls.includes("home/license/appDetails/renew") ||
-    //   breadCrumbUrls.includes("inbox/license/appDetails/renew") ||
-    //   breadCrumbUrls.includes("home/search/appDetails/renew") ||
+    //   breadCrumbUrls.includes("inbox/appDetails/renew") || 
+    //   breadCrumbUrls.includes("home/license/appDetails/renew") || 
+    //   breadCrumbUrls.includes("inbox/license/appDetails/renew") || 
+    //   breadCrumbUrls.includes("home/search/appDetails/renew") || 
     //   breadCrumbUrls.includes("inbox/search/appDetails/renew")
     // },
     // {
     //   content: t("ES_TITLE_RE_NEW_TRADE_LICESE_APPLICATION"),
-    //   show: isEditApplication ||
-    //   breadCrumbUrls.includes("inbox/appDetails/edit") ||
-    //   breadCrumbUrls.includes("home/license/appDetails/edit") ||
-    //   breadCrumbUrls.includes("inbox/license/appDetails/edit") ||
-    //   breadCrumbUrls.includes("home/search/appDetails/edit") ||
+    //   show: isEditApplication || 
+    //   breadCrumbUrls.includes("inbox/appDetails/edit") || 
+    //   breadCrumbUrls.includes("home/license/appDetails/edit") || 
+    //   breadCrumbUrls.includes("inbox/license/appDetails/edit") || 
+    //   breadCrumbUrls.includes("home/search/appDetails/edit") || 
     //   breadCrumbUrls.includes("inbox/search/appDetails/edit")
     // },
     // {
@@ -178,19 +193,16 @@ const CRBreadCrumb = ({ location }) => {
     // }
   ];
 
-  return <BreadCrumb style={isMobile ? { display: "flex" } : {}} spanStyle={{ maxWidth: "min-content" }} crumbs={crumbs} />;
+  return <BreadCrumb style={isMobile?{display:"flex"}:{}}  spanStyle={{maxWidth:"min-content"}} crumbs={crumbs} />;
 };
+
 
 const EmployeeApp = ({ path, url, userType }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const mobileView = innerWidth <= 640;
 
-  const locationCheck =
-    window.location.href.includes("employee/tl/new-application") ||
-    window.location.href.includes("employee/tl/response") ||
-    window.location.href.includes("employee/tl/edit-application-details") ||
-    window.location.href.includes("employee/tl/renew-application-details");
+  const locationCheck = window.location.href.includes("employee/tl/new-application") || window.location.href.includes("employee/tl/response") || window.location.href.includes("employee/tl/edit-application-details") || window.location.href.includes("employee/tl/renew-application-details");
 
   // const NewApplication = Digit?.ComponentRegistryService?.getComponent('TLNewApplication');
   // const ReNewApplication = Digit?.ComponentRegistryService?.getComponent('TLReNewApplication');
@@ -199,18 +211,18 @@ const EmployeeApp = ({ path, url, userType }) => {
 
   return (
     <Switch>
-      <React.Fragment>
-        <div className="ground-container" style={locationCheck ? { width: "100%", marginLeft: "0px" } : { marginLeft: "0px" }}>
-          <div style={locationCheck ? { marginLeft: "15px" } : {}}>
-            <CRBreadCrumb location={location} />
-          </div>
-          <PrivateRoute parentRoute={path} path={`${path}/cr-flow`} component={() => <CrFlow parentUrl={url} />} />
-          <PrivateRoute parentRoute={path} path={`${path}/Deathcr-flow`} component={() => <DeathCrFlow parentUrl={url} />} />
-
-          {/* <PrivateRoute path={`${path}/submenu`} component={() => < SubDashboard/>}/>   */}
+    <React.Fragment>
+      <div className="ground-container" style={locationCheck ? {width: "100%", marginLeft: "0px"} : {marginLeft: "0px"}}>
+        <div style={locationCheck ? {marginLeft: "15px"} : {}}>
+          <CRBreadCrumb location={location} />
         </div>
-      </React.Fragment>
-    </Switch>
+        <PrivateRoute parentRoute={path} path={`${path}/cr-flow`} component={() => <CrFlow parentUrl={url} />} />
+        <PrivateRoute parentRoute={path} path={`${path}/death-cr`} component={() => <DeathFlow parentUrl={url} />} />
+
+      </div>
+    </React.Fragment>
+  </Switch>
+      
   );
 };
 
