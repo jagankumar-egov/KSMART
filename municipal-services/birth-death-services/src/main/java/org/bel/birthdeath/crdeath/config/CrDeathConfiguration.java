@@ -48,6 +48,11 @@ public class CrDeathConfiguration {
     @Value("${egov.idgen.deathackno.format}")
     private String deathACKFormat;
 
+    //UPDATE   
+
+    @Value("${persister.update.crdeath.topic}")
+    private String updateDeathDetailsTopic;
+
 
 
 }

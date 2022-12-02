@@ -129,7 +129,7 @@ public class CrDeathDtl {
     private String  informantNameMl ;
 
     @JsonProperty("informantAadharSubmitted")
-    private String  informantAadharSubmitted ;
+    private Integer informantAadharSubmitted ;
 
     @JsonProperty("informantAadharNo")
     private String  informantAadharNo ;

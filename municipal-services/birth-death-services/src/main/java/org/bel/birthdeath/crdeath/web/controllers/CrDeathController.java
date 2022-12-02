@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -76,4 +77,20 @@ public class CrDeathController {
                                                                       .build();
         return ResponseEntity.ok(response);
     }
+
+    //UPDATE BEGIN
+   // @Override
+   @PutMapping("/crdeathdetails/_update")
+   public ResponseEntity<CrDeathDtlResponse> update(@RequestBody CrDeathDtlRequest request) {
+       log.info("request  " + request);
+       System.out.println("hai" + request);
+       List<CrDeathDtl> deathDetails = deathService.update(request);
+
+       CrDeathDtlResponse response = CrDeathDtlResponse.builder()
+                                       .responseInfo(responseInfoFactory.createResponseInfoFromRequestInfo(request.getRequestInfo(),Boolean.TRUE))
+                                       .deathCertificateDtls(deathDetails)
+                                       .build();
+       return ResponseEntity.ok(response);
+   }
+//UPDATE END
 }

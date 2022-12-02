@@ -17,6 +17,10 @@ import org.egov.common.contract.request.User;
 import org.egov.tracer.model.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
      * Creates CrDeathEnrichment for UUID ,Audit details and IDGeneration
@@ -25,6 +29,7 @@ import org.springframework.stereotype.Component;
      */
 
 @Component
+@Slf4j
 public class CrDeathEnrichment implements BaseEnrichment{
 
    
@@ -88,6 +93,32 @@ public class CrDeathEnrichment implements BaseEnrichment{
 
         String ackNo = getIdList(requestInfo, tenantId, config.getDeathAckName(), config.getDeathACKFormat(), 1).get(0);
         deathDtls.get(0).setDeathACKNo(ackNo);
-    }    
+    }  
+    //UPDATE  BEGIN Jasmine
+    public void enrichUpdate(CrDeathDtlRequest request) {
+
+        RequestInfo requestInfo = request.getRequestInfo();
+        User userInfo = requestInfo.getUserInfo();
+        AuditDetails auditDetails = buildAuditDetails(userInfo.getUuid(), Boolean.FALSE);
+
+        request.getDeathCertificateDtls()
+               .forEach(deathDtls -> {
+                deathDtls.setAuditDetails(auditDetails);
+                deathDtls.getAddressInfo().forEach(addressdtls -> {
+                                            addressdtls.setParentdeathDtlId(deathDtls.getId());
+                                            addressdtls.setAuditDetails(auditDetails);
+                                        });
+            
+                } );
+        // try {
+        //         ObjectMapper mapper = new ObjectMapper();
+        //         Object obj = request;
+        //         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        //        System.out.println("Jasmine444 setParentdeathDtlId "+ mapper.writeValueAsString(obj));
+        // }catch(Exception e) {
+        //     log.error("Exception while fetching from searcher: ",e);
+        // }
+
+    }//UPDATE END
     
 }

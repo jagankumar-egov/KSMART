@@ -72,6 +72,27 @@ public class CrDeathService {
 
         return request.getDeathCertificateDtls();
     }
+//UPDATE BEGIN
+public List<CrDeathDtl> update(CrDeathDtlRequest request) {
 
+    String id = request.getDeathCertificateDtls().get(0).getId();
+
+    // search database
+//	List<CrDeathDtl> searchResult = repository
+//			.getDeathDetails(CrDeathSearchCriteria.builder().id(id).build());
+
+    // validate request
+//	validatorService.validateUpdate(request, searchResult);
+
+    enrichmentService.enrichUpdate(request);
+
+    //wfIntegrator.callWorkFlow(request);
+
+    producer.push(deathConfig.getUpdateDeathDetailsTopic(), request);
+
+    return request.getDeathCertificateDtls();
+}
+
+//UPDATE END
     
 }
