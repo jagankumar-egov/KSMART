@@ -53,6 +53,11 @@ public class CrDeathConfiguration {
     @Value("${persister.update.crdeath.topic}")
     private String updateDeathDetailsTopic;
 
+    //SEARCH 
+
+    @Value("${employee.allowed.search.params}")
+    private String allowedEmployeeSearchParams;
+
 
 
 }

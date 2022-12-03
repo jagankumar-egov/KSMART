@@ -37,6 +37,7 @@ public class CrDeathDtl {
 
     @JsonProperty("tenantId")
     private String tenantId ;
+    
 
     @JsonProperty("correctDeathDateKnown")
     private Integer correctDeathDateKnown ;
@@ -230,6 +231,9 @@ public class CrDeathDtl {
 
     @JsonProperty("deathACKNo")
     private String deathACKNo = null;
+
+    @JsonProperty("fileNumber")
+    private String fileNumber ;
 
 
 

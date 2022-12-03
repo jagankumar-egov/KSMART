@@ -6,9 +6,13 @@ import org.bel.birthdeath.crdeath.config.CrDeathConfiguration;
 import org.bel.birthdeath.crdeath.enrichment.CrDeathEnrichment;
 import org.bel.birthdeath.crdeath.kafka.producer.CrDeathProducer;
 import org.bel.birthdeath.crdeath.util.CrDeathMdmsUtil;
+import org.bel.birthdeath.crdeath.validators.CrDeathValidator;
 import org.bel.birthdeath.crdeath.validators.MDMSValidator;
 import org.bel.birthdeath.crdeath.web.models.CrDeathDtl;
 import org.bel.birthdeath.crdeath.web.models.CrDeathDtlRequest;
+import org.bel.birthdeath.crdeath.repository.CrDeathRepository;
+import org.bel.birthdeath.crdeath.web.models.CrDeathSearchCriteria;
+import org.egov.common.contract.request.RequestInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,15 +33,20 @@ public class CrDeathService {
     private final CrDeathEnrichment enrichmentService;
     private final CrDeathMdmsUtil util;
     private final MDMSValidator mdmsValidator;
+    private final CrDeathValidator validatorService;
+    private final CrDeathRepository repository;
 
     @Autowired
     CrDeathService(CrDeathProducer producer,CrDeathConfiguration deathConfig,
-                CrDeathEnrichment enrichmentService,CrDeathMdmsUtil util,MDMSValidator mdmsValidator){
+                CrDeathEnrichment enrichmentService,CrDeathMdmsUtil util,CrDeathValidator validatorService,
+                    MDMSValidator mdmsValidator,CrDeathRepository repository){
         this.producer = producer;
         this.deathConfig = deathConfig;
         this.enrichmentService = enrichmentService;
         this.util = util;
         this.mdmsValidator = mdmsValidator;
+        this.validatorService=validatorService;
+        this.repository=repository;
     }
     
     public List<CrDeathDtl> create(CrDeathDtlRequest request) {
@@ -92,7 +101,12 @@ public List<CrDeathDtl> update(CrDeathDtlRequest request) {
 
     return request.getDeathCertificateDtls();
 }
-
 //UPDATE END
+//SEARCH BEGIN
+public List<CrDeathDtl> search(CrDeathSearchCriteria criteria, RequestInfo requestInfo) {
+    validatorService.validateSearch(requestInfo, criteria);
+    return repository.getDeathDetails(criteria);
+}
+//SEARCH END
     
 }

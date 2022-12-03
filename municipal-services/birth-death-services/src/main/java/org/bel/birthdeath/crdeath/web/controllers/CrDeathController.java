@@ -9,12 +9,13 @@ import org.bel.birthdeath.crdeath.service.CrDeathService;
 import org.bel.birthdeath.crdeath.web.models.CrDeathDtl;
 import org.bel.birthdeath.crdeath.web.models.CrDeathDtlRequest;
 import org.bel.birthdeath.crdeath.web.models.CrDeathDtlResponse;
+import org.bel.birthdeath.crdeath.web.models.CrDeathSearchCriteria;
+import org.bel.birthdeath.crdeath.web.models.RequestInfoWrapper;
 import org.bel.birthdeath.utils.ResponseInfoFactory;
-// import org.bel.birthdeath.crdeath.web.models.CrDeathRequest;
-// import org.bel.birthdeath.crdeath.web.models.CrDeathResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,7 +79,7 @@ public class CrDeathController {
         return ResponseEntity.ok(response);
     }
 
-    //UPDATE BEGIN
+    //UPDATE BEGIN Jasmine
    // @Override
    @PutMapping("/crdeathdetails/_update")
    public ResponseEntity<CrDeathDtlResponse> update(@RequestBody CrDeathDtlRequest request) {
@@ -94,4 +95,20 @@ public class CrDeathController {
    }
    
 //UPDATE END
+//SEARCH BEGIN Jasmine
+//@Override
+@PostMapping("/crdeathdetails/_search")
+public ResponseEntity<CrDeathDtlResponse> search(@RequestBody RequestInfoWrapper request,
+                                                        @ModelAttribute CrDeathSearchCriteria criteria) {
+
+    List<CrDeathDtl> deathDetails = deathService.search(criteria, request.getRequestInfo());
+
+    CrDeathDtlResponse response = CrDeathDtlResponse.builder()
+                                    .responseInfo(responseInfoFactory.createResponseInfoFromRequestInfo(request.getRequestInfo(),Boolean.TRUE))
+                                    .deathCertificateDtls(deathDetails)
+                                    .build();
+    return ResponseEntity.ok(response);
+}
+
+//SEARCH END
 }
