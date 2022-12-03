@@ -28,7 +28,7 @@ public class CrDeathStatistical {
 
     @Size(max = 64)
     @JsonProperty("id")
-    private String id;
+    private String id; 
 
     @JsonProperty("death_dtl_id")
     private String deathDtlId ; 
@@ -88,6 +88,8 @@ public class CrDeathStatistical {
     private Integer alcoholNumYears;
     
 
+
+    
     // @JsonProperty("residence_place_type")
     // private String residencePlaceType;
 

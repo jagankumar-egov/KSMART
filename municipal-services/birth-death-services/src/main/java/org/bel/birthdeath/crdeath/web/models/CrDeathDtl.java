@@ -232,5 +232,5 @@ public class CrDeathDtl {
     private String deathACKNo = null;
 
 
-   
+
 }

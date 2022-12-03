@@ -523,7 +523,7 @@ serviceMaps:
       
       - jsonPath: $.deathCertificateDtls.*.auditDetails.lastModifiedTime
       
-      # UPDATE
+      # UPDATE 
   - version: 1.0
     description: Persists death reporting form details in eg_death_dtls,eg_death_statistical_dtls,eg_death_address_dtls  table
     fromTopic: update-deathdetails-topic

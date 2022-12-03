@@ -75,7 +75,7 @@ public class CrDeathService {
 //UPDATE BEGIN
 public List<CrDeathDtl> update(CrDeathDtlRequest request) {
 
-    String id = request.getDeathCertificateDtls().get(0).getId();
+  //  String id = request.getDeathCertificateDtls().get(0).getId();
 
     // search database
 //	List<CrDeathDtl> searchResult = repository
