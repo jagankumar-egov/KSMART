@@ -83,8 +83,7 @@ public class CrDeathController {
    // @Override
    @PutMapping("/crdeathdetails/_update")
    public ResponseEntity<CrDeathDtlResponse> update(@RequestBody CrDeathDtlRequest request) {
-       log.info("request  " + request);
-       System.out.println("hai" + request);
+
        List<CrDeathDtl> deathDetails = deathService.update(request);
 
        CrDeathDtlResponse response = CrDeathDtlResponse.builder()

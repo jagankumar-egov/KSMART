@@ -84,14 +84,12 @@ public class CrDeathService {
 //UPDATE BEGIN
 public List<CrDeathDtl> update(CrDeathDtlRequest request) {
 
-  //  String id = request.getDeathCertificateDtls().get(0).getId();
+    String id = request.getDeathCertificateDtls().get(0).getId();
 
-    // search database
-//	List<CrDeathDtl> searchResult = repository
-//			.getDeathDetails(CrDeathSearchCriteria.builder().id(id).build());
-
+// search database
+List<CrDeathDtl> searchResult = repository.getDeathDetails(CrDeathSearchCriteria.builder().id(id).build());
     // validate request
-//	validatorService.validateUpdate(request, searchResult);
+	validatorService.validateUpdate(request, searchResult);
 
     enrichmentService.enrichUpdate(request);
 
