@@ -1,2 +1,2 @@
-Alter table eg_fm_applicantpersonal alter column dateofbirth type bigint;
-Alter table eg_fm_applicantpersonal alter column applicationdate type bigint;
+Alter table eg_fm_applicantpersonal alter column dateofbirth type bigint using dateofbirth::bigint;
+Alter table eg_fm_applicantpersonal alter column applicationdate type bigint using applicationdate::bigint;
