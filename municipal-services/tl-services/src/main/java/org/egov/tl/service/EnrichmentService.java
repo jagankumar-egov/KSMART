@@ -423,15 +423,16 @@ public class EnrichmentService {
                         });
                 });
 
-                if (tradeLicense.getTradeLicenseDetail().getSubOwnerShipCategory().contains(config.getInstitutional())
-                        && tradeLicense.getTradeLicenseDetail().getInstitution().getId() == null) {
-                    tradeLicense.getTradeLicenseDetail().getInstitution().setId(UUID.randomUUID().toString());
-                    tradeLicense.getTradeLicenseDetail().getInstitution().setActive(true);
-                    tradeLicense.getTradeLicenseDetail().getInstitution().setTenantId(tradeLicense.getTenantId());
-                    tradeLicense.getTradeLicenseDetail().getOwners().forEach(owner -> {
-                        owner.setInstitutionId(tradeLicense.getTradeLicenseDetail().getInstitution().getId());
-                    });
-                }
+                // if
+                // (tradeLicense.getTradeLicenseDetail().getSubOwnerShipCategory().contains(config.getInstitutional())
+                // && tradeLicense.getTradeLicenseDetail().getInstitution().getId() == null) {
+                tradeLicense.getTradeLicenseDetail().getInstitution().setId(UUID.randomUUID().toString());
+                tradeLicense.getTradeLicenseDetail().getInstitution().setActive(true);
+                tradeLicense.getTradeLicenseDetail().getInstitution().setTenantId(tradeLicense.getTenantId());
+                tradeLicense.getTradeLicenseDetail().getOwners().forEach(owner -> {
+                    owner.setInstitutionId(tradeLicense.getTradeLicenseDetail().getInstitution().getId());
+                });
+                // }
 
                 if (!CollectionUtils.isEmpty(tradeLicense.getTradeLicenseDetail().getApplicationDocuments())) {
                     tradeLicense.getTradeLicenseDetail().getApplicationDocuments().forEach(document -> {
