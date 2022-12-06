@@ -567,7 +567,7 @@ public class EnrichmentService {
         TradeLicenseSearchCriteria searchCriteria = enrichTLSearchCriteriaWithOwnerids(criteria, licenses);
         switch (businessService) {
             case businessService_TL:
-                enrichBoundary(new TradeLicenseRequest(requestInfo, licenses));
+                // enrichBoundary(new TradeLicenseRequest(requestInfo, licenses));
                 break;
         }
         UserDetailResponse userDetailResponse = userService.getUser(searchCriteria, requestInfo);
