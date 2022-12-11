@@ -46,6 +46,24 @@ const useCivilRegistrationMDMS = (tenantId, moduleCode, type, filter, config = {
   const useCRDistrict = () => {
     return useQuery("CR_DISTRICT", () => MdmsService.getCRDistrict(tenantId, moduleCode, type), config);
   };
+  const useCRPostOffice = () => {
+    return useQuery("CR_POST_OFFICE", () => MdmsService.getCRPostOffice(tenantId, moduleCode, type), config);
+  };
+  const useCRState = () => {
+    return useQuery("CR_STATE", () => MdmsService.getCRState(tenantId, moduleCode, type), config);
+  };
+  const useCROccupation = () => {
+    return useQuery("CR_OCCUPATION", () => MdmsService.getCROccupation(tenantId, moduleCode, type), config);
+  };
+  const useCRLBType = () => {
+    return useQuery("CR_LBTYPE", () => MdmsService.getCRLBType(tenantId, moduleCode, type), config);
+  };
+  const useCRQualification = () => {
+    return useQuery("CR_QUALIFICATION", () => MdmsService.getCRQualification(tenantId, moduleCode, type), config);
+  };
+  const useCRProfession = () => {
+    return useQuery("CR_PROFESSION", () => MdmsService.getCRProfession(tenantId, moduleCode, type), config);
+  };
   ////////////////////////////////////////////////////////////////////death
   const useTLDocuments = () => {
     return useQuery("TL_DOCUMENTS", () => MdmsService.getTLDocumentRequiredScreen(tenantId, moduleCode, type), config);
@@ -190,6 +208,18 @@ const useCivilRegistrationMDMS = (tenantId, moduleCode, type, filter, config = {
       return useCRVillage();
     case "District":
       return useCRDistrict();  
+    case "PostOffice":
+      return useCRPostOffice(); 
+    case "mstate":
+      return useCRState();
+    case "LBType":
+      return useCRLBType();  
+    case "Occupation":
+      return useCROccupation(); 
+    case "Qualification":
+      return useCRQualification();
+      case "Profession":
+      return useCRProfession();  
     case "Title":
       return useCRWard();
     case "Religion":
