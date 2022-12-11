@@ -313,15 +313,15 @@ export const newConfig = [
         component: "MotherInformation",
         texts: {
           headerCaption: "",
-          header: "",
+          header: "CR_MOTHERS_DETAILS",
           cardText: "",
           submitBarLabel: "CS_COMMON_NEXT",
           skipText: "",
         },
         withoutLabel: true,
         key: "MotherInfoDetails",
-        nextStep: "statistical-information",
         type: "component",
+        nextStep: "statistical-information",        
         hideInEmployee: false,
       },
       {

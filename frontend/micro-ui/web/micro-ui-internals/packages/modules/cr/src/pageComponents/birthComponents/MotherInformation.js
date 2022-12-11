@@ -43,23 +43,11 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     <React.Fragment>
     {window.location.href.includes("/citizen") ? <Timeline /> : null}
     <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isDisabled={!CommencementDate}>
-    <header className="card-header" style={{fontSize:"35px"}}>Mothers Information</header>
-    <div className="row">    
-        <div className="col-md-12 col-lg-12" > 
-        <div className="col-md-5" > 
-            <hr className="aligncss"></hr>
-        </div>
-        <div className="col-md-2" > 
-        <h1 className="headingh1" >
-            <span> Details</span>
-        </h1>
-        </div>
-        <div className="col-md-5" > 
-            <hr className="aligncss"></hr>
-        </div>
-        </div>        
-    </div>
     
+    <div className="row">
+        <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("Father's Information")}`}</span> </h1>
+        </div>
+    </div>
     
     <div className="row">    
         <div className="col-md-4" > 
@@ -234,7 +222,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
         </div>       
     </div>
     <div className="row" >    
-        <div className="col-md-12" > 
+        <div className="col-md-4" > 
             <CardLabel>{`${t("CR_PROFESSIONAL")}`}</CardLabel>
             <Dropdown
                 t={t}
@@ -246,7 +234,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                 disabled={isEdit}
             />
         </div>
-        <div className="col-md-12" >
+        <div className="col-md-4" >
             <CardLabel>{`${t("CR_NATIONALITY")}`}</CardLabel>
             <Dropdown
                 t={t}
@@ -257,40 +245,8 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                 select={selectPlaceofactivity}
                 disabled={isEdit}
             />
-        </div>        
-    </div>
-    <div className="row">    
-        <div className="col-md-6" > 
-            <CardLabel>{`${t("CR_MOTHER_MARITAL_STATUS")}`}</CardLabel>
-            <TextInput       
-            t={t}
-            isMandatory={false}
-            type={"text"}
-            optionKey="i18nKey"
-            name="TradeName"
-            value={TradeName}
-            onChange={setSelectTradeName}
-            disable={isEdit}
-            {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-            />
-        </div>
-        <div className="col-md-6" >
-            <CardLabel>{`${t("CR_AGE_OF_LIMIT")}`}</CardLabel>
-            <TextInput       
-            t={t}
-            isMandatory={false}
-            type={"text"}
-            optionKey="i18nKey"
-            name="TradeName"
-            value={TradeName}
-            onChange={setSelectTradeName}
-            disable={isEdit}
-            {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-            />
-        </div>
-  </div>
-  <div className="row">    
-        <div className="col-md-6" > 
+        </div>  
+        <div className="col-md-4" > 
             <CardLabel>{`${t("CR_AGE_OF_DELIVERY")}`}</CardLabel>
             <TextInput       
             t={t}
@@ -303,8 +259,10 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
             disable={isEdit}
             {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
             />
-        </div>
-        <div className="col-md-6" >
+        </div>      
+    </div>
+  <div className="row">    
+        <div className="col-md-4" >
             <CardLabel>{`${t("CR_NO_OF_BIRTH_GIVEN")}`}</CardLabel>
             <TextInput       
             t={t}
@@ -321,7 +279,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
   </div>
   <div className="row">
         <div className="col-md-4" >
-        <CardLabel>{`${t("PLACE_TYPE_URBAN / PLACE_TYPE_RURAL ")}`}</CardLabel>
+        <CardLabel>{`${t("PLACE_TYPE_URBAN_PLACE_TYPE_RURAL")}`}</CardLabel>
             <Dropdown
                 t={t}
                 optionKey="code"
@@ -388,7 +346,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
             {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
             />
         </div>
-        <div className="col-md-4" >
+        <div className="col-md-12" >
         <CardLabel>{`${t("CS_COMMON_COUNTRY")}`}</CardLabel>
         <TextInput       
             t={t}
