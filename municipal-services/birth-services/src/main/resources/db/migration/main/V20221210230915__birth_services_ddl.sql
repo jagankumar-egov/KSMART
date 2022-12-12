@@ -378,12 +378,6 @@ $BODY$;
 
 -- DROP TRIGGER IF EXISTS eg_register_birth_place_audit ON public.eg_register_birth_place;
 
-CREATE TRIGGER eg_register_birth_place_audit
-    BEFORE DELETE OR UPDATE
-                         ON public.eg_register_birth_place
-                         FOR EACH ROW
-                         EXECUTE FUNCTION public.process_eg_register_birth_place_audit();
-
 
 -- Table: public.eg_register_birth_present_address_audit
 
