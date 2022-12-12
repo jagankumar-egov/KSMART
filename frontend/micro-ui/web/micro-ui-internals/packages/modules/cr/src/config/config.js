@@ -624,6 +624,32 @@ export const newConfig = [
       },
     ],
   },
+
+
+  {
+    head: "Adoption Routing",
+    body: [
+      {
+        type: "component",
+        route: "search-registry",
+        isMandatory: true,
+        component: "SearchRegistry",
+        texts: {
+          // headerCaption: "TL_STRUCTURE_TYPE",
+          header: "TL_STRUCTURE_TYPE_HEADER",
+          // cardText: "TL_STRUCTURE_TYPE_TEXT",
+          submitBarLabel: "CS_COMMON_NEXT",
+        },
+        key: "SearchRegistry",
+        withoutLabel: true,
+        hideInEmployee: false,
+        nextStep: "address-of-decesed",
+      },
+
+    ],
+  },
+
+  
   {
     head: "Death Routing",
     body: [

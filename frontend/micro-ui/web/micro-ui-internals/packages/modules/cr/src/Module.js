@@ -16,6 +16,8 @@ import OtherCountry from "./pageComponents/birthComponents/OtherCountry";
 import InstitutionDetails from "./pageComponents/birthComponents/InstitutionDetails";
 import ChildDetails from "../src/pageComponents/birthComponents/ChildDetails";
 
+import SearchRegistry from "./pageComponents/adoptionComponents/SearchRegistry";
+
 import InformationDeath from "../src/pageComponents/deathComponents/InformationDeath";
 import InformationDeath1 from "../src/pageComponents/deathComponents/InformationDeath1";
 import AddressOfDecesed from "./pageComponents/deathComponents/AddressOfDecesed";
@@ -142,6 +144,8 @@ const componentsToRegister = {
   OtherCountry,
   InstitutionDetails,
   ChildDetails,
+
+  SearchRegistry,
 
   InformationDeath,
   InformationDeath1,
