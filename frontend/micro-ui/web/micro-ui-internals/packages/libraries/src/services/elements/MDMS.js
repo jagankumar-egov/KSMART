@@ -837,7 +837,7 @@ const getCRLBTypelist = (tenantId, moduleCode) => ({
     ],
   },
 });
-const getCRQualification = (tenantId, moduleCode) => ({
+const getCRQualificationlist = (tenantId, moduleCode) => ({
   details: {
     tenantId: tenantId,
     moduleDetails: [
@@ -852,7 +852,7 @@ const getCRQualification = (tenantId, moduleCode) => ({
     ],
   },
 });
-const getCRProfession = (tenantId, moduleCode) => ({
+const getCRProfessionlist = (tenantId, moduleCode) => ({
   details: {
     tenantId: tenantId,
     moduleDetails: [
