@@ -132,7 +132,7 @@ const CreateTradeLicence = ({ parentRoute }) => {
               t={t}
               formData={params}
               onAdd={handleMultiple}
-              userType="citizen"
+              userType="employee"
             />
           </Route>
         );
