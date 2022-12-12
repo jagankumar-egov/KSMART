@@ -30,6 +30,8 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     const [StateName, setStateName] = useState(formData?.MotherInfoDetails?.StateName);
     const [MotherAgeDeleivery, setMotherAgeDeleivery] = useState(formData?.MotherInfoDetails?.MotherAgeDeleivery);
     const [MotherNoOfBirths, setMotherNoOfBirths] = useState(formData?.MotherInfoDetails?.MotherNoOfBirths);
+    const [MotherNationality, setMotherNationality] = useState(formData?.TradeDetails?.MotherNationality);
+
     const [setPlaceofActivity, setSelectedPlaceofActivity] = useState(formData?.TradeDetails?.setPlaceofActivity);
     const isEdit = window.location.href.includes("/edit-application/") || window.location.href.includes("renew-trade");
     let cmbPlace = [];
@@ -121,9 +123,13 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     function setSelectMotherNoOfBirths(e) {
         setMotherNoOfBirths(e.target.value);
     }
+    function setSelectMotherNationality(value) {
+        setMotherNationality(value);
+    }
     function selectPlaceofactivity(value) {
         setSelectedPlaceofActivity(value);
     }
+    
     const goNext = () => {
         sessionStorage.setItem("MotherFirstNameEn", MotherFirstNameEn);
         sessionStorage.setItem("MotherMiddleNameEn", MotherMiddleNameEn);
@@ -132,13 +138,14 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
         sessionStorage.setItem("MotherMiddleNameMl", MotherMiddleNameMl);
         sessionStorage.setItem("MotherLastNameMl", MotherLastNameMl);
         sessionStorage.setItem("MotherAadhar", MotherAadhar);
+        sessionStorage.setItem("MotherPassportNo", MotherPassportNo);
         sessionStorage.setItem("MotherEmail", MotherEmail);
         sessionStorage.setItem("MotherMobile", MotherMobile);
         sessionStorage.setItem("MotherEducation", MotherEducation.code);
         sessionStorage.setItem("MotherEducationSubject", MotherEducationSubject.code);
         sessionStorage.setItem("MotherProfession", MotherProfession.code);
         onSelect(config.key, { MotherFirstNameEn,MotherMiddleNameEn,MotherLastNameEn,
-            MotherFirstNameMl,MotherMiddleNameMl,MotherLastNameMl,MotherAadhar,MotherEmail,MotherMobile,MotherEducation,MotherEducationSubject,MotherProfession });
+            MotherFirstNameMl,MotherMiddleNameMl,MotherLastNameMl,MotherAadhar,MotherPassportNo,MotherEmail,MotherMobile,MotherEducation,MotherEducationSubject,MotherProfession });
     }
     return (
         <React.Fragment>
@@ -343,8 +350,8 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                             optionKey="code"
                             isMandatory={false}
                             option={cmbPlace}
-                            selected={setPlaceofActivity}
-                            select={selectPlaceofactivity}
+                            selected={MotherNationality}
+                            select={setSelectMotherNationality}
                             disabled={isEdit}
                         />
                     </div>

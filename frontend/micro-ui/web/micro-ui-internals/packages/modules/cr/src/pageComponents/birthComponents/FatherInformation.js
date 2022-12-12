@@ -8,6 +8,8 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
     const { t } = useTranslation();
     let validation = {};
     const { data: place = {}, isLoad } = Digit.Hooks.tl.useTradeLicenseMDMS(stateId, "TradeLicense", "PlaceOfActivity");
+    const { data: Qualification = {}, } = Digit.Hooks.cr.useCivilRegistrationMDMS(stateId, "birth-death-service", "Qualification");
+    const { data: Profession = {}, } = Digit.Hooks.cr.useCivilRegistrationMDMS(stateId, "birth-death-service", "Profession");
     const isEdit = window.location.href.includes("/edit-application/") || window.location.href.includes("renew-trade");
     const [FatherFirstNameEn, setFatherFirstNameEn] = useState(formData?.FatherInfoDetails?.setFatherFirstNameEn);
     const [FatherMiddleNameEn, setFatherMiddleNameEn] = useState(formData?.FatherInfoDetails?.FatherMiddleNameEn);
@@ -28,7 +30,18 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
         place["TradeLicense"].PlaceOfActivity.map((ob) => {
             cmbPlace.push(ob);
         });
-
+        let cmbQualification = [];
+        Qualification &&
+            Qualification["birth-death-service"] &&
+            Qualification["birth-death-service"].Qualification.map((ob) => {
+                cmbQualification.push(ob);
+            });
+        let cmbProfession = [];
+        Profession &&
+            Profession["birth-death-service"] &&
+            Profession["birth-death-service"].Profession.map((ob) => {
+                cmbProfession.push(ob);
+            });
     const onSkip = () => onSelect();
 
     function setSelectFatherFirstNameEn(e) {
@@ -128,13 +141,13 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
                 </div>
                 <div className="row">
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EDUCATION")}`}</CardLabel>
-                        <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbPlace} selected={FatherEducation} select={setSelectFatherEducation} disabled={isEdit} />
+                        <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbQualification} selected={FatherEducation} select={setSelectFatherEducation} disabled={isEdit} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EDUCATION_SUBJECT")}`}</CardLabel>
                         <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbPlace} selected={FatherEducationSubject} select={setSelectFatherEducationSubject} disabled={isEdit} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_PROFESSIONAL")}`}</CardLabel>
-                        <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbPlace} selected={FatherProfession} select={setSelectFatherProfession} disabled={isEdit} />
+                        <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbProfession} selected={FatherProfession} select={setSelectFatherProfession} disabled={isEdit} />
                     </div>
                 </div>
             </FormStep>
