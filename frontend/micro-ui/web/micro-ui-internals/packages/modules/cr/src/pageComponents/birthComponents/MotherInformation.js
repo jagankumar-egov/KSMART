@@ -28,11 +28,11 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     const [MotherProfession, setMotherProfession] = useState(formData?.MotherInfoDetails?.MotherProfession);
     const [LBTypeName, setLBTypeName] = useState(formData?.MotherInfoDetails?.LBTypeName);
     const [StateName, setStateName] = useState(formData?.MotherInfoDetails?.StateName);
+    const [MotherDistrict, setMotherDistrict] = useState(formData?.MotherInfoDetails?.MotherDistrict);
     const [MotherAgeDeleivery, setMotherAgeDeleivery] = useState(formData?.MotherInfoDetails?.MotherAgeDeleivery);
     const [MotherNoOfBirths, setMotherNoOfBirths] = useState(formData?.MotherInfoDetails?.MotherNoOfBirths);
     const [MotherNationality, setMotherNationality] = useState(formData?.TradeDetails?.MotherNationality);
-
-    const [setPlaceofActivity, setSelectedPlaceofActivity] = useState(formData?.TradeDetails?.setPlaceofActivity);
+    const [MotherCountry, setMotherCountry] = useState(formData?.TradeDetails?.MotherCountry);
     const isEdit = window.location.href.includes("/edit-application/") || window.location.href.includes("renew-trade");
     let cmbPlace = [];
     place &&
@@ -126,10 +126,15 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     function setSelectMotherNationality(value) {
         setMotherNationality(value);
     }
-    function selectPlaceofactivity(value) {
-        setSelectedPlaceofActivity(value);
+    function setSelectMotherDistrict(value) {
+        setMotherDistrict(value);
     }
-    
+    function setSelectMotherLBName(value) {
+        setMotherDistrict(value);
+    }
+    function setSelectMotherCountry(value) {
+        setMotherCountry(value);
+    }    
     const goNext = () => {
         sessionStorage.setItem("MotherFirstNameEn", MotherFirstNameEn);
         sessionStorage.setItem("MotherMiddleNameEn", MotherMiddleNameEn);
@@ -157,7 +162,6 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                     <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("Mother's Information")}`}</span> </h1>
                     </div>
                 </div>
-
                 <div className="row">
                     <div className="col-md-4" >
                         <CardLabel>{`${t("CR_FIRST_NAME_EN")}`}</CardLabel>
@@ -394,8 +398,8 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                             optionKey="code"
                             isMandatory={false}
                             option={cmbPlace}
-                            selected={setPlaceofActivity}
-                            select={selectPlaceofactivity}
+                            selected={MotherPlaceType}
+                            select={setSelectMotherPlaceType}
                             disabled={isEdit}
                         />
                     </div>
@@ -406,8 +410,8 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                             optionKey="code"
                             isMandatory={false}
                             option={cmbPlace}
-                            selected={setPlaceofActivity}
-                            select={selectPlaceofactivity}
+                            selected={MotherLBName}
+                            select={setSelectMotherLBName}
                             disabled={isEdit}
                         />
                     </div>
@@ -432,8 +436,8 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                             optionKey="name"
                             isMandatory={false}
                             option={cmbDistrict}
-                            selected={setPlaceofActivity}
-                            select={selectPlaceofactivity}
+                            selected={MotherDistrict}
+                            select={setSelectMotherDistrict}
                             disabled={isEdit}
                         />
                     </div>
@@ -456,8 +460,8 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                             optionKey="code"
                             isMandatory={false}
                             option={cmbPlace}
-                            selected={setPlaceofActivity}
-                            select={selectPlaceofactivity}
+                            selected={MotherCountry}
+                            select={setSelectMotherCountry}
                             disabled={isEdit}
                         />
                     </div>
