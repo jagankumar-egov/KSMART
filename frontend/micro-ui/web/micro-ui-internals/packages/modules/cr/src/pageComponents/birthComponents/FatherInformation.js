@@ -120,7 +120,7 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
                         <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherAadhar" value={FatherAadhar} onChange={setSelectFatherAadhar} disable={isEdit} {...(validation = { pattern: "^([0-9]){12}$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EMAIL")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherEmail" value={FatherEmail} onChange={setSelectFatherEmail} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type="email" optionKey="i18nKey" name="FatherEmail" value={FatherEmail} onChange={setSelectFatherEmail} disable={isEdit} {...(validation = { isRequired: true, title: t("TL_INVALID_TRADE_NAME") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_MOBILE_NO")}`}</CardLabel>
                         <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherMobile" value={FatherMobile} onChange={setSelectFatherMobile} disable={isEdit} {...(validation = { pattern: "^[0-9]{10}$",type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })} />
