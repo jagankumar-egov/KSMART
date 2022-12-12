@@ -7,7 +7,7 @@ import Inbox from "./Inbox";
 // import Search from "./Search";
 // import Response from "../Response";
 import ApplicationDetails from "./ApplicationDetails";
-import CrFlow from "./route-item";
+import CrFlow from "./Birth-route";
 import DeathCrFlow from "./Death-route";
 //import ReNewApplication from "./ReNewApplication";
 
