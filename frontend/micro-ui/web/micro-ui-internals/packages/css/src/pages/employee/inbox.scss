@@ -23,6 +23,8 @@
 
     .text {
       @apply pl-md text-heading-m font-bold;
+      color: white;
+      
     }
   }
 
@@ -41,6 +43,7 @@
       border-style: solid;
       padding: 8px 10px;
       border-style: solid;
+      color: black;
     }
 
     .inbox-total {
@@ -72,6 +75,7 @@
 
     .link {
       justify-content: space-between;
+      color: black;
     }
 
     svg {
@@ -84,13 +88,14 @@
 
   .header {
     margin-right: 0px;
-    background-color: #92ec9c;
+    background-color:#DB5BDC;
     display: flex;
     align-items: center;
     color: #ffff;
     border-radius: 8px;
     padding: 30px;
     min-width: 270px;
+    color: white;
 
     .logo {
       width: 56px;
@@ -105,6 +110,7 @@
 
     .text {
       @apply pl-md text-heading-m font-bold;
+      color: white;
     }
   }
 
@@ -123,6 +129,7 @@
       border-style: solid;
       padding: 8px 10px;
       border-style: solid;
+      color: black;
     }
 
     .inbox-total {
@@ -154,6 +161,7 @@
 
     .link {
       justify-content: space-between;
+      color: black;
     }
 
     svg {
@@ -173,6 +181,7 @@
     border-radius: 8px;
     padding: 30px;
     min-width: 270px;
+    color: white;
 
     .logo {
       width: 56px;
@@ -187,6 +196,7 @@
 
     .text {
       @apply pl-md text-heading-m font-bold;
+      color: white;
     }
   }
 
@@ -205,6 +215,7 @@
       border-style: solid;
       padding: 8px 10px;
       border-style: solid;
+      color: black;
     }
 
     .inbox-total {
@@ -236,6 +247,7 @@
 
     .link {
       justify-content: space-between;
+      color: black;
     }
 
     svg {
@@ -245,88 +257,6 @@
 }
 
 .hrms-links-container {
-
-  .header {
-    margin-right: 0px;
-    background-color: #DB5BDC;
-    display: flex;
-    align-items: center;
-    color: #ffff;
-    border-radius: 8px;
-    padding: 30px;
-    min-width: 270px;
-
-    .logo {
-      width: 56px;
-      height: 56px;
-      border-radius: 4px;
-      display: contents;
-
-      svg {
-        @apply w-8 h-8;
-      }
-    }
-
-    .text {
-      @apply pl-md text-heading-m font-bold;
-    }
-  }
-
-  .body {
-    @apply flex items-start flex-col;
-    margin-left: 46px;
-
-    .link {
-      @apply p-sm text-primary-main items-center;
-      display: flex !important;
-      width: 100%;
-      --border-opacity: 1;
-      border-color: #d6d5d4;
-      border-bottom: 1px;
-      border-color: rgba(214, 213, 212, var(--border-opacity));
-      border-style: solid;
-      padding: 8px 10px;
-      border-style: solid;
-    }
-
-    .inbox-total {
-      margin-left: 130px;
-      background-color: #de4436;
-      color: #fff;
-      font-size: 75%;
-      font-weight: 700;
-      line-height: 1;
-      width: 25%;
-      padding: 0.25em 0.7em em;
-      text-align: center;
-      padding: 4px;
-      display: table;
-      display: inline-block;
-      white-space: nowrap;
-      vertical-align: baseline;
-      border-radius: 12px;
-      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-  }
-
-  .links-wrapper {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    font-size: 16px;
-    line-height: 24px;
-    width: 100% !important;
-
-    .link {
-      justify-content: space-between;
-    }
-
-    svg {
-      @apply ml-sm;
-    }
-  }
-}
-
-.doc-links-container {
 
   .header {
     margin-right: 0px;
@@ -351,6 +281,7 @@
 
     .text {
       @apply pl-md text-heading-m font-bold;
+      color: white;
     }
   }
 
@@ -369,6 +300,7 @@
       border-style: solid;
       padding: 8px 10px;
       border-style: solid;
+      color: black;
     }
 
     .inbox-total {
@@ -400,6 +332,92 @@
 
     .link {
       justify-content: space-between;
+      color: black;
+    }
+
+    svg {
+      @apply ml-sm;
+    }
+  }
+}
+
+.doc-links-container {
+
+  .header {
+    margin-right: 0px;
+    background-color: #92ec9c;
+    display: flex;
+    align-items: center;
+    color: #ffff;
+    border-radius: 8px;
+    padding: 30px;
+    min-width: 270px;
+    color: white;
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 4px;
+      display: contents;
+
+      svg {
+        @apply w-8 h-8;
+      }
+    }
+
+    .text {
+      @apply pl-md text-heading-m font-bold;
+      color: white;
+    }
+  }
+
+  .body {
+    @apply flex items-start flex-col;
+    margin-left: 46px;
+
+    .link {
+      @apply p-sm text-primary-main items-center;
+      display: flex !important;
+      width: 100%;
+      --border-opacity: 1;
+      border-color: #d6d5d4;
+      border-bottom: 1px;
+      border-color: rgba(214, 213, 212, var(--border-opacity));
+      border-style: solid;
+      padding: 8px 10px;
+      border-style: solid;
+      color: black;
+    }
+
+    .inbox-total {
+      margin-left: 130px;
+      background-color: #de4436;
+      color: #fff;
+      font-size: 75%;
+      font-weight: 700;
+      line-height: 1;
+      width: 25%;
+      padding: 0.25em 0.7em em;
+      text-align: center;
+      padding: 4px;
+      display: table;
+      display: inline-block;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 12px;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+  }
+
+  .links-wrapper {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 16px;
+    line-height: 24px;
+    width: 100% !important;
+
+    .link {
+      justify-content: space-between;
+      color: black;
     }
 
     svg {
@@ -419,7 +437,7 @@
     border-radius: 8px;
     padding: 30px;
     min-width: 270px;
-
+    color: white;
     .logo {
       width: 56px;
       height: 56px;
@@ -433,6 +451,7 @@
 
     .text {
       @apply pl-md text-heading-m font-bold;
+      color: white;
     }
   }
 
@@ -451,6 +470,7 @@
       border-style: solid;
       padding: 8px 10px;
       border-style: solid;
+      color: black;
     }
 
     .inbox-total {
@@ -482,6 +502,7 @@
 
     .link {
       justify-content: space-between;
+      color: black;
     }
 
     svg {
@@ -501,7 +522,7 @@
     border-radius: 8px;
     padding: 30px;
     min-width: 270px;
-
+    color: white;
     .logo {
       width: 56px;
       height: 56px;
@@ -515,6 +536,8 @@
 
     .text {
       @apply pl-md text-heading-m font-bold;
+      color: white;
+      
     }
   }
 
@@ -533,6 +556,7 @@
       border-style: solid;
       padding: 8px 10px;
       border-style: solid;
+      color: black;
     }
 
     .inbox-total {
@@ -564,6 +588,7 @@
 
     .link {
       justify-content: space-between;
+      color: black;
     }
 
     svg {
@@ -985,7 +1010,7 @@
 }
 
 .employeeTotalLink {
-  color: #505a5f;
+  color: black;
   font-size: 14px;
 }
 
