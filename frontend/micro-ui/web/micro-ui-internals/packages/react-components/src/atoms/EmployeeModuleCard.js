@@ -32,7 +32,7 @@ const ClassList =
                 <div className="card-count" key={index}>
                   <div>
                     <span style={{
-                      fontSize: "24px"
+                      fontSize: "21px"
                     }}>{count || "-"}</span>
                   </div>
                   <div>

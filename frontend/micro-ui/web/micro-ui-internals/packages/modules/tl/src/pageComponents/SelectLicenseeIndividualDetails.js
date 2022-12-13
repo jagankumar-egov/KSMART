@@ -50,7 +50,9 @@ const SelectLicenseeIndividualDetails = ({ t, config, onSelect, userType, formDa
         {formData.TradeDetails?.LicenseeType.code === "INDIVIDUAL" && (
           <div>
             <div className="row">
-              <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("TL_LICENSEE_INDIVIDUAL_HEADER_MSG")}*`}</span> </h1>
+              <div className="col-md-12" ><h1 className="headingh1" >
+                {/* <span style={{ background: "#fff", padding: "0 10px" }}>{`${t("TL_LICENSEE_INDIVIDUAL_HEADER_MSG")}*`}</span> */}
+               </h1>
               </div>
             </div>
             <div className="row">
