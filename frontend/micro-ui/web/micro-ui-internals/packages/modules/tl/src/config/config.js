@@ -68,7 +68,7 @@ export const newConfig = [
         component: "SelectLicenseeIndividualDetails",
         texts: {
           headerCaption: "",
-          header: "TL_LICENSEE_TYPE",
+          header: "TL_LICENSEE_DETAILS",
           cardText: "",
           submitBarLabel: "CS_COMMON_NEXT",
           skipText: "",
@@ -100,7 +100,8 @@ export const newConfig = [
         component: "SelectLicenseePlaceActivity",
         texts: {
           headerCaption: "",
-          header: "TL_LICENSEE_PLACE_STRUCTURE",
+          header: "",
+          //TL_LICENSEE_PLACE_STRUCTURE
           cardText: "",
           submitBarLabel: "CS_COMMON_NEXT",
           skipText: "",
@@ -299,7 +300,8 @@ export const newConfig = [
         component: "SelectLicensee",
         texts: {
           headerCaption: "",
-          header: "TL_LICENSEE_TYPE",
+          header: "",
+          // TL_LICENSEE_TYPE
           cardText: "",
           submitBarLabel: "CS_COMMON_NEXT",
         },
@@ -463,7 +465,7 @@ export const newConfig = [
         component: "SelectCommencementDate",
         texts: {
           headerCaption: "",
-          header: "TL_NEW_TRADE_DETAILS_TRADE_COMM_DATE_LABEL",
+          header: "TL_NEW_TRADE_DETAILS_TRADE_COMM_DATE_HEADER",
           cardText: "",
           submitBarLabel: "CS_COMMON_NEXT",
         },
