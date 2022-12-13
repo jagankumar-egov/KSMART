@@ -86,7 +86,7 @@ const InstitutionDetails = ({ config, onSelect, userType, formData }) => {
             value={TradeName}
             onChange={setSelectTradeName}
             disable={isEdit}
-            {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_SIGNED_OFFICER") })}
+            {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_SIGNED_OFFICER") })}
             />
         </div>
         <div className="col-md-6" >
