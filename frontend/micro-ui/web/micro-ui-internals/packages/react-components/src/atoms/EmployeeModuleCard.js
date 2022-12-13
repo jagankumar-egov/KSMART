@@ -11,7 +11,7 @@ const ClassList =
      'Documents':  'doc-links-container',
      'Events':  'event-links-container', 
      'Public Message Broadcast':  'public-links-container', 
-     'Survey':  'event-links-container', 
+     'Survey':  'survey-links-container', 
      'Civil Registration':  'cr-links-container', 
     };
   
