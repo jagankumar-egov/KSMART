@@ -75,7 +75,7 @@ const HospitalDetails = ({ config, onSelect, userType, formData }) => {
         </div>
         <div className="row">          
           <div className="col-md-6" > <CardLabel>{`${t("CS_COMMON_AADHAAR")}`}</CardLabel>
-            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="SignedOfficerAadharNo" value={SignedOfficerAadharNo} onChange={setSelectSignedOfficerAadharNo} placeholder={`${t("CS_COMMON_AADHAAR")}`} {...(validation = { pattern: "^([0-9]){12}$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="SignedOfficerAadharNo" value={SignedOfficerAadharNo} onChange={setSelectSignedOfficerAadharNo} placeholder={`${t("CS_COMMON_AADHAAR")}`} {...(validation = { pattern: "^([0-9]){12}$", isRequired: true, type: "text", title: t("CR_INVALID_AADHAR_NO") })} />
           </div>
           <div className="col-md-6"> <CardLabel>{`${t("CR_MOBILE_NO")}`}</CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="SignedOfficerMobileNo" value={SignedOfficerMobileNo} onChange={setSelectSignedOfficerMobileNo} placeholder={`${t("CR_MOBILE_NO")}`} {...(validation = { pattern: "^[0-9]{10}$",type: "text", isRequired: true, title: t("CR_INVALID_MOBILE_NO") })} />

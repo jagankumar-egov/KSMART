@@ -268,30 +268,30 @@ const Address = ({ config, onSelect, userType, formData }) => {
                 <div className="row">
                     <div className="col-md-12" >
                         <div className="col-md-6" ><CardLabel>{t("CR_BUILDING_NO")}</CardLabel>
-                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentBuldingNo" value={PresentBuldingNo} onChange={setSelectPresentBuldingNo} placeholder={`${t("CR_BUILDING_NO")}`} disable={isEdit}  {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_BUILDING_NO") })} />
+                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentBuldingNo" value={PresentBuldingNo} onChange={setSelectPresentBuldingNo} placeholder={`${t("CR_BUILDING_NO")}`} disable={isEdit}  {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_BUILDING_NO") })} />
                         </div>
                         <div className="col-md-6" ><CardLabel>{t("CR_HOUSE_NO")}</CardLabel>
-                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentHouseNo" value={PresentHouseNo} onChange={setSelectPresentHouseNo} placeholder={`${t("CR_HOUSE_NO")}`} disable={isEdit}  {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_HOUSE_NO") })} />
+                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentHouseNo" value={PresentHouseNo} onChange={setSelectPresentHouseNo} placeholder={`${t("CR_HOUSE_NO")}`} disable={isEdit}  {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_HOUSE_NO") })} />
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-12" >
                         <div className="col-md-6" ><CardLabel>{t("CR_LOCALITY_EN")}</CardLabel>
-                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentLocalityNameEn" value={PresentLocalityNameEn} onChange={setSelectPresentLocalityNameEn} placeholder={`${t("CR_LOCALITY_EN")}`} disable={isEdit}    {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TLOCALITY_EN") })} />
+                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentLocalityNameEn" value={PresentLocalityNameEn} onChange={setSelectPresentLocalityNameEn} placeholder={`${t("CR_LOCALITY_EN")}`} disable={isEdit}    {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_LOCALITY_EN") })} />
                         </div>
                         <div className="col-md-6" ><CardLabel>{t("CR_LOCALITY_ML")}</CardLabel>
-                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentLocalityNameMl" value={PresentLocalityNameMl} onChange={setSelectPresentLocalityNameMl} placeholder={`${t("CR_LOCALITY_ML")}`} disable={isEdit}    {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_LOCALITY_ML") })} />
+                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentLocalityNameMl" value={PresentLocalityNameMl} onChange={setSelectPresentLocalityNameMl} placeholder={`${t("CR_LOCALITY_ML")}`} disable={isEdit}    {...(validation = { isRequired: true, type: "text", title: t("CR_INVALID_LOCALITY_ML") })} />
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-12" >
                         <div className="col-md-6" ><CardLabel>{t("CR_CITY_EN")}</CardLabel>
-                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentCityNameEn" value={PresentCityNameEn} onChange={setSelectPresentCityNameEn} placeholder={`${t("CR_CITY_EN")}`} disable={isEdit}    {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_CITY_EN") })} />
+                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentCityNameEn" value={PresentCityNameEn} onChange={setSelectPresentCityNameEn} placeholder={`${t("CR_CITY_EN")}`} disable={isEdit}    {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_CITY_EN") })} />
                         </div>
                         <div className="col-md-6" ><CardLabel>{t("CR_CITY_ML")}</CardLabel>
-                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentCityNameMl" value={PresentCityNameMl} onChange={setSelectPresentCityNameMl} placeholder={`${t("CR_CITY_ML")}`} disable={isEdit}    {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_CITY_ML") })} />
+                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentCityNameMl" value={PresentCityNameMl} onChange={setSelectPresentCityNameMl} placeholder={`${t("CR_CITY_ML")}`} disable={isEdit}    {...(validation = { isRequired: true, type: "text", title: t("CR_INVALID_CITY_ML") })} />
                         </div>
                     </div>
                 </div>
@@ -317,7 +317,7 @@ const Address = ({ config, onSelect, userType, formData }) => {
                             <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbPostOffice} selected={PresentPostOffice} select={setSelectPresentPostOffice} disabled={isEdit} placeholder={`${t("CS_COMMON_POST_OFFICE")}`} />
                         </div>
                         <div className="col-md-4" ><CardLabel>{t("CS_COMMON_PIN_CODE")}</CardLabel>
-                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentPincode" value={PresentPincode} onChange={setSelectPresentPincode} disable={isEdit} placeholder={`${t("CS_COMMON_PIN_CODE")}`}  {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "number", maxLength: 6, minLength: 6, title: t("TL_INVALID_PIN_CODE") })} />
+                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentPincode" value={PresentPincode} onChange={setSelectPresentPincode} disable={isEdit} placeholder={`${t("CS_COMMON_PIN_CODE")}`}  {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "number", maxLength: 6, minLength: 6, title: t("CR_INVALID_PIN_CODE") })} />
                         </div>
                     </div>
                 </div>
@@ -338,30 +338,30 @@ const Address = ({ config, onSelect, userType, formData }) => {
                     <div className="row">
                         <div className="col-md-12" >
                             <div className="col-md-6" ><CardLabel>{t("CR_BUILDING_NO")}</CardLabel>
-                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentBuldingNo" value={PermanentBuldingNo} onChange={setSelectPermanentBuldingNo} disable={isEdit} placeholder={`${t("CR_BUILDING_NO")}`}   {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentBuldingNo" value={PermanentBuldingNo} onChange={setSelectPermanentBuldingNo} disable={isEdit} placeholder={`${t("CR_BUILDING_NO")}`}   {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_BUILDING_NO") })} />
                             </div>
                             <div className="col-md-6" ><CardLabel>{t("CR_HOUSE_NO")}</CardLabel>
-                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentHouseNo" value={PermanentHouseNo} onChange={setSelectPermanentHouseNo} disable={isEdit} placeholder={`${t("CR_HOUSE_NO")}`}   {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentHouseNo" value={PermanentHouseNo} onChange={setSelectPermanentHouseNo} disable={isEdit} placeholder={`${t("CR_HOUSE_NO")}`}   {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_HOUSE_NO") })} />
                             </div>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-12" >
                             <div className="col-md-6" ><CardLabel>{t("CR_LOCALITY_EN")}</CardLabel>
-                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentLocalityNameEn" value={PermanentLocalityNameEn} onChange={setSelectPermanentLocalityNameEn} disable={isEdit} placeholder={`${t("CR_LOCALITY_EN")}`}   {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentLocalityNameEn" value={PermanentLocalityNameEn} onChange={setSelectPermanentLocalityNameEn} disable={isEdit} placeholder={`${t("CR_LOCALITY_EN")}`}   {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_LOCALITY_EN") })} />
                             </div>
                             <div className="col-md-6" ><CardLabel>{t("CR_LOCALITY_ML")}</CardLabel>
-                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentLocalityNameMl" value={PermanentLocalityNameMl} onChange={setSelectPermanentLocalityNameMl} disable={isEdit} placeholder={`${t("CR_LOCALITY_ML")}`}   {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentLocalityNameMl" value={PermanentLocalityNameMl} onChange={setSelectPermanentLocalityNameMl} disable={isEdit} placeholder={`${t("CR_LOCALITY_ML")}`}   {...(validation = { isRequired: true, type: "text", title: t("CR_INVALID_LOCALITY_ML") })} />
                             </div>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-12" >
                             <div className="col-md-6" ><CardLabel>{t("CR_CITY_EN")}</CardLabel>
-                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentCityNameEn" value={PermanentCityNameEn} onChange={setSelectPermanentCityNameEn} disable={isEdit} placeholder={`${t("CR_CITY_EN")}`} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentCityNameEn" value={PermanentCityNameEn} onChange={setSelectPermanentCityNameEn} disable={isEdit} placeholder={`${t("CR_CITY_EN")}`} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_CITY_EN") })} />
                             </div>
                             <div className="col-md-6" ><CardLabel>{t("CR_CITY_ML")}</CardLabel>
-                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentCityNameMl" value={PermanentCityNameMl} onChange={setSelectPermanentCityNameMl} disable={isEdit} placeholder={`${t("CR_CITY_ML")}`} {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentCityNameMl" value={PermanentCityNameMl} onChange={setSelectPermanentCityNameMl} disable={isEdit} placeholder={`${t("CR_CITY_ML")}`} {...(validation = { isRequired: true, type: "text", title: t("CR_INVALID_CITY_ML") })} />
                             </div>
                         </div>
                     </div>
@@ -387,7 +387,7 @@ const Address = ({ config, onSelect, userType, formData }) => {
                                 <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbPostOffice} selected={PermanentPostOffice} select={setSelectPermanentPostOffice} disabled={isEdit} placeholder={`${t("CS_COMMON_POST_OFFICE")}`} />
                             </div>
                             <div className="col-md-4" ><CardLabel>{t("CS_COMMON_PIN_CODE")}</CardLabel>
-                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentPincode" value={PermanentPincode} onChange={setSelectPermanentPincode} disable={isEdit} placeholder={`${t("CS_COMMON_PIN_CODE")}`}  {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "number", maxLength: 6, minLength: 6, title: t("TL_INVALID_TRADE_NAME") })} />
+                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentPincode" value={PermanentPincode} onChange={setSelectPermanentPincode} disable={isEdit} placeholder={`${t("CS_COMMON_PIN_CODE")}`}  {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "number", maxLength: 6, minLength: 6, title: t("CR_INVALID_PIN_CODE") })} />
                             </div>
                         </div>
                     </div>
