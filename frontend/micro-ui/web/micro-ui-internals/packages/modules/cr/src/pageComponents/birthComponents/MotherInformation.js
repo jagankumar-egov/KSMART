@@ -31,8 +31,10 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     const [MotherDistrict, setMotherDistrict] = useState(formData?.MotherInfoDetails?.MotherDistrict);
     const [MotherAgeDeleivery, setMotherAgeDeleivery] = useState(formData?.MotherInfoDetails?.MotherAgeDeleivery);
     const [MotherNoOfBirths, setMotherNoOfBirths] = useState(formData?.MotherInfoDetails?.MotherNoOfBirths);
-    const [MotherNationality, setMotherNationality] = useState(formData?.TradeDetails?.MotherNationality);
-    const [MotherCountry, setMotherCountry] = useState(formData?.TradeDetails?.MotherCountry);
+    const [MotherPlaceType, setMotherPlaceType] = useState(formData?.MotherInfoDetails?.MotherPlaceType);
+    const [MotherLBName, setMotherLBName] = useState(formData?.MotherInfoDetails?.MotherLBName);
+    const [MotherNationality, setMotherNationality] = useState(formData?.MotherInfoDetails?.MotherNationality);
+    const [MotherCountry, setMotherCountry] = useState(formData?.MotherInfoDetails?.MotherCountry);
     const isEdit = window.location.href.includes("/edit-application/") || window.location.href.includes("renew-trade");
     let cmbPlace = [];
     place &&
@@ -64,10 +66,10 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
         District["common-masters"].District.map((ob) => {
             cmbDistrict.push(ob);
         });
-        let cmbLBType = [];
+    let cmbLBType = [];
     LBType &&
-    LBType["common-masters"] &&
-    LBType["common-masters"].LBType.map((ob) => {
+        LBType["common-masters"] &&
+        LBType["common-masters"].LBType.map((ob) => {
             cmbLBType.push(ob);
         });
     const onSkip = () => onSelect();
@@ -89,7 +91,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     }
     function setSelectMotherLastNameMl(e) {
         setMotherLastNameMl(e.target.value);
-    }    
+    }
     function setSelectMotherAadhar(e) {
         setMotherAadhar(e.target.value);
     }
@@ -123,6 +125,9 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     function setSelectMotherNoOfBirths(e) {
         setMotherNoOfBirths(e.target.value);
     }
+    function setSelectMotherPlaceType(value) {
+        setMotherPlaceType(value);
+    }
     function setSelectMotherNationality(value) {
         setMotherNationality(value);
     }
@@ -130,11 +135,11 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
         setMotherDistrict(value);
     }
     function setSelectMotherLBName(value) {
-        setMotherDistrict(value);
+        setMotherLBName(value);
     }
     function setSelectMotherCountry(value) {
         setMotherCountry(value);
-    }    
+    }
     const goNext = () => {
         sessionStorage.setItem("MotherFirstNameEn", MotherFirstNameEn);
         sessionStorage.setItem("MotherMiddleNameEn", MotherMiddleNameEn);
@@ -149,13 +154,25 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
         sessionStorage.setItem("MotherEducation", MotherEducation.code);
         sessionStorage.setItem("MotherEducationSubject", MotherEducationSubject.code);
         sessionStorage.setItem("MotherProfession", MotherProfession.code);
-        onSelect(config.key, { MotherFirstNameEn,MotherMiddleNameEn,MotherLastNameEn,
-            MotherFirstNameMl,MotherMiddleNameMl,MotherLastNameMl,MotherAadhar,MotherPassportNo,MotherEmail,MotherMobile,MotherEducation,MotherEducationSubject,MotherProfession });
+        sessionStorage.setItem("MotherNationality", MotherNationality.code);
+        sessionStorage.setItem("MotherAgeDeleivery", MotherAgeDeleivery);
+        sessionStorage.setItem("MotherNoOfBirths", MotherNoOfBirths);
+        sessionStorage.setItem("MotherPlaceType", MotherPlaceType.code);
+        sessionStorage.setItem("MotherLBName", MotherLBName.code);
+        sessionStorage.setItem("LBTypeName", LBTypeName.code);
+        sessionStorage.setItem("MotherDistrict", MotherDistrict.code);
+        sessionStorage.setItem("StateName", StateName.code);
+        sessionStorage.setItem("MotherCountry", MotherCountry.code);
+        onSelect(config.key, {
+            MotherFirstNameEn, MotherMiddleNameEn, MotherLastNameEn,
+            MotherFirstNameMl, MotherMiddleNameMl, MotherLastNameMl, MotherAadhar, MotherPassportNo, MotherEmail, MotherMobile, MotherEducation, MotherEducationSubject, MotherProfession,
+            MotherNationality, MotherAgeDeleivery, MotherNoOfBirths, MotherPlaceType, MotherLBName, LBTypeName, MotherDistrict, StateName, MotherCountry
+        });
     }
     return (
         <React.Fragment>
-            {window.location.href.includes("/citizen") ? <Timeline currentStep={3} /> : null}
-            {window.location.href.includes("/employee") ? <Timeline currentStep={3} /> : null}
+            {window.location.href.includes("/citizen") ? <Timeline currentStep={4} /> : null}
+            {window.location.href.includes("/employee") ? <Timeline currentStep={4} /> : null}
             <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isDisabled={!MotherFirstNameEn}>
 
                 <div className="row">
@@ -163,307 +180,323 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_FIRST_NAME_EN")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherFirstNameEn"
-                            value={MotherFirstNameEn}
-                            onChange={setSelectMotherFirstNameEn}
-                            disable={isEdit}
-                            {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_MIDDLE_NAME_EN")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherMiddleNameEn"
-                            value={MotherMiddleNameEn}
-                            onChange={setSelectMotherMiddleNameEn}
-                            disable={isEdit}
-                            {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: false, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_LAST_NAME_EN")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherLastNameEn"
-                            value={MotherLastNameEn}
-                            onChange={setSelectMotherLastNameEn}
-                            disable={isEdit}
-                            {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_FIRST_NAME_ML")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherFirstNameMl"
-                            value={MotherFirstNameMl}
-                            onChange={setSelectMotherFirstNameMl}
-                            disable={isEdit}
-                            {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_MIDDLE_NAME_ML")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherMiddleNameMl"
-                            value={MotherMiddleNameMl}
-                            onChange={setSelectMotherMiddleNameMl}
-                            disable={isEdit}
-                            {...(validation = { isRequired: false, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_LAST_NAME_ML")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherLastNameMl"
-                            value={MotherLastNameMl}
-                            onChange={setSelectMotherLastNameMl}
-                            disable={isEdit}
-                            {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-                        />
+                    <div className="col-md-12" >
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_FIRST_NAME_EN")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherFirstNameEn"
+                                value={MotherFirstNameEn}
+                                onChange={setSelectMotherFirstNameEn}
+                                disable={isEdit}
+                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_MIDDLE_NAME_EN")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherMiddleNameEn"
+                                value={MotherMiddleNameEn}
+                                onChange={setSelectMotherMiddleNameEn}
+                                disable={isEdit}
+                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: false, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_LAST_NAME_EN")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherLastNameEn"
+                                value={MotherLastNameEn}
+                                onChange={setSelectMotherLastNameEn}
+                                disable={isEdit}
+                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CS_COMMON_AADHAAR")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherAadhar"
-                            value={MotherAadhar}
-                            onChange={setSelectMotherAadhar}
-                            disable={isEdit}
-                            {...(validation = { pattern: "^[0-9]{12}$",type: "text", isRequired: true,  title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_PASSPORT_NO")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherPassportNo"
-                            value={MotherPassportNo}
-                            onChange={setSelectMotherPassportNo}
-                            disable={isEdit}
-                            {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$",isRequired: true,  title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_EMAIL")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type="email"
-                            optionKey="i18nKey"
-                            name="MotherEmail"
-                            value={MotherEmail}
-                            onChange={setSelectMotherEmail}
-                            disable={isEdit}
-                            {...(validation = { isRequired: true, title: t("TL_INVALID_TRADE_NAME") })}
-                        />
+                    <div className="col-md-12" >
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_FIRST_NAME_ML")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherFirstNameMl"
+                                value={MotherFirstNameMl}
+                                onChange={setSelectMotherFirstNameMl}
+                                disable={isEdit}
+                                {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_MIDDLE_NAME_ML")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherMiddleNameMl"
+                                value={MotherMiddleNameMl}
+                                onChange={setSelectMotherMiddleNameMl}
+                                disable={isEdit}
+                                {...(validation = { isRequired: false, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_LAST_NAME_ML")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherLastNameMl"
+                                value={MotherLastNameMl}
+                                onChange={setSelectMotherLastNameMl}
+                                disable={isEdit}
+                                {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_MOBILE_NO")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherMobile"
-                            value={MotherMobile}
-                            onChange={setSelectMotherMobile}
-                            disable={isEdit}
-                            {...(validation = { pattern: "^[0-9]{10}$", type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })}
-                        />
+                    <div className="col-md-12" >
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CS_COMMON_AADHAAR")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherAadhar"
+                                value={MotherAadhar}
+                                onChange={setSelectMotherAadhar}
+                                disable={isEdit}
+                                {...(validation = { pattern: "^[0-9]{12}$", type: "text", isRequired: false, title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_PASSPORT_NO")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherPassportNo"
+                                value={MotherPassportNo}
+                                onChange={setSelectMotherPassportNo}
+                                disable={isEdit}
+                                {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: false, title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_EMAIL")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type="email"
+                                optionKey="i18nKey"
+                                name="MotherEmail"
+                                value={MotherEmail}
+                                onChange={setSelectMotherEmail}
+                                disable={isEdit}
+                                {...(validation = { isRequired: false, title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
                     </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_EDUCATION")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="name"
-                            isMandatory={false}
-                            option={cmbQualification}
-                            selected={MotherEducation}
-                            select={setSelectMotherEducation}
-                            disabled={isEdit}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_EDUCATION_SUBJECT")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="code"
-                            isMandatory={false}
-                            option={cmbPlace}
-                            selected={MotherEducationSubject}
-                            select={setSelectMotherEducationSubject}
-                            disabled={isEdit}
-                        />
+                </div>
+                <div className="row">
+                    <div className="col-md-12" >
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_MOBILE_NO")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherMobile"
+                                value={MotherMobile}
+                                onChange={setSelectMotherMobile}
+                                disable={isEdit}
+                                {...(validation = { pattern: "^[0-9]{10}$", type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_EDUCATION")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="name"
+                                isMandatory={false}
+                                option={cmbQualification}
+                                selected={MotherEducation}
+                                select={setSelectMotherEducation}
+                                disabled={isEdit}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_EDUCATION_SUBJECT")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="code"
+                                isMandatory={false}
+                                option={cmbQualification}
+                                selected={MotherEducationSubject}
+                                select={setSelectMotherEducationSubject}
+                                disabled={isEdit}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="row" >
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_PROFESSIONAL")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="name"
-                            isMandatory={false}
-                            option={cmbProfession}
-                            selected={MotherProfession}
-                            select={setSelectMotherProfession}
-                            disabled={isEdit}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_NATIONALITY")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="code"
-                            isMandatory={false}
-                            option={cmbPlace}
-                            selected={MotherNationality}
-                            select={setSelectMotherNationality}
-                            disabled={isEdit}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_AGE_OF_DELIVERY")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherAgeDeleivery"
-                            value={MotherAgeDeleivery}
-                            onChange={setSelectMotherAgeDeleivery}
-                            disable={isEdit}
-                            {...(validation = { pattern: "^[0-9]{2}$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CR_NO_OF_BIRTH_GIVEN")}`}</CardLabel>
-                        <TextInput
-                            t={t}
-                            isMandatory={false}
-                            type={"text"}
-                            optionKey="i18nKey"
-                            name="MotherNoOfBirths"
-                            value={MotherNoOfBirths}
-                            onChange={setSelectMotherNoOfBirths}
-                            disable={isEdit}
-                            {...(validation = { pattern: "^[0-9]$", type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })}
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("PLACE_TYPE_URBAN_PLACE_TYPE_RURAL")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="code"
-                            isMandatory={false}
-                            option={cmbPlace}
-                            selected={MotherPlaceType}
-                            select={setSelectMotherPlaceType}
-                            disabled={isEdit}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CS_COMMON_LB_NAME")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="code"
-                            isMandatory={false}
-                            option={cmbPlace}
-                            selected={MotherLBName}
-                            select={setSelectMotherLBName}
-                            disabled={isEdit}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CS_COMMON_LB_TYPE")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="name"
-                            isMandatory={false}
-                            option={cmbLBType}
-                            selected={LBTypeName}
-                            select={setSelectLBType}
-                            disabled={isEdit}
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CS_COMMON_DISTRICT")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="name"
-                            isMandatory={false}
-                            option={cmbDistrict}
-                            selected={MotherDistrict}
-                            select={setSelectMotherDistrict}
-                            disabled={isEdit}
-                        />
-                    </div>
-                    <div className="col-md-4" >
-                        <CardLabel>{`${t("CS_COMMON_STATE")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="name"
-                            isMandatory={false}
-                            option={cmbState}
-                            selected={StateName}
-                            select={setSelectStateName}
-                            disabled={isEdit}
-                        />
-                    </div>
                     <div className="col-md-12" >
-                        <CardLabel>{`${t("CS_COMMON_COUNTRY")}`}</CardLabel>
-                        <Dropdown
-                            t={t}
-                            optionKey="code"
-                            isMandatory={false}
-                            option={cmbPlace}
-                            selected={MotherCountry}
-                            select={setSelectMotherCountry}
-                            disabled={isEdit}
-                        />
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_PROFESSIONAL")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="name"
+                                isMandatory={false}
+                                option={cmbProfession}
+                                selected={MotherProfession}
+                                select={setSelectMotherProfession}
+                                disabled={isEdit}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_NATIONALITY")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="code"
+                                isMandatory={false}
+                                option={cmbPlace}
+                                selected={MotherNationality}
+                                select={setSelectMotherNationality}
+                                disabled={isEdit}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_AGE_OF_DELIVERY")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherAgeDeleivery"
+                                value={MotherAgeDeleivery}
+                                onChange={setSelectMotherAgeDeleivery}
+                                disable={isEdit}
+                                {...(validation = { pattern: "^[0-9]{2}$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12" >
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CR_NO_OF_BIRTH_GIVEN")}`}</CardLabel>
+                            <TextInput
+                                t={t}
+                                isMandatory={false}
+                                type={"text"}
+                                optionKey="i18nKey"
+                                name="MotherNoOfBirths"
+                                value={MotherNoOfBirths}
+                                onChange={setSelectMotherNoOfBirths}
+                                disable={isEdit}
+                                {...(validation = { pattern: "^[0-9]$", type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("PLACE_TYPE_URBAN_PLACE_TYPE_RURAL")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="code"
+                                isMandatory={false}
+                                option={cmbPlace}
+                                selected={MotherPlaceType}
+                                select={setSelectMotherPlaceType}
+                                disabled={isEdit}
+                            />
+                        </div>
+                        <div className="col-md-4" >
+                            <CardLabel>{`${t("CS_COMMON_DISTRICT")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="name"
+                                isMandatory={false}
+                                option={cmbDistrict}
+                                selected={MotherDistrict}
+                                select={setSelectMotherDistrict}
+                                disabled={isEdit}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12" >
+                        <div className="col-md-6" >
+                            <CardLabel>{`${t("CS_COMMON_LB_NAME")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="code"
+                                isMandatory={false}
+                                option={cmbState}
+                                selected={MotherLBName}
+                                select={setSelectMotherLBName}
+                                disabled={isEdit}
+                            />
+                        </div>
+                        <div className="col-md-6" >
+                            <CardLabel>{`${t("CS_COMMON_LB_TYPE")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="name"
+                                isMandatory={false}
+                                option={cmbLBType}
+                                selected={LBTypeName}
+                                select={setSelectLBType}
+                                disabled={isEdit}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12" >
+                        <div className="col-md-6" >
+                            <CardLabel>{`${t("CS_COMMON_STATE")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="name"
+                                isMandatory={false}
+                                option={cmbState}
+                                selected={StateName}
+                                select={setSelectStateName}
+                                disabled={isEdit}
+                            />
+                        </div>
+                        <div className="col-md-6" >
+                            <CardLabel>{`${t("CS_COMMON_COUNTRY")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="code"
+                                isMandatory={false}
+                                option={cmbState}
+                                selected={MotherCountry}
+                                select={setSelectMotherCountry}
+                                disabled={isEdit}
+                            />
+                        </div>
                     </div>
                 </div>
             </FormStep>

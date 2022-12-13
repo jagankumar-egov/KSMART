@@ -777,6 +777,7 @@ const getCRDistrictlist = (tenantId, moduleCode) => ({
     ],
   },
 });
+
 const getCRPostOfficelist = (tenantId, moduleCode) => ({
   details: {
     tenantId: tenantId,
@@ -786,6 +787,21 @@ const getCRPostOfficelist = (tenantId, moduleCode) => ({
         masterDetails: [
           {
             name: "PostOffice",
+          },
+        ],
+      },
+    ],
+  },
+});
+const getCRCountrylist = (tenantId, moduleCode) => ({
+  details: {
+    tenantId: tenantId,
+    moduleDetails: [
+      {
+        moduleName: moduleCode,
+        masterDetails: [
+          {
+            name: "Country",
           },
         ],
       },
@@ -861,6 +877,51 @@ const getCRProfessionlist = (tenantId, moduleCode) => ({
         masterDetails: [
           {
             name: "Profession",
+          },
+        ],
+      },
+    ],
+  },
+});
+const getCRNatureofMedicalAttentionlist = (tenantId, moduleCode) => ({
+  details: {
+    tenantId: tenantId,
+    moduleDetails: [
+      {
+        moduleName: moduleCode,
+        masterDetails: [
+          {
+            name: "AttentionOfDelivery",
+          },
+        ],
+      },
+    ],
+  },
+});
+const getCRNatureofMedicalAttentionSublist = (tenantId, moduleCode) => ({
+  details: {
+    tenantId: tenantId,
+    moduleDetails: [
+      {
+        moduleName: moduleCode,
+        masterDetails: [
+          {
+            name: "MedicalAttentionType",
+          },
+        ],
+      },
+    ],
+  },
+});
+const getCRDeliveryMethodlist = (tenantId, moduleCode) => ({
+  details: {
+    tenantId: tenantId,
+    moduleDetails: [
+      {
+        moduleName: moduleCode,
+        masterDetails: [
+          {
+            name: "DeliveryMethod",
           },
         ],
       },
@@ -1786,9 +1847,7 @@ export const MdmsService = {
   getCRPostOffice: (tenantId, moduleCode) => {
     return MdmsService.getDataByCriteria(tenantId, getCRPostOfficelist(tenantId, moduleCode), moduleCode);
   },
-  getCRState: (tenantId, moduleCode) => {
-    return MdmsService.getDataByCriteria(tenantId, getCRStatelist(tenantId, moduleCode), moduleCode);
-  },
+  
   getCROccupation: (tenantId, moduleCode) => {
     return MdmsService.getDataByCriteria(tenantId, getCROccupationlist(tenantId, moduleCode), moduleCode);
   },
@@ -1800,6 +1859,18 @@ export const MdmsService = {
   },
   getCRProfession: (tenantId, moduleCode) => {
     return MdmsService.getDataByCriteria(tenantId, getCRProfessionlist(tenantId, moduleCode), moduleCode);
+  },
+  getCRCountry: (tenantId, moduleCode) => {
+    return MdmsService.getDataByCriteria(tenantId, getCRCountrylist(tenantId, moduleCode), moduleCode);
+  },
+  getCRNatureofMedicalAttention: (tenantId, moduleCode) => {
+    return MdmsService.getDataByCriteria(tenantId, getCRNatureofMedicalAttentionlist(tenantId, moduleCode), moduleCode);
+  },
+  getCRDeliveryMethod: (tenantId, moduleCode) => {
+    return MdmsService.getDataByCriteria(tenantId, getCRDeliveryMethodlist(tenantId, moduleCode), moduleCode);
+  },
+  getCRNatureofMedicalAttentionSub: (tenantId, moduleCode) => {
+    return MdmsService.getDataByCriteria(tenantId, getCRNatureofMedicalAttentionSublist(tenantId, moduleCode), moduleCode);
   },
   /////////crmdms
   getServiceDefs: (tenantId, moduleCode) => {

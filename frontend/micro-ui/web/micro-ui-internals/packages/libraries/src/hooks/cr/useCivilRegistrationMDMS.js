@@ -65,6 +65,18 @@ const useCivilRegistrationMDMS = (tenantId, moduleCode, type, filter, config = {
   const useCRProfession = () => {
     return useQuery("CR_PROFESSION", () => MdmsService.getCRProfession(tenantId, moduleCode, type), config);
   };
+  const useCRCountry = () => {
+    return useQuery("CR_COUNTRY", () => MdmsService.getCRCountry(tenantId, moduleCode, type), config);
+  };
+  const useCRNatureofMedicalAttention = () => {
+    return useQuery("CR_NATURE_OF_MEDICAL_ATTENTION", () => MdmsService.getCRNatureofMedicalAttention(tenantId, moduleCode, type), config);
+  };
+  const useCRNatureofMedicalAttentionSub = () => {
+    return useQuery("CR_NATURE_OF_MEDICAL_ATTENTION_SUB", () => MdmsService.getCRNatureofMedicalAttentionSub(tenantId, moduleCode, type), config);
+  };
+  const useCRDeliveryMethod = () => {
+    return useQuery("CR_DELIVERY_METHOD", () => MdmsService.getCRDeliveryMethod(tenantId, moduleCode, type), config);
+  };
   ////////////////////////////////////////////////////////////////////death
   const useTLDocuments = () => {
     return useQuery("TL_DOCUMENTS", () => MdmsService.getTLDocumentRequiredScreen(tenantId, moduleCode, type), config);
@@ -214,13 +226,21 @@ const useCivilRegistrationMDMS = (tenantId, moduleCode, type, filter, config = {
     case "mstate":
       return useCRState();
     case "LBType":
-      return useCRLBType();  
+      return useCRLBType(); 
+    case "Country":
+      return useCRCountry(); 
     case "Occupation":
       return useCROccupation(); 
     case "Qualification":
       return useCRQualification();
       case "Profession":
-      return useCRProfession();  
+      return useCRProfession(); 
+    case "AttentionOfDelivery":
+      return useCRNatureofMedicalAttention();
+      case "AttentionOfDelivery":
+      return useCRNatureofMedicalAttentionSub();
+    case "MedicalAttentionType":
+      return useCRDeliveryMethod();   
     case "Title":
       return useCRWard();
     case "Religion":

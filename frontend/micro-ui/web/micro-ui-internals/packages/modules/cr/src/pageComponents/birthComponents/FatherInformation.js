@@ -98,7 +98,8 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
     }
     return (
         <React.Fragment>
-            {window.location.href.includes("/citizen") ? <Timeline /> : null}
+             {window.location.href.includes("/citizen") ? <Timeline currentStep={4} /> : null}
+            {window.location.href.includes("/employee") ? <Timeline currentStep={4}  /> : null}
             <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isDisabled={!FatherFirstNameEn}>
                 <div className="row">
                     <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("Father's Information")}`}</span> </h1>
@@ -130,10 +131,10 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
 
                 <div className="row">
                     <div className="col-md-4" ><CardLabel>{`${t("CS_COMMON_AADHAAR")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherAadhar" value={FatherAadhar} onChange={setSelectFatherAadhar} disable={isEdit} {...(validation = { pattern: "^([0-9]){12}$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherAadhar" value={FatherAadhar} onChange={setSelectFatherAadhar} disable={isEdit} {...(validation = { pattern: "^([0-9]){12}$", isRequired: false, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EMAIL")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type="email" optionKey="i18nKey" name="FatherEmail" value={FatherEmail} onChange={setSelectFatherEmail} disable={isEdit} {...(validation = { isRequired: true, title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type="email" optionKey="i18nKey" name="FatherEmail" value={FatherEmail} onChange={setSelectFatherEmail} disable={isEdit} {...(validation = { isRequired: false, title: t("TL_INVALID_TRADE_NAME") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_MOBILE_NO")}`}</CardLabel>
                         <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherMobile" value={FatherMobile} onChange={setSelectFatherMobile} disable={isEdit} {...(validation = { pattern: "^[0-9]{10}$",type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })} />
@@ -144,7 +145,7 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
                         <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbQualification} selected={FatherEducation} select={setSelectFatherEducation} disabled={isEdit} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EDUCATION_SUBJECT")}`}</CardLabel>
-                        <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbPlace} selected={FatherEducationSubject} select={setSelectFatherEducationSubject} disabled={isEdit} />
+                        <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbProfession} selected={FatherEducationSubject} select={setSelectFatherEducationSubject} disabled={isEdit} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_PROFESSIONAL")}`}</CardLabel>
                         <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbProfession} selected={FatherProfession} select={setSelectFatherProfession} disabled={isEdit} />
