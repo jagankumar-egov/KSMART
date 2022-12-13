@@ -76,17 +76,17 @@ const StatisticalInformation = ({ config, onSelect, userType, formData }) => {
             {window.location.href.includes("/employee") ? <Timeline currentStep={4} /> : null}
             <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isDisabled={!BirthWeight}>
                 <div className="row">
-                    <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("CR_Statistical_Information")}`}</span> </h1>
+                    <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("CR_STATISTICAL_INFORMATION")}`}</span> </h1>
                     </div>
                 </div>
                 <div className="row">
                 <div className="col-md-12" >
                     <div className="col-md-6" ><CardLabel>{t("CR_BIRTH_WEIGHT")}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="BirthWeight" value={BirthWeight} onChange={setSelectBirthWeight} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="BirthWeight" value={BirthWeight} onChange={setSelectBirthWeight} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_BIRTH_WEIGHT") })} />
                     </div>
                     <div className="col-md-6" >
                         <CardLabel>{t("CR_BIRTH_HEIGHT")}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="BirthHeight" value={BirthHeight} onChange={setSelectBirthHeight} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="BirthHeight" value={BirthHeight} onChange={setSelectBirthHeight} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_BIRTH_HEIGHT") })} />
                     </div>
                     </div>
                 </div>
@@ -117,11 +117,11 @@ const StatisticalInformation = ({ config, onSelect, userType, formData }) => {
                 <div className="row">
                 <div className="col-md-12" >
                     <div className="col-md-6" >
-                        <CardLabel>{`${t("CR_DELIVERY_METHORD")}`}</CardLabel>
+                        <CardLabel>{`${t("CR_DELIVERY_METHOD")}`}</CardLabel>
                         <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbReligion} selected={DeliveryMethod} select={setSelectDeliveryMethod} disabled={isEdit} />
                     </div>
                     <div className="col-md-6" >
-                        <CardLabel>{`${t("CR_DELIVERY_METHORD_SUB")}`}</CardLabel>
+                        <CardLabel>{`${t("CR_DELIVERY_METHOD_SUB")}`}</CardLabel>
                         <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbReligion} selected={DeliveryMethodSub} select={setSelectDeliveryMethodSub} disabled={isEdit} />
                     </div>
                 </div>

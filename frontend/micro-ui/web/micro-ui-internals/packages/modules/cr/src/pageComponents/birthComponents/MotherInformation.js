@@ -176,7 +176,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
             <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isDisabled={!MotherFirstNameEn}>
 
                 <div className="row">
-                    <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("Mother's Information")}`}</span> </h1>
+                    <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("CR_MOTHER_INFORMATION")}`}</span> </h1>
                     </div>
                 </div>
                 <div className="row">
@@ -192,7 +192,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherFirstNameEn}
                                 onChange={setSelectMotherFirstNameEn}
                                 disable={isEdit}
-                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_FIRST_NAME_EN") })}
                             />
                         </div>
                         <div className="col-md-4" >
@@ -206,7 +206,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherMiddleNameEn}
                                 onChange={setSelectMotherMiddleNameEn}
                                 disable={isEdit}
-                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: false, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: false, type: "text", title: t("CR_INVALID_MIDDLE_NAME_EN") })}
                             />
                         </div>
                         <div className="col-md-4" >
@@ -220,7 +220,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherLastNameEn}
                                 onChange={setSelectMotherLastNameEn}
                                 disable={isEdit}
-                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_LAST_NAME_EN") })}
                             />
                         </div>
                     </div>
@@ -238,7 +238,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherFirstNameMl}
                                 onChange={setSelectMotherFirstNameMl}
                                 disable={isEdit}
-                                {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { isRequired: true, type: "text", title: t("CR_INVALID_FIRST_NAME_ML") })}
                             />
                         </div>
                         <div className="col-md-4" >
@@ -252,7 +252,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherMiddleNameMl}
                                 onChange={setSelectMotherMiddleNameMl}
                                 disable={isEdit}
-                                {...(validation = { isRequired: false, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { isRequired: false, type: "text", title: t("CR_INVALID_MIDDLE_NAME_ML") })}
                             />
                         </div>
                         <div className="col-md-4" >
@@ -266,7 +266,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherLastNameMl}
                                 onChange={setSelectMotherLastNameMl}
                                 disable={isEdit}
-                                {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { isRequired: true, type: "text", title: t("CR_INVALID_LAST_NAME_ML") })}
                             />
                         </div>
                     </div>
@@ -284,7 +284,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherAadhar}
                                 onChange={setSelectMotherAadhar}
                                 disable={isEdit}
-                                {...(validation = { pattern: "^[0-9]{12}$", type: "text", isRequired: false, title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { pattern: "^[0-9]{12}$", type: "text", isRequired: false, title: t("CS_COMMON_INVALID_AADHAR_NO") })}
                             />
                         </div>
                         <div className="col-md-4" >
@@ -298,7 +298,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherPassportNo}
                                 onChange={setSelectMotherPassportNo}
                                 disable={isEdit}
-                                {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: false, title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: false, title: t("CR_INVALID_PASSPORT_NO") })}
                             />
                         </div>
                         <div className="col-md-4" >
@@ -312,7 +312,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherEmail}
                                 onChange={setSelectMotherEmail}
                                 disable={isEdit}
-                                {...(validation = { isRequired: false, title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { isRequired: false, title: t("CR_INVALID_EMAIL") })}
                             />
                         </div>
                     </div>
@@ -330,7 +330,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherMobile}
                                 onChange={setSelectMotherMobile}
                                 disable={isEdit}
-                                {...(validation = { pattern: "^[0-9]{10}$", type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { pattern: "^[0-9]{10}$", type: "text", isRequired: true, title: t("CR_INVALID_MOBILE_NO") })}
                             />
                         </div>
                         <div className="col-md-4" >
@@ -396,7 +396,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherAgeDeleivery}
                                 onChange={setSelectMotherAgeDeleivery}
                                 disable={isEdit}
-                                {...(validation = { pattern: "^[0-9]{2}$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { pattern: "^[0-9]{2}$", isRequired: true, type: "text", title: t("CR_INVALID_AGE_OF_DELIVERY") })}
                             />
                         </div>
                     </div>
@@ -414,11 +414,11 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 value={MotherNoOfBirths}
                                 onChange={setSelectMotherNoOfBirths}
                                 disable={isEdit}
-                                {...(validation = { pattern: "^[0-9]$", type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })}
+                                {...(validation = { pattern: "^[0-9]$", type: "text", isRequired: true, title: t("CR_INVALID_NO_OF_BIRTH_GIVEN") })}
                             />
                         </div>
                         <div className="col-md-4" >
-                            <CardLabel>{`${t("PLACE_TYPE_URBAN_PLACE_TYPE_RURAL")}`}</CardLabel>
+                            <CardLabel>{`${t("CR_PLACE_TYPE_URBAN_PLACE_TYPE_RURAL")}`}</CardLabel>
                             <Dropdown
                                 t={t}
                                 optionKey="code"

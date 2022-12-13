@@ -102,7 +102,7 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
             {window.location.href.includes("/employee") ? <Timeline currentStep={4}  /> : null}
             <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isDisabled={!FatherFirstNameEn}>
                 <div className="row">
-                    <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("Father's Information")}`}</span> </h1>
+                    <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("CR_FATHER_INFORMATION")}`}</span> </h1>
                     </div>
                 </div>
                 <div className="row">
@@ -131,7 +131,7 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
 
                 <div className="row">
                     <div className="col-md-4" ><CardLabel>{`${t("CS_COMMON_AADHAAR")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherAadhar" value={FatherAadhar} onChange={setSelectFatherAadhar} disable={isEdit} {...(validation = { pattern: "^([0-9]){12}$", isRequired: false, type: "text", title: t("CR_INVALID_AADHAR_NO") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherAadhar" value={FatherAadhar} onChange={setSelectFatherAadhar} disable={isEdit} {...(validation = { pattern: "^([0-9]){12}$", isRequired: false, type: "text", title: t("CS_COMMON_INVALID_AADHAR_NO") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EMAIL")}`}</CardLabel>
                         <TextInput t={t} isMandatory={false} type="email" optionKey="i18nKey" name="FatherEmail" value={FatherEmail} onChange={setSelectFatherEmail} disable={isEdit} {...(validation = { isRequired: false, title: t("CR_INVALID_EMAIL") })} />
