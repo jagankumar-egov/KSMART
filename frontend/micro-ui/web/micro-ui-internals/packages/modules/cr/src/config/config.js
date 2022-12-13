@@ -467,7 +467,7 @@ export const newConfig = [
         component: "SearchRegistry",
         texts: {
           // headerCaption: "TL_STRUCTURE_TYPE",
-          header: "TL_STRUCTURE_TYPE_HEADER",
+          header: "Name Inclusion",
           // cardText: "TL_STRUCTURE_TYPE_TEXT",
           submitBarLabel: "CS_COMMON_NEXT",
         },
