@@ -237,9 +237,9 @@ const useCivilRegistrationMDMS = (tenantId, moduleCode, type, filter, config = {
       return useCRProfession(); 
     case "AttentionOfDelivery":
       return useCRNatureofMedicalAttention();
-      case "AttentionOfDelivery":
+      case "MedicalAttentionType":
       return useCRNatureofMedicalAttentionSub();
-    case "MedicalAttentionType":
+    case "DeliveryMethod":
       return useCRDeliveryMethod();   
     case "Title":
       return useCRWard();

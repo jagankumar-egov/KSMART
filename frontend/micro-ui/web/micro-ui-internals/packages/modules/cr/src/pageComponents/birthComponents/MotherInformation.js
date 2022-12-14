@@ -13,6 +13,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
     const { data: State = {}, } = Digit.Hooks.cr.useCivilRegistrationMDMS(stateId, "common-masters", "mstate");
     const { data: District = {} } = Digit.Hooks.cr.useCivilRegistrationMDMS(stateId, "common-masters", "District");
     const { data: LBType = {} } = Digit.Hooks.cr.useCivilRegistrationMDMS(stateId, "common-masters", "LBType");
+    const { data: Country = {} } = Digit.Hooks.cr.useCivilRegistrationMDMS(stateId, "common-masters", "Country");
     const [MotherFirstNameEn, setMotherFirstNameEn] = useState(formData?.MotherInfoDetails?.setMotherFirstNameEn);
     const [MotherMiddleNameEn, setMotherMiddleNameEn] = useState(formData?.MotherInfoDetails?.MotherMiddleNameEn);
     const [MotherLastNameEn, setMotherLastNameEn] = useState(formData?.MotherInfoDetails?.MotherLastNameEn);
@@ -71,6 +72,12 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
         LBType["common-masters"] &&
         LBType["common-masters"].LBType.map((ob) => {
             cmbLBType.push(ob);
+        });
+    let cmbCountry = [];
+    Country &&
+        Country["common-masters"] &&
+        Country["common-masters"].Country.map((ob) => {
+            cmbCountry.push(ob);
         });
     const onSkip = () => onSelect();
 
@@ -158,7 +165,7 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
         sessionStorage.setItem("MotherAgeDeleivery", MotherAgeDeleivery);
         sessionStorage.setItem("MotherNoOfBirths", MotherNoOfBirths);
         sessionStorage.setItem("MotherPlaceType", MotherPlaceType.code);
-        sessionStorage.setItem("MotherLBName", MotherLBName.code);
+        sessionStorage.setItem("MotherLBName", null);//MotherLBName.code
         sessionStorage.setItem("LBTypeName", LBTypeName.code);
         sessionStorage.setItem("MotherDistrict", MotherDistrict.code);
         sessionStorage.setItem("StateName", StateName.code);
@@ -446,18 +453,6 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                 <div className="row">
                     <div className="col-md-12" >
                         <div className="col-md-6" >
-                            <CardLabel>{`${t("CS_COMMON_LB_NAME")}`}</CardLabel>
-                            <Dropdown
-                                t={t}
-                                optionKey="code"
-                                isMandatory={false}
-                                option={cmbState}
-                                selected={MotherLBName}
-                                select={setSelectMotherLBName}
-                                disabled={isEdit}
-                            />
-                        </div>
-                        <div className="col-md-6" >
                             <CardLabel>{`${t("CS_COMMON_LB_TYPE")}`}</CardLabel>
                             <Dropdown
                                 t={t}
@@ -466,6 +461,18 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                                 option={cmbLBType}
                                 selected={LBTypeName}
                                 select={setSelectLBType}
+                                disabled={isEdit}
+                            />
+                        </div>
+                        <div className="col-md-6" >
+                            <CardLabel>{`${t("CS_COMMON_LB_NAME")}`}</CardLabel>
+                            <Dropdown
+                                t={t}
+                                optionKey="code"
+                                isMandatory={false}
+                                option={cmbState}
+                                selected={MotherLBName}
+                                select={setSelectMotherLBName}
                                 disabled={isEdit}
                             />
                         </div>
@@ -489,9 +496,9 @@ const MotherInformation = ({ config, onSelect, userType, formData }) => {
                             <CardLabel>{`${t("CS_COMMON_COUNTRY")}`}</CardLabel>
                             <Dropdown
                                 t={t}
-                                optionKey="code"
+                                optionKey="name"
                                 isMandatory={false}
-                                option={cmbState}
+                                option={cmbCountry}
                                 selected={MotherCountry}
                                 select={setSelectMotherCountry}
                                 disabled={isEdit}

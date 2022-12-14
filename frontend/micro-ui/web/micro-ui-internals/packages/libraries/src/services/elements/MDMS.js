@@ -1847,7 +1847,9 @@ export const MdmsService = {
   getCRPostOffice: (tenantId, moduleCode) => {
     return MdmsService.getDataByCriteria(tenantId, getCRPostOfficelist(tenantId, moduleCode), moduleCode);
   },
-  
+  getCRState: (tenantId, moduleCode) => {
+    return MdmsService.getDataByCriteria(tenantId, getCRStatelist(tenantId, moduleCode), moduleCode);
+  },  
   getCROccupation: (tenantId, moduleCode) => {
     return MdmsService.getDataByCriteria(tenantId, getCROccupationlist(tenantId, moduleCode), moduleCode);
   },
