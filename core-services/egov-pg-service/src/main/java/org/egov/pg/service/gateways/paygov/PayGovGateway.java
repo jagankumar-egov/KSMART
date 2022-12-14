@@ -148,7 +148,7 @@ public class PayGovGateway implements Gateway {
         queryMap.put(REQUEST_DATE_TIME_KEY, format.format(currentDate));
         String returnUrl = transaction.getCallbackUrl().replace(CITIZEN_URL, "");
 
-        queryMap.put(SERVICE_ID_KEY, getModuleCode(transaction));
+        queryMap.put(SERVICE_ID_KEY, "KSMARTLSG" /*getModuleCode(transaction)*/);
         String domainName =  returnUrl.replaceAll("http(s)?://|www\\.|/.*", "");
         String citizenReturnURL = returnUrl.split(domainName)[1];
         log.info("returnUrl::::"+getReturnUrl(citizenReturnURL, REDIRECT_URL));
@@ -200,6 +200,7 @@ public class PayGovGateway implements Gateway {
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyyHH:mm:SSS");
         queryMap.put(REQUEST_DATE_TIME_KEY, format1.format(currentDate));
         log.info("REQUEST_DATE_TIME_KEY::"+queryMap.get(REQUEST_DATE_TIME_KEY));
+        log.info("fields::"+fields);
         ObjectMapper mapper = new ObjectMapper();
         try {
             urlData= mapper.writeValueAsString(queryMap);
