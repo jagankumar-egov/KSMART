@@ -35,10 +35,10 @@ const SelectCommencementDate = ({ t, config, onSelect, userType, formData }) => 
           </div>        
         </div>
         <div className="row">
-          <div className="col-md-6" ><CardLabel>{t("TL_NEW_TRADE_DETAILS_TRADE_COMM_DATE_LABEL")}</CardLabel>
-            <DatePicker date={CommencementDate} name="CommencementDate" onChange={selectCommencementDate} disabled={isEdit} {...(validation = {  isRequired: true, title: t("TL_INVALID_LICENSE_PERIOD") })} />
+          <div className="col-md-6" ><CardLabel>{t("TL_NEW_TRADE_DETAILS_TRADE_COMM_DATE_LABEL")}<span className="mandatorycss">*</span></CardLabel>
+            <DatePicker date={CommencementDate} name="CommencementDate" onChange={selectCommencementDate} disabled={isEdit} {...(validation = {  isRequired: true, title: t("TL_NEW_TRADE_DETAILS_TRADE_COMM_DATE_LABEL") })} />
           </div>
-          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSE_PERIOD")}`}</CardLabel>
+          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSE_PERIOD")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LicensePeriod" value={LicensePeriod} onChange={setSelectLicensePeriod} disable={isEdit} {...(validation = { pattern: "^[0-9]*$", isRequired: true, type: "number", title: t("TL_INVALID_LICENSE_PERIOD") })} />
           </div>
         </div>

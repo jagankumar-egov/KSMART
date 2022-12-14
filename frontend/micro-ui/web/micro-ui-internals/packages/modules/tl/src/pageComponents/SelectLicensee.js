@@ -6,15 +6,15 @@ import Timeline from "../components/TLTimeline";
 const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
   let validation = {};
   const onSkip = () => onSelect();
+  const citizentenantId = Digit.ULBService.getCitizenCurrentTenant();
   const empTenantId =Digit.ULBService.getCurrentUlb();
   let tenantId = "";
-  // Digit.ULBService.getCitizenCurrentTenant() ? empTenantId["code"]:null;
-
-  if(userType=="citizen"){
+  if(citizentenantId !="kl"){
     tenantId = Digit.ULBService.getCitizenCurrentTenant();
   } else {
-    tenantId =  empTenantId["code"];
-  }
+      tenantId =  empTenantId["code"];
+    }
+   console.log("userType"+ tenantId);
   console.log(tenantId);
   const stateId = Digit.ULBService.getStateId();
   const { data: place = {}, isLoad } = Digit.Hooks.tl.useTradeLicenseMDMS(stateId, "TradeLicense", "NatureOfInstitution");
@@ -190,7 +190,7 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
     {window.location.href.includes("/employee") ? <Timeline /> : null}
 
     <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} >        
-          <LabelFieldPair style={{ display: "flex" }}><CardLabel style={{fontSize:"20px"}}>{`${t("TL_LICENSEE_MSG")}`}</CardLabel>
+          <LabelFieldPair style={{ display: "flex" }}><CardLabel style={{fontSize:"17px",width:"none !important"}}>{`${t("TL_LICENSEE_MSG")}`}</CardLabel>
            <RadioButtons t={t} optionsKey="i18nKey" isMandatory={config.isMandatory} options={menu} selectedOption={LicenseeType} onSelect={selectLicenseeType} disabled={isEdit} style={{ marginTop:"-8px",paddingLeft:"5px" ,height:"25px"}} /> 
           </LabelFieldPair>
       {value2 === "INDIVIDUAL" && (
@@ -200,34 +200,34 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
           </div>        
         </div>
         <div className="row">
-          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_TYPE")}*`}</CardLabel>
+          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_TYPE")}`}<span className="mandatorycss">*</span></CardLabel>
             <Dropdown t={t} optionKey="code" isMandatory={config.isMandatory} option={cmbtype} selected={LicensingUnitType} select={selectLicensingUnitType} disabled={isEdit} placeholder={`${t("TL_LICENSING_UNIT_TYPE")}`} />
           </div>
-          <div className="col-md-6" ><CardLabel>{`${t("TL_NO_EMPLOYEES")}*`}</CardLabel>
-            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="NoOfEmployees" value={NoOfEmployees} onChange={setSelectNoOfEmployees} disable={isEdit} placeholder={`${t("TL_LICENSING_UNIT_NAME")}`} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_LICENSING_UNIT_NAME") })} />
+          <div className="col-md-6" ><CardLabel>{`${t("TL_NO_EMPLOYEES")}`}<span className="mandatorycss">*</span></CardLabel>
+            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="NoOfEmployees" value={NoOfEmployees} onChange={setSelectNoOfEmployees} disable={isEdit} placeholder={`${t("TL_NO_EMPLOYEES")}`} {...(validation = { pattern: "^[0-9]{8}$", isRequired: true, type: "number", title: t("TL_INVALID_LICENSING_UNIT_NAME") })} />
           </div>
         </div>
         <div className="row">         
-          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_NAME")}*`}</CardLabel>
+          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_NAME")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LicenseUnitName" value={LicenseUnitName} onChange={setSelectLicenseUnitName} disable={isEdit} placeholder={`${t("TL_LICENSING_UNIT_NAME")}`} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_LICENSING_UNIT_NAME") })} />
           </div>
-          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_NAME_ML")}*`}</CardLabel>
+          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_NAME_ML")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LicenseUnitNameMal" value={LicenseUnitNameMal} onChange={setSelectLicenseUnitNameMal} disable={isEdit} placeholder={`${t("TL_LICENSING_UNIT_NAME")}`} {...(validation = {  isRequired: true, type: "text", title: t("TL_INVALID_LICENSING_UNIT_NAME") })} />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_ZONAL_OFFICE")}*`}</CardLabel>
-            <Dropdown t={t} optionKey="name" isMandatory={config.isMandatory} option={cmbZonal[0]} selected={Zonal} select={setSelectZonalOffice} disabled={isEdit} placeholder={`${t("TL_LOCALIZATION_ZONAL_OFFICE")}`} {...(validation = { isRequired: true, title: t("TL_INVALID_ZONAL_NAME") })} />
+          <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_ZONAL_OFFICE")}`}<span className="mandatorycss">*</span></CardLabel>
+            <Dropdown t={t} optionKey="name" isRequired="true" isMandatory={config.isMandatory} option={cmbZonal[0]} selected={Zonal} select={setSelectZonalOffice} disabled={isEdit} placeholder={`${t("TL_LOCALIZATION_ZONAL_OFFICE")}`} {...(validation = { isRequired: true, title: t("TL_INVALID_ZONAL_NAME") })} />
           </div>
-          <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_WARD_NO")}*`}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_WARD_NO")}`}<span className="mandatorycss">*</span></CardLabel>
             <Dropdown t={t} optionKey="name" isMandatory={config.isMandatory} option={wards} selected={WardNo} select={setSelectWard} disabled={isEdit} placeholder={`${t("TL_LOCALIZATION_WARD_NO")}`} {...(validation = { isRequired: true, title: t("TL_INVALID_WARD_NO") })} />
           </div>
-          <div className="col-md-4" ><CardLabel>{`${t("TL_STREET_NAME")}*`}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{`${t("TL_STREET_NAME")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="StreetName" value={StreetName} onChange={setSelectStreetName} disable={isEdit} placeholder={`${t("TL_STREET_NAME")}`} {...(validation = { pattern: "^[a-zA-Z-.,0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_STREET_NAME") })} />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12" ><CardLabel>{`${t("TL_LOCALIZATION_LAND_MARK")}*`}</CardLabel>
+          <div className="col-md-12" ><CardLabel>{`${t("TL_LOCALIZATION_LAND_MARK")}`}<span className="mandatorycss">*</span></CardLabel>
           <TextArea t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LandMark" value={LandMark} onChange={setSelectLandMark} disable={isEdit} placeholder={`${t("TL_LOCALIZATION_LAND_MARK")}`} {...(validation = { pattern: "^[a-zA-Z-.,0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_LAND_MARK") })} />
           </div>
         </div>
@@ -248,18 +248,18 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
           </div>        
         </div>
         <div className="row">
-          <div className="col-md-4" ><CardLabel>{`${t("TL_LICENSING_INSTITUTION_TYPE")}*`}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{`${t("TL_LICENSING_INSTITUTION_TYPE")}`}<span className="mandatorycss">*</span></CardLabel>
             <Dropdown t={t} optionKey="code" isMandatory={config.isMandatory} option={cmbPlace} selected={LicensingInstitutionType} select={selectLicensingInstitutionType} disabled={isEdit} placeholder={`${t("TL_LICENSING_INSTITUTION_TYPE")}`} />
           </div>
           <div className="col-md-4" ><CardLabel>{`${t("TL_LICENSING_INSTITUTION_ID")}`}</CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LicensingInstitutionID" value={LicensingInstitutionID} onChange={setSelectLicensingInstitutionID} disable={isEdit} placeholder={`${t("TL_LICENSING_INSTITUTION_ID")}`} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: false, type: "number", title: t("TL_INVALID_LICENSING_INSTITUTION_ID") })} />
           </div>
-          <div className="col-md-4" ><CardLabel>{`${t("TL_LICENSING_INSTITUTION_NAME")}*`}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{`${t("TL_LICENSING_INSTITUTION_NAME")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LicensingInstitutionName" value={LicensingInstitutionName} onChange={setSelectLicensingInstitutionName} disable={isEdit} placeholder={`${t("TL_LICENSING_INSTITUTION_NAME")}`} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_LICENSING_INSTITUTION_NAME") })} />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12" ><CardLabel>{`${t("TL_LICENSING_INSTITUTION_ADDRESS")}*`}</CardLabel>
+          <div className="col-md-12" ><CardLabel>{`${t("TL_LICENSING_INSTITUTION_ADDRESS")}`}<span className="mandatorycss">*</span></CardLabel>
           <TextArea t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LicensingInstitutionAddress" value={LicensingInstitutionAddress} onChange={setSelectLicensingInstitutionAddress} disable={isEdit} placeholder={`${t("TL_LICENSING_INSTITUTION_ADDRESS")}`} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_LICENSING_INSTITUTION_ADDRESS") })} />
           </div>
         </div>
@@ -275,7 +275,7 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
           <div className="col-md-12" ><h1 className="headingh1" ><span style={{background:"#fff",padding:"0 10px" }}>{`${t("TL_LICENSING_UNIT_HEADER")}*`}</span> </h1>
           </div>        
         </div>
-        <div className="row"><div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_TYPE")}*`}</CardLabel>
+        <div className="row"><div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_TYPE")}`}<span className="mandatorycss">*</span></CardLabel>
             <Dropdown t={t} optionKey="code" isMandatory={config.isMandatory} option={cmbtype} selected={LicensingUnitType} select={selectLicensingUnitType} disabled={isEdit} placeholder={`${t("TL_LICENSING_UNIT_TYPE")}`} />
           </div>
           <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_ID")}`}</CardLabel>
@@ -284,26 +284,26 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
           
         </div>
         <div className="row">
-        <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_NAME")}*`}</CardLabel>
+        <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_NAME")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LicenseUnitName" value={LicenseUnitName} onChange={setSelectLicenseUnitName} disable={isEdit} placeholder={`${t("TL_LICENSING_UNIT_NAME")}`} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_LICENSING_UNIT_NAME") })} />
           </div>
-          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_NAME_ML")}*`}</CardLabel>
+          <div className="col-md-6" ><CardLabel>{`${t("TL_LICENSING_UNIT_NAME_ML")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LicenseUnitNameMal" value={LicenseUnitNameMal} onChange={setSelectLicenseUnitNameMal} disable={isEdit} placeholder={`${t("TL_LICENSING_UNIT_NAME_ML")}`} {...(validation = {  isRequired: true, type: "text", title: t("TL_INVALID_LICENSING_UNIT_NAME") })} />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_ZONAL_OFFICE")}*`}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_ZONAL_OFFICE")}`}<span className="mandatorycss">*</span></CardLabel>
             <Dropdown t={t} optionKey="name" isMandatory={config.isMandatory} option={cmbZonal[0]} selected={Zonal} select={setSelectZonalOffice} disabled={isEdit} placeholder={`${t("TL_LOCALIZATION_ZONAL_OFFICE")}`} {...(validation = { isRequired: true, title: t("TL_INVALID_ZONAL_NAME") })} />
           </div>
-          <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_WARD_NO")}*`}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_WARD_NO")}`}<span className="mandatorycss">*</span></CardLabel>
             <Dropdown t={t} optionKey="name" isMandatory={config.isMandatory} option={wards} selected={WardNo} select={setSelectWard} disabled={isEdit} placeholder={`${t("TL_LOCALIZATION_WARD_NO")}`} {...(validation = { isRequired: true, title: t("TL_INVALID_WARD_NO") })} />
           </div>
-          <div className="col-md-4" ><CardLabel>{`${t("TL_STREET_NAME")}*`}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{`${t("TL_STREET_NAME")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="StreetName" value={StreetName} onChange={setSelectStreetName} disable={isEdit} placeholder={`${t("TL_STREET_NAME")}`} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_STREET_NAME") })} />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12" ><CardLabel>{`${t("TL_LOCALIZATION_LAND_MARK")}*`}</CardLabel>
+          <div className="col-md-12" ><CardLabel>{`${t("TL_LOCALIZATION_LAND_MARK")}`}<span className="mandatorycss">*</span></CardLabel>
           <TextArea t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="LandMark" value={LandMark} onChange={setSelectLandMark} disable={isEdit} placeholder={`${t("TL_LOCALIZATION_LAND_MARK")}`} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_LAND_MARK") })} />
           </div>
         </div>
