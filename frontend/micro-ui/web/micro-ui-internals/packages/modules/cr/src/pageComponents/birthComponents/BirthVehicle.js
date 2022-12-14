@@ -89,7 +89,7 @@ const BirthVehicle = ({ config, onSelect, userType, formData }) => {
                 value={TradeName}
                 onChange={setSelectTradeName}
                 disable={isEdit}
-                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_AADHAR_NO") })}
+                {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CS_COMMON_INVALID_AADHAR_NO") })}
             />
         </div>
     </div>

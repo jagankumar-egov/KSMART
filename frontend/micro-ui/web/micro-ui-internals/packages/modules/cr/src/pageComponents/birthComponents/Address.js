@@ -317,7 +317,7 @@ const Address = ({ config, onSelect, userType, formData }) => {
                             <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbPostOffice} selected={PresentPostOffice} select={setSelectPresentPostOffice} disabled={isEdit} placeholder={`${t("CS_COMMON_POST_OFFICE")}`} />
                         </div>
                         <div className="col-md-4" ><CardLabel>{t("CS_COMMON_PIN_CODE")}</CardLabel>
-                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentPincode" value={PresentPincode} onChange={setSelectPresentPincode} disable={isEdit} placeholder={`${t("CS_COMMON_PIN_CODE")}`}  {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "number", maxLength: 6, minLength: 6, title: t("CR_INVALID_PIN_CODE") })} />
+                            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PresentPincode" value={PresentPincode} onChange={setSelectPresentPincode} disable={isEdit} placeholder={`${t("CS_COMMON_PIN_CODE")}`}  {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "number", maxLength: 6, minLength: 6, title: t("CS_COMMON_INVALID_PIN_CODE") })} />
                         </div>
                     </div>
                 </div>
@@ -387,7 +387,7 @@ const Address = ({ config, onSelect, userType, formData }) => {
                                 <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbPostOffice} selected={PermanentPostOffice} select={setSelectPermanentPostOffice} disabled={isEdit} placeholder={`${t("CS_COMMON_POST_OFFICE")}`} />
                             </div>
                             <div className="col-md-4" ><CardLabel>{t("CS_COMMON_PIN_CODE")}</CardLabel>
-                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentPincode" value={PermanentPincode} onChange={setSelectPermanentPincode} disable={isEdit} placeholder={`${t("CS_COMMON_PIN_CODE")}`}  {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "number", maxLength: 6, minLength: 6, title: t("CR_INVALID_PIN_CODE") })} />
+                                <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="PermanentPincode" value={PermanentPincode} onChange={setSelectPermanentPincode} disable={isEdit} placeholder={`${t("CS_COMMON_PIN_CODE")}`}  {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "number", maxLength: 6, minLength: 6, title: t("CS_COMMON_INVALID_PIN_CODE") })} />
                             </div>
                         </div>
                     </div>
