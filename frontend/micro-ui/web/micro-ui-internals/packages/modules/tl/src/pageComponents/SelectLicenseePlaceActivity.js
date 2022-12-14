@@ -87,7 +87,7 @@ const SelectLicenseePlaceActivity = ({ t, config, onSelect, userType, formData }
           <div className="col-md-4" ><CardLabel>{`${t("TL_OWNER_AADHAR_NO")}`}</CardLabel>
             <TextInput t={t} isMandatory={false} optionKey="i18nKey" name="OwnerAadharNo" value={OwnerAadharNo} onChange={setSelectOwnerAadharNo}   disable={isEdit}   {...(validation = { pattern: "^([0-9]){12}$", isRequired: false, type: "text", title: t("TL_INVALID_OWNER_AADHAR_NO") })} />
           </div>
-          <div className="col-md-4" ><CardLabel>{`${t("TL_OWNER_NAME")}`}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{`${t("TL_OWNER_NAME")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="OwnerName" value={OwnerName} onChange={setSelectOwnerName}   disable={isEdit}   {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_OWNER_NAME") })} />
           </div>
           <div className="col-md-4" ><CardLabel>{`${t("TL_LOCALIZATION_MOBILE_NO")}`}</CardLabel> 
@@ -95,7 +95,7 @@ const SelectLicenseePlaceActivity = ({ t, config, onSelect, userType, formData }
           </div>        
         </div>
         <div className="row">
-          <div className="col-md-12" ><CardLabel>{`${t("TL_OWNER_ADDRESS")}`}</CardLabel>
+          <div className="col-md-12" ><CardLabel>{`${t("TL_OWNER_ADDRESS")}`}<span className="mandatorycss">*</span></CardLabel>
             <TextArea t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="OwnerAddress" value={OwnerAddress} onChange={setSelectOwnerAddress} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_OWNER_ADDRESS") })} />
           </div>
         </div>
@@ -103,7 +103,7 @@ const SelectLicenseePlaceActivity = ({ t, config, onSelect, userType, formData }
           <div className="col-md-4" ><CardLabel>{`${t("TL_OWNER_CONSENT_PLACE")}`}</CardLabel> 
           <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="OwnerConsentPlace" value={OwnerConsentPlace} onChange={setSelectOwnerConsentPlace} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.0-9`' ]*$", isRequired: false, type: "text", title: t("TL_INVALID_OWNER_CONSENT_PLACE") })} />
           </div>
-          <div className="col-md-4" ><CardLabel>{t("TL_OWNER_CONSENT_DATE_START")}</CardLabel>
+          <div className="col-md-4" ><CardLabel>{t("TL_OWNER_CONSENT_DATE_START")}<span className="mandatorycss">*</span></CardLabel>
             <DatePicker date={OwnerConsentDateStart} name="OwnerConsentDateStart" onChange={selectOwnerConsentDateStart} disabled={isEdit} {...(validation = { isRequired: true, type: "text", title: t("TL_INVALID_OWNER_ADDRESS") })} />
           </div>
           <div className="col-md-4" ><CardLabel>{t("TL_OWNER_CONSENT_DATE_END")}</CardLabel>
