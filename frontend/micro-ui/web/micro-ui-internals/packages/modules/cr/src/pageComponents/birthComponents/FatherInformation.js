@@ -8,6 +8,8 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
     const { t } = useTranslation();
     let validation = {};
     const { data: place = {}, isLoad } = Digit.Hooks.tl.useTradeLicenseMDMS(stateId, "TradeLicense", "PlaceOfActivity");
+    const { data: Qualification = {}, } = Digit.Hooks.cr.useCivilRegistrationMDMS(stateId, "birth-death-service", "Qualification");
+    const { data: Profession = {}, } = Digit.Hooks.cr.useCivilRegistrationMDMS(stateId, "birth-death-service", "Profession");
     const isEdit = window.location.href.includes("/edit-application/") || window.location.href.includes("renew-trade");
     const [FatherFirstNameEn, setFatherFirstNameEn] = useState(formData?.FatherInfoDetails?.setFatherFirstNameEn);
     const [FatherMiddleNameEn, setFatherMiddleNameEn] = useState(formData?.FatherInfoDetails?.FatherMiddleNameEn);
@@ -20,7 +22,7 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
     const [FatherMobile, setFatherMobile] = useState(formData?.FatherInfoDetails?.FatherMobile);
     const [FatherEducation, setFatherEducation] = useState(formData?.FatherInfoDetails?.FatherEducation);
     const [FatherEducationSubject, setFatherEducationSubject] = useState(formData?.FatherInfoDetails?.FatherEducationSubject);
-    const [FatherProfession, setsetFatherProfession] = useState(formData?.FatherInfoDetails?.FatherProfession);
+    const [FatherProfession, setFatherProfession] = useState(formData?.FatherInfoDetails?.FatherProfession);
 
     let cmbPlace = [];
     place &&
@@ -28,7 +30,18 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
         place["TradeLicense"].PlaceOfActivity.map((ob) => {
             cmbPlace.push(ob);
         });
-
+        let cmbQualification = [];
+        Qualification &&
+            Qualification["birth-death-service"] &&
+            Qualification["birth-death-service"].Qualification.map((ob) => {
+                cmbQualification.push(ob);
+            });
+        let cmbProfession = [];
+        Profession &&
+            Profession["birth-death-service"] &&
+            Profession["birth-death-service"].Profession.map((ob) => {
+                cmbProfession.push(ob);
+            });
     const onSkip = () => onSelect();
 
     function setSelectFatherFirstNameEn(e) {
@@ -85,56 +98,57 @@ const FatherInformation = ({ config, onSelect, userType, formData }) => {
     }
     return (
         <React.Fragment>
-            {window.location.href.includes("/citizen") ? <Timeline /> : null}
+             {window.location.href.includes("/citizen") ? <Timeline currentStep={4} /> : null}
+            {window.location.href.includes("/employee") ? <Timeline currentStep={4}  /> : null}
             <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} isDisabled={!FatherFirstNameEn}>
                 <div className="row">
-                    <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("Father's Information")}`}</span> </h1>
+                    <div className="col-md-12" ><h1 className="headingh1" ><span style={{ background: "#fff", padding: "0 10px" }}>{`${t("CR_FATHER_INFORMATION")}`}</span> </h1>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-4" ><CardLabel>{`${t("CR_FIRST_NAME_EN")}`}</CardLabel>
                         <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherFirstNameEn" 
-                        value={FatherFirstNameEn} onChange={setSelectFatherFirstNameEn} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        value={FatherFirstNameEn} onChange={setSelectFatherFirstNameEn} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_FIRST_NAME_EN") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_MIDDLE_NAME_EN")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherMiddleNameEn" value={FatherMiddleNameEn} onChange={setSelectFatherMiddleNameEn} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherMiddleNameEn" value={FatherMiddleNameEn} onChange={setSelectFatherMiddleNameEn} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: false, type: "text", title: t("CR_INVALID_MIDDLE_NAME_EN") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_LAST_NAME_EN")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherLastNameEn" value={FatherLastNameEn} onChange={setSelectFatherLastNameEn} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherLastNameEn" value={FatherLastNameEn} onChange={setSelectFatherLastNameEn} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("CR_INVALID_LAST_NAME_EN") })} />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-4" ><CardLabel>{`${t("CR_FIRST_NAME_ML")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherFirstNameMl" value={FatherFirstNameMl} onChange={setSelectFatherFirstNameMl} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherFirstNameMl" value={FatherFirstNameMl} onChange={setSelectFatherFirstNameMl} disable={isEdit} {...(validation = {  isRequired: true, type: "text", title: t("CR_INVALID_FIRST_NAME_ML") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_MIDDLE_NAME_ML")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherMiddleNameMl" value={FatherMiddleNameMl} onChange={setSelectFatherMiddleNameMl} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherMiddleNameMl" value={FatherMiddleNameMl} onChange={setSelectFatherMiddleNameMl} disable={isEdit} {...(validation = { isRequired: false, type: "text", title: t("CR_INVALID_MIDDLE_NAME_ML") })} />
                     </div>
                     <div className="col-md-4"><CardLabel>{`${t("CR_LAST_NAME_ML")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherLastNameMl" value={FatherLastNameMl} onChange={setSelectFatherLastNameMl} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherLastNameMl" value={FatherLastNameMl} onChange={setSelectFatherLastNameMl} disable={isEdit} {...(validation = { isRequired: true, type: "text", title: t("CR_INVALID_LAST_NAME_ML") })} />
                     </div>
                 </div>
 
                 <div className="row">
                     <div className="col-md-4" ><CardLabel>{`${t("CS_COMMON_AADHAAR")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherAadhar" value={FatherAadhar} onChange={setSelectFatherAadhar} disable={isEdit} {...(validation = { pattern: "^([0-9]){12}$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherAadhar" value={FatherAadhar} onChange={setSelectFatherAadhar} disable={isEdit} {...(validation = { pattern: "^([0-9]){12}$", isRequired: false, type: "text", title: t("CS_COMMON_INVALID_AADHAR_NO") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EMAIL")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherEmail" value={FatherEmail} onChange={setSelectFatherEmail} disable={isEdit} {...(validation = { pattern: "^[a-zA-Z-.`' ]*$", isRequired: true, type: "text", title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type="email" optionKey="i18nKey" name="FatherEmail" value={FatherEmail} onChange={setSelectFatherEmail} disable={isEdit} {...(validation = { isRequired: false, title: t("CR_INVALID_EMAIL") })} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_MOBILE_NO")}`}</CardLabel>
-                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherMobile" value={FatherMobile} onChange={setSelectFatherMobile} disable={isEdit} {...(validation = { pattern: "^[0-9]{10}$",type: "text", isRequired: true, title: t("TL_INVALID_TRADE_NAME") })} />
+                        <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="FatherMobile" value={FatherMobile} onChange={setSelectFatherMobile} disable={isEdit} {...(validation = { pattern: "^[0-9]{10}$",type: "text", isRequired: true, title: t("CR_INVALID_MOBILE_NO") })} />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EDUCATION")}`}</CardLabel>
-                        <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbPlace} selected={FatherEducation} select={setSelectFatherEducation} disabled={isEdit} />
+                        <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbQualification} selected={FatherEducation} select={setSelectFatherEducation} disabled={isEdit} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_EDUCATION_SUBJECT")}`}</CardLabel>
-                        <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbPlace} selected={FatherEducationSubject} select={setSelectFatherEducationSubject} disabled={isEdit} />
+                        <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbProfession} selected={FatherEducationSubject} select={setSelectFatherEducationSubject} disabled={isEdit} />
                     </div>
                     <div className="col-md-4" ><CardLabel>{`${t("CR_PROFESSIONAL")}`}</CardLabel>
-                        <Dropdown t={t} optionKey="code" isMandatory={false} option={cmbPlace} selected={FatherProfession} select={setSelectFatherProfession} disabled={isEdit} />
+                        <Dropdown t={t} optionKey="name" isMandatory={false} option={cmbProfession} selected={FatherProfession} select={setSelectFatherProfession} disabled={isEdit} />
                     </div>
                 </div>
             </FormStep>
