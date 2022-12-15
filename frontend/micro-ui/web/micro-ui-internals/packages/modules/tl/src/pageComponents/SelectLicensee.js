@@ -189,7 +189,7 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
     {window.location.href.includes("/citizen") ? <Timeline /> : null}
     {window.location.href.includes("/employee") ? <Timeline /> : null}
 
-    <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} >        
+    <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip}  isDisabled={!LicensingUnitType}>        
           <LabelFieldPair style={{ display: "flex" }}><CardLabel style={{fontSize:"17px",width:"none !important"}}>{`${t("TL_LICENSEE_MSG")}`}</CardLabel>
            <RadioButtons t={t} optionsKey="i18nKey" isMandatory={config.isMandatory} options={menu} selectedOption={LicenseeType} onSelect={selectLicenseeType} disabled={isEdit} style={{ marginTop:"-8px",paddingLeft:"5px" ,height:"25px"}} /> 
           </LabelFieldPair>
