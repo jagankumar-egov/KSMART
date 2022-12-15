@@ -189,7 +189,7 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
     {window.location.href.includes("/citizen") ? <Timeline /> : null}
     {window.location.href.includes("/employee") ? <Timeline /> : null}
 
-    <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip} >        
+    <FormStep t={t} config={config} onSelect={goNext} onSkip={onSkip}  isDisabled={!LicensingUnitType}>        
           <LabelFieldPair style={{ display: "flex" }}><CardLabel style={{fontSize:"17px",width:"none !important"}}>{`${t("TL_LICENSEE_MSG")}`}</CardLabel>
            <RadioButtons t={t} optionsKey="i18nKey" isMandatory={config.isMandatory} options={menu} selectedOption={LicenseeType} onSelect={selectLicenseeType} disabled={isEdit} style={{ marginTop:"-8px",paddingLeft:"5px" ,height:"25px"}} /> 
           </LabelFieldPair>
@@ -233,7 +233,7 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
         </div>
         <div className="row">
           <div className="col-md-6" ><CardLabel>{`${t("TL_CONTACT_NO")}`}</CardLabel>
-            <TextInput t={t} isMandatory={false} optionKey="i18nKey" name="MobileNo" value={MobileNo} onChange={setSelectMobileNo} disable={isEdit} placeholder={`${t("TL_CONTACT_NO")}`} {...(validation = { pattern: "^[0-9]$",type: "text", isRequired: false,title: t("TL_INVALID_MOBILE_NO") })} />
+            <TextInput t={t} isMandatory={false} optionKey="i18nKey" name="MobileNo" value={MobileNo} onChange={setSelectMobileNo} disable={isEdit} placeholder={`${t("TL_CONTACT_NO")}`} {...(validation = { type: "number", isRequired: false,title: t("TL_INVALID_MOBILE_NO") })} />
           </div>
           <div className="col-md-6" ><CardLabel>{`${t("TL_LOCALIZATION_EMAIL_ID")}`}</CardLabel>
             <TextInput t={t} isMandatory={false} type="email" optionKey="i18nKey" name="EmailID" value={EmailID} onChange={setSelectEmailID} disable={isEdit} placeholder={`${t("TL_LOCALIZATION_EMAIL_ID")}`} {...(validation = { isRequired: false, title: t("TL_INVALID_EMAIL_ID") })} />
@@ -265,7 +265,7 @@ const SelectLicensee = ({ t, config, onSelect, userType, formData }) => {
         </div>
         <div className="row">
           <div className="col-md-6" ><CardLabel>{`${t("TL_CONTACT_NO")}`}</CardLabel>
-            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="InstitutionMobileNo" value={InstitutionMobileNo} onChange={setSelectInstitutionMobileNo} disable={isEdit} placeholder={`${t("TL_CONTACT_NO")}`} {...(validation = { pattern: "^[0-9]$",type: "text", isRequired: false, title: t("TL_INVALID_MOBILE_NO") })} />
+            <TextInput t={t} isMandatory={false} type={"text"} optionKey="i18nKey" name="InstitutionMobileNo" value={InstitutionMobileNo} onChange={setSelectInstitutionMobileNo} disable={isEdit} placeholder={`${t("TL_CONTACT_NO")}`} {...(validation = {type: "number", isRequired: false, title: t("TL_INVALID_MOBILE_NO") })} />
           </div>
           <div className="col-md-6" ><CardLabel>{`${t("TL_LOCALIZATION_EMAIL_ID")}`}</CardLabel>
             <TextInput t={t} isMandatory={false} type="email" optionKey="i18nKey" name="InstitutionEmailID" value={InstitutionEmailID} onChange={setSelectInstitutionEmailID} disable={isEdit} placeholder={`${t("TL_LOCALIZATION_EMAIL_ID")}`} {...(validation = { isRequired: false, title: t("TL_INVALID_EMAIL_ID") })} />

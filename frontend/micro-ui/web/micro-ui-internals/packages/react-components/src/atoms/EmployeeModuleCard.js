@@ -6,13 +6,15 @@ const EmployeeModuleCard = ({ Icon, moduleName, kpis = [], links = [], isCitizen
 const ClassList = 
     {
      'Complaints':  'complaint-links-container',
-     'HRMS':  'hrms-links-container' ,
      'Trade License':  'tl-links-container',
+     'Civil Registration':  'cr-links-container', 
+     'File Management':  'dfm-links-container', 
+     'HRMS':  'survey-links-container' ,     
      'Documents':  'doc-links-container',
      'Events':  'event-links-container', 
      'Public Message Broadcast':  'public-links-container', 
-     'Survey':  'survey-links-container', 
-     'Civil Registration':  'cr-links-container', 
+     'Survey':  'survey-links-container',     
+     
     };
   
   

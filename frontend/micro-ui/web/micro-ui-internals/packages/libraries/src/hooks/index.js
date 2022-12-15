@@ -134,6 +134,15 @@ import useCRGenderMDMS from "./cr/useCRGenderMDMS";
 import useCRMDMS from "./cr/useMDMS";
 import useCRSearch from "./cr/useSearch";
 
+import useTenantsDFM from "./dfm/useTenants";
+import useDFMMDMS from "./dfm/useDFMMDMS";
+import useDFMAPI from "./dfm/useDFMAPI";
+import useDFMApplicationDetail from "./dfm/useApplicationDetail";
+import useDFMApplicationActions from "./dfm/useApplicationActions";
+import useDFMGenderMDMS from "./dfm/useDFMGenderMDMS";
+import useDFFMMDMS from "./dfm/useMDMS";
+import useDFMSearch from "./dfm/useSearch";
+
 import useHRMSSearch from "./hrms/useHRMSsearch";
 import useHrmsMDMS from "./hrms/useHRMSMDMS";
 import useHRMSCreate from "./hrms/useHRMScreate";
@@ -313,10 +322,20 @@ const cr = {
   useCivilRegistrationMDMS,
   useCivilRegistrationAPI,
   useCRGenderMDMS,
-  useMDMS: useCRSearch,
+  useMDMS: useCRMDMS,
   useSearch: useCRSearch,
   useApplicationDetail: useCRApplicationDetail,
   useApplicationActions: useCRApplicationActions,
+};
+const dfm = {
+  useTenants: useTenantsDFM,
+  useDFMMDMS,
+  useDFMAPI,
+  useDFMGenderMDMS,
+  useMDMS: useDFFMMDMS,
+  useSearch: useDFMSearch,
+  useApplicationDetail: useDFMApplicationDetail,
+  useApplicationActions: useDFMApplicationActions,
 };
 const receipts = {
   useReceiptsMDMS,
