@@ -1,5 +1,5 @@
 import cloneDeep from "lodash/cloneDeep";
-import { TLService } from "../../elements/TL";
+import { DFMService } from "../../elements/DFM";
 
 const stringReplaceAll = (str = "", searcher = "", replaceWith = "") => {
   if (searcher == "") return str;
@@ -31,24 +31,24 @@ const getAddress = (address, t) => {
     address?.pincode && t(address?.pincode) ? `, ${address.pincode}` : " "
   }`;
 };
-export const TLSearch = {
+export const DFMsearch = {
   all: async (tenantId, filters = {}) => {
-    const response = await TLService.TLsearch({ tenantId, filters });
+    const response = await DFMService.DFMsearch({ tenantId, filters });
     return response;
   },
   application: async (tenantId, filters = {}) => {
-    const response = await TLService.TLsearch({ tenantId, filters });
+    const response = await DFMService.DFMsearch({ tenantId, filters });
     return response.Licenses[0];
   },
 
   numberOfApplications: async (tenantId, filters = {}) => {
-    const response = await TLService.TLsearch({ tenantId, filters });
+    const response = await DFMService.DFMsearch({ tenantId, filters });
     return response.Licenses;
   },
 
   applicationDetails: async (t, tenantId, applicationNumber, userType) => {
     const filter = { applicationNumber };
-    const response = await TLSearch.application(tenantId, filter);
+    const response = await DFMsearch.application(tenantId, filter);
     const propertyDetails =
       response?.tradeLicenseDetail?.additionalDetail?.propertyId &&
       (await Digit.PTService.search({ tenantId, filters: { propertyIds: response?.tradeLicenseDetail?.additionalDetail?.propertyId } }));
@@ -56,13 +56,12 @@ export const TLSearch = {
     if (response?.licenseNumber) {
       const licenseNumbers = response?.licenseNumber;
       const filters = { licenseNumbers, offset: 0 };
-      numOfApplications = await TLSearch.numberOfApplications(tenantId, filters);
+      numOfApplications = await DFMsearch.numberOfApplications(tenantId, filters);
     }
     let propertyAddress = "";
     if (propertyDetails && propertyDetails?.Properties.length) {
       propertyAddress = getAddress(propertyDetails?.Properties[0]?.address, t);
     }
-    // console.log("response"+response?);
     let employeeResponse = [];
     const tradedetails = {
       title: "TL_COMMON_TR_DETAILS",
@@ -117,54 +116,54 @@ export const TLSearch = {
     };
 
     const accessories = {
-      // title: "TL_NEW_TRADE_DETAILS_HEADER_ACC",
-      // // asSectionHeader: true,
-      // additionalDetails: {
-      //   accessories: response?.tradeLicenseDetail?.accessories?.map((unit, index) => {
-      //     let accessoryCategory = "NA";
-      //     if (unit?.accessoryCategory) {
-      //       accessoryCategory = stringReplaceAll(unit?.accessoryCategory, ".", "_");
-      //       accessoryCategory = `TRADELICENSE_ACCESSORIESCATEGORY_${stringReplaceAll(accessoryCategory, "-", "_")}`;
-      //     }
-      //     return {
-      //       title: "TL_ACCESSORY_LABEL",
-      //       values: [
-      //         { title: "TL_NEW_TRADE_DETAILS_ACC_LABEL", value: accessoryCategory },
-      //         { title: "TL_NEW_TRADE_DETAILS_UOM_UOM_PLACEHOLDER", value: unit?.uom || "NA" },
-      //         { title: "TL_NEW_TRADE_DETAILS_UOM_VALUE_LABEL", value: unit?.uomValue || "NA" },
-      //         { title: "TL_ACCESSORY_COUNT_LABEL", value: unit?.count || "NA" },
-      //       ],
-      //     };
-      //   }),
-      // },
+      title: "TL_NEW_TRADE_DETAILS_HEADER_ACC",
+      // asSectionHeader: true,
+      additionalDetails: {
+        accessories: response?.tradeLicenseDetail?.accessories?.map((unit, index) => {
+          let accessoryCategory = "NA";
+          if (unit?.accessoryCategory) {
+            accessoryCategory = stringReplaceAll(unit?.accessoryCategory, ".", "_");
+            accessoryCategory = `TRADELICENSE_ACCESSORIESCATEGORY_${stringReplaceAll(accessoryCategory, "-", "_")}`;
+          }
+          return {
+            title: "TL_ACCESSORY_LABEL",
+            values: [
+              { title: "TL_NEW_TRADE_DETAILS_ACC_LABEL", value: accessoryCategory },
+              { title: "TL_NEW_TRADE_DETAILS_UOM_UOM_PLACEHOLDER", value: unit?.uom || "NA" },
+              { title: "TL_NEW_TRADE_DETAILS_UOM_VALUE_LABEL", value: unit?.uomValue || "NA" },
+              { title: "TL_ACCESSORY_COUNT_LABEL", value: unit?.count || "NA" },
+            ],
+          };
+        }),
+      },
     };
 
     const PropertyDetail = {
-      // title: "PT_DETAILS",
-      // values: [
-      //   { title: "TL_PROPERTY_ID", value: propertyDetails?.Properties?.[0]?.propertyId || "NA" },
-      //   { title: "PT_OWNER_NAME", value: propertyDetails?.Properties?.[0]?.owners[0]?.name || "NA" },
-      //   { title: "PROPERTY_ADDRESS", value: propertyAddress || "NA" },
-      //   {
-      //     title: "TL_VIEW_PROPERTY_DETAIL",
-      //     to: `/digit-ui/employee/commonpt/view-property?propertyId=${propertyDetails?.Properties?.[0]?.propertyId}&tenantId=${propertyDetails?.Properties?.[0]?.tenantId}&from=TL_APPLICATION_DETAILS_LABEL`,
-      //     value: "",
-      //     isLink: true,
-      //   },
-      // ],
+      title: "PT_DETAILS",
+      values: [
+        { title: "TL_PROPERTY_ID", value: propertyDetails?.Properties?.[0]?.propertyId || "NA" },
+        { title: "PT_OWNER_NAME", value: propertyDetails?.Properties?.[0]?.owners[0]?.name || "NA" },
+        { title: "PROPERTY_ADDRESS", value: propertyAddress || "NA" },
+        {
+          title: "TL_VIEW_PROPERTY_DETAIL",
+          to: `/digit-ui/employee/commonpt/view-property?propertyId=${propertyDetails?.Properties?.[0]?.propertyId}&tenantId=${propertyDetails?.Properties?.[0]?.tenantId}&from=TL_APPLICATION_DETAILS_LABEL`,
+          value: "",
+          isLink: true,
+        },
+      ],
     };
 
     const cityOfApp = cloneDeep(response?.tradeLicenseDetail?.address?.city);
     const localityCode = cloneDeep(response?.tradeLicenseDetail?.address?.locality?.code);
     const tradeAddress = {
-      // title: "TL_CHECK_ADDRESS",
-      // values: [
-      //   { title: "CORE_COMMON_PINCODE", value: response?.tradeLicenseDetail?.address?.pincode || "NA" },
-      //   { title: "MYCITY_CODE_LABEL", value: response?.tradeLicenseDetail?.address?.city || "NA" },
-      //   { title: "TL_LOCALIZATION_LOCALITY", value: `${stringReplaceAll(cityOfApp?.toUpperCase(), ".", "_")}_REVENUE_${localityCode}` },
-      //   { title: "TL_LOCALIZATION_BUILDING_NO", value: response?.tradeLicenseDetail?.address?.doorNo || "NA" },
-      //   { title: "TL_LOCALIZATION_STREET_NAME", value: response?.tradeLicenseDetail?.address?.street || "NA" },
-      // ],
+      title: "TL_CHECK_ADDRESS",
+      values: [
+        { title: "CORE_COMMON_PINCODE", value: response?.tradeLicenseDetail?.address?.pincode || "NA" },
+        { title: "MYCITY_CODE_LABEL", value: response?.tradeLicenseDetail?.address?.city || "NA" },
+        { title: "TL_LOCALIZATION_LOCALITY", value: `${stringReplaceAll(cityOfApp?.toUpperCase(), ".", "_")}_REVENUE_${localityCode}` },
+        { title: "TL_LOCALIZATION_BUILDING_NO", value: response?.tradeLicenseDetail?.address?.doorNo || "NA" },
+        { title: "TL_LOCALIZATION_STREET_NAME", value: response?.tradeLicenseDetail?.address?.street || "NA" },
+      ],
     };
 
     const checkOwnerLength = response?.tradeLicenseDetail?.owners?.length || 1;
