@@ -58,16 +58,16 @@ public class NICSMSServiceImpl extends BaseSMSService {
                 //KeyStore trustStore = KeyStore.getInstance("pkcs11");
                 //System.out.println(KeyStore.getDefaultType());
                 //File file = new File(System.getenv("JAVA_HOME")+"/lib/security/cacerts");
-                //File file = new File(Thread.currentThread().getContextClassLoader().getResource("smsgwsmsgovin-sep22.cer").getFile());
+                //File file = new File(Thread.currentThread().getContextClassLoader().getResource("smsgwsmsgovin-dec22.cer").getFile());
                 //InputStream is = new FileInputStream(file);
-                //Resource resource = (Resource) new ClassPathResource("smsgwsmsgovin-sep22.cer");
+                //Resource resource = (Resource) new ClassPathResource("smsgwsmsgovin-dec22.cer");
                 //InputStream is = resource.getInputStream(); 
-                //InputStream is = getClass().getClassLoader().getResourceAsStream("smsgwsmsgovin-sep22.cer");
+                //InputStream is = getClass().getClassLoader().getResourceAsStream("smsgwsmsgovin-dec22.cer");
                 //trustStore.load(is, "changeit".toCharArray());
                 
                
                 try (InputStream is = getClass().getClassLoader()
-                                            .getResourceAsStream("smsgwsmsgovin-sep22.cer")) {
+                                            .getResourceAsStream("smsgwsmsgovin-dec22.cer")) {
 
                     //KeyStore trustStore = KeyStore.getInstance("pkcs12");
                     //trustStore.load(is, "changeit".toCharArray());
