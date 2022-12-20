@@ -24,7 +24,7 @@ public class CrBirthService {
 
     public List<BirthDetail> saveBirthDetails(BirthDetailsRequest request) {
 
-        WorkflowIntegrator.callWorkFlow(request);
+       // WorkflowIntegrator.callWorkFlow(request);
         return repository.saveBirthDetails(request);
     }
 
