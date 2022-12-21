@@ -30,17 +30,23 @@ public class CrBirthController {
         this.responseInfoFactory = responseInfoFactory;
     }
 
-    @PostMapping(value = { "/_create"})
-    public ResponseEntity<?> saveBirthDetails(@RequestBody BirthDetailsRequest request) {
-        List<BirthDetail> birthDetails = crBirthService.saveBirthDetails(request);
-        return new ResponseEntity<>(birthDetails, HttpStatus.OK);
-    }
+   @PostMapping(value = { "/_create"})
+public ResponseEntity<BirthApplicationResponse> saveBirthDetails(@RequestBody BirthDetailsRequest request) {
+    List<BirthDetail> birthDetails = crBirthService.saveBirthDetails(request);
+    BirthApplicationResponse response = BirthApplicationResponse.builder().birthDetails(birthDetails).responseInfo(
+                    responseInfoFactory.createResponseInfoFromRequestInfo(request.getRequestInfo(), true))
+            .build();
+    return new ResponseEntity<>(response, HttpStatus.OK);
+}
 
-    @PostMapping(value = { "/_update"})
-    public ResponseEntity<?> updateBirthDetails(@RequestBody BirthDetailsRequest request) {
-        List<BirthDetail> birthDetails = crBirthService.updateBirthDetails(request);
-        return new ResponseEntity<>(birthDetails, HttpStatus.OK);
-    }
+@PostMapping(value = { "/_update"})
+public ResponseEntity<BirthApplicationResponse> updateBirthDetails(@RequestBody BirthDetailsRequest request) {
+    List<BirthDetail> birthDetails = crBirthService.updateBirthDetails(request);
+    BirthApplicationResponse response = BirthApplicationResponse.builder().birthDetails(birthDetails).responseInfo(
+                    responseInfoFactory.createResponseInfoFromRequestInfo(request.getRequestInfo(), true))
+            .build();
+    return new ResponseEntity<>(response, HttpStatus.OK);
+}
 
     @PostMapping(value = { "/_search"})
     public ResponseEntity<BirthApplicationResponse> listByHospitalId(@RequestBody BirthDetailsRequest request,
