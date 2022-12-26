@@ -171,7 +171,7 @@ public class BirthRepository {
 
 	public EgovPdfResp saveBirthCertPdf(BirthPdfApplicationRequest pdfApplicationRequest) {
 		EgovPdfResp result= new EgovPdfResp();
-		//try {
+		try {
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");	
 		pdfApplicationRequest.getBirthCertificate().forEach(cert-> {
 			String uiHost = config.getUiAppHost();
@@ -201,11 +201,11 @@ public class BirthRepository {
 				}
 				result.setFilestoreIds(response.getFilestoreIds());
 			});
-		/*Maya
+		Maya
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new CustomException("PDF_ERROR","Error in generating PDF");
-		}*/
+		}
 		return result;
 	}
 
@@ -251,7 +251,7 @@ public class BirthRepository {
 	}
 
 	public void updateCounter(String birthDtlId) {
-		/*try {
+		try {
 			String updateQry="UPDATE public.eg_birth_dtls SET counter=counter+1 WHERE id=:id and tenantid not in (:tenantIds)";
 			Map<String, Object> params = new HashMap<>();
 			params.put("id", birthDtlId);
@@ -260,7 +260,7 @@ public class BirthRepository {
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new CustomException("Invalid_data","Error in updating");
-		}*/
+		}
 		
 	}
 
@@ -290,11 +290,11 @@ public class BirthRepository {
 		builder.append(config.getUrlShortnerEndpoint());
 		String res = restTemplate.postForObject(builder.toString(), body, String.class);
 		//maya
-		/*if(StringUtils.isEmpty(res)){
+		if(StringUtils.isEmpty(res)){
 			log.error("URL_SHORTENING_ERROR","Unable to shorten url: "+url);
 			return url;
 		}
-		else*/
+		else
 		return res;
 	}
 
