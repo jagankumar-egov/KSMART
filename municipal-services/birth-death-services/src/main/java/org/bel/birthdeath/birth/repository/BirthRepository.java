@@ -201,7 +201,7 @@ public class BirthRepository {
 				}
 				result.setFilestoreIds(response.getFilestoreIds());
 			});
-		Maya
+		//Maya
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new CustomException("PDF_ERROR","Error in generating PDF");
