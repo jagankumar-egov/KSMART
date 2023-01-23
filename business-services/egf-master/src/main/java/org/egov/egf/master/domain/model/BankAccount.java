@@ -91,4 +91,7 @@ public class BankAccount extends Auditable {
 	@NotNull
 	private BankAccountType type;
 
+	private String moduleId;
+
+	private String serviceId;
 }
