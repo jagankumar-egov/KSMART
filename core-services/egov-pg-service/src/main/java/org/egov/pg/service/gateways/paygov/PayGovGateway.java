@@ -148,7 +148,8 @@ public class PayGovGateway implements Gateway {
         queryMap.put(REQUEST_DATE_TIME_KEY, format.format(currentDate));
         String returnUrl = transaction.getCallbackUrl().replace(CITIZEN_URL, "");
 
-        queryMap.put(SERVICE_ID_KEY, "KSMARTLSG" /*getModuleCode(transaction)*/);
+      //  queryMap.put(SERVICE_ID_KEY, "KSMARTLSG" /*getModuleCode(transaction)*/);
+      queryMap.put(SERVICE_ID_KEY,transaction.getServiceId());
         String domainName =  returnUrl.replaceAll("http(s)?://|www\\.|/.*", "");
         String citizenReturnURL = returnUrl.split(domainName)[1];
         log.info("returnUrl::::"+getReturnUrl(citizenReturnURL, REDIRECT_URL));
@@ -252,7 +253,8 @@ public class PayGovGateway implements Gateway {
         HashMap<String, String> queryMap = new HashMap<>();
         queryMap.put(MESSAGE_TYPE_KEY, MESSAGE_TYPE);
         queryMap.put(MERCHANT_ID_KEY, PAYGOV_MERCHENT_ID);
-        queryMap.put(SERVICE_ID_KEY, /*getModuleCode(transaction)*/"KSMARTLSG");
+        // queryMap.put(SERVICE_ID_KEY, /*getModuleCode(transaction)*/"KSMARTLSG");
+        queryMap.put(SERVICE_ID_KEY, transaction.getServiceId());
         queryMap.put(ORDER_ID_KEY, transaction.getTxnId());
         queryMap.put(CUSTOMER_ID_KEY, transaction.getUser().getUuid());
         queryMap.put(TRANSACTION_AMOUNT_KEY, String.valueOf( transaction.getTxnAmount()));

@@ -64,4 +64,7 @@ public class BankAccount {
 
     private BankBranch bankBranch;
 
+    private String moduleId;
+
+    private String serviceId;
 }

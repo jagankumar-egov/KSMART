@@ -1,0 +1,2 @@
+ALTER TABLE egf_bankaccount ADD COLUMN bussinessservice CHARACTER VARYING(50)  NULL;
+ALTER TABLE egf_bankaccount ADD COLUMN serviceid CHARACTER VARYING(100)  NULL;

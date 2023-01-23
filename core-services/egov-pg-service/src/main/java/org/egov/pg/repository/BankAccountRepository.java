@@ -29,7 +29,7 @@ public class BankAccountRepository {
         this.appProperties = appProperties;
     }
 
-    public BankAccount getBankAccountsById( RequestInfo requestInfo, String tenantId) {
+    public BankAccountResponse getBankAccountsById( RequestInfo requestInfo, String tenantId) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("tenantId", tenantId);
 
@@ -45,7 +45,7 @@ public class BankAccountRepository {
         try {
             BankAccountResponse response = restTemplate.postForObject(uri, wrapper, BankAccountResponse.class);
             if( response.getBankAccounts().size() == 1 )
-                return response.getBankAccounts().get(0);
+                return response; //response.getBankAccounts().get(0);
             else {
                 log.error("Expected to find one bank account for tenant " +
                         "{}, instead found {}", tenantId, response.getBankAccounts().size());

@@ -8,6 +8,7 @@ import org.egov.pg.constants.PgConstants;
 import org.egov.pg.constants.TransactionAdditionalFields;
 import org.egov.pg.models.AuditDetails;
 import org.egov.pg.models.BankAccount;
+import org.egov.pg.models.BankAccountResponse;
 import org.egov.pg.models.Transaction;
 import org.egov.pg.repository.BankAccountRepository;
 import org.egov.pg.web.models.TransactionRequest;
@@ -33,7 +34,8 @@ public class EnrichmentService {
     private UserService userService;
 
     @Autowired
-    EnrichmentService(IdGenService idGenService, BankAccountRepository bankAccountRepository, ObjectMapper objectMapper, UserService userService) {
+    EnrichmentService(IdGenService idGenService, BankAccountRepository bankAccountRepository, ObjectMapper objectMapper,
+            UserService userService) {
         this.idGenService = idGenService;
         this.bankAccountRepository = bankAccountRepository;
         this.objectMapper = objectMapper;
@@ -44,8 +46,24 @@ public class EnrichmentService {
         Transaction transaction = transactionRequest.getTransaction();
         RequestInfo requestInfo = transactionRequest.getRequestInfo();
 
-        BankAccount bankAccount = bankAccountRepository.getBankAccountsById(requestInfo, transaction.getTenantId());
-        transaction.setAdditionalFields(singletonMap(TransactionAdditionalFields.BANK_ACCOUNT_NUMBER, bankAccount.getAccountNumber()));
+        BankAccountResponse bankAccountlist = bankAccountRepository.getBankAccountsById(requestInfo,
+                transaction.getTenantId());
+
+        bankAccountlist.getBankAccounts().forEach(bankAccount -> {
+            if (bankAccount.getModuleId().equals(transaction.getModule())) {
+                transaction.setServiceId(bankAccount.getServiceId());
+                transaction.setAdditionalFields(
+                        singletonMap(TransactionAdditionalFields.BANK_ACCOUNT_NUMBER, bankAccount.getAccountNumber()));
+                return;
+            } else if (bankAccount.getModuleId().equals("ALL")) {
+                transaction.setServiceId(bankAccount.getServiceId());
+                transaction.setAdditionalFields(
+                        singletonMap(TransactionAdditionalFields.BANK_ACCOUNT_NUMBER, bankAccount.getAccountNumber()));
+            }
+        });
+
+        // transaction.setAdditionalFields(singletonMap(TransactionAdditionalFields.BANK_ACCOUNT_NUMBER,
+        // bankAccount.getAccountNumber()));
 
         // Generate ID from ID Gen service and assign to txn object
         String txnId = idGenService.generateTxnId(transactionRequest);
@@ -54,17 +72,16 @@ public class EnrichmentService {
         transaction.setTxnStatus(Transaction.TxnStatusEnum.PENDING);
         transaction.setTxnStatusMsg(PgConstants.TXN_INITIATED);
 
-        if(Objects.isNull(transaction.getAdditionalDetails())){
+        if (Objects.isNull(transaction.getAdditionalDetails())) {
             transaction.setAdditionalDetails(objectMapper.createObjectNode());
             ((ObjectNode) transaction.getAdditionalDetails()).set("taxAndPayments",
                     objectMapper.valueToTree(transaction.getTaxAndPayments()));
+        } else {
+            Map<String, Object> additionDetailsMap = objectMapper.convertValue(transaction.getAdditionalDetails(),
+                    Map.class);
+            additionDetailsMap.put("taxAndPayments", (Object) transaction.getTaxAndPayments());
+            transaction.setAdditionalDetails(objectMapper.convertValue(additionDetailsMap, Object.class));
         }
-        else{
-            Map<String, Object> additionDetailsMap = objectMapper.convertValue(transaction.getAdditionalDetails(), Map.class);
-            additionDetailsMap.put("taxAndPayments",(Object) transaction.getTaxAndPayments());
-            transaction.setAdditionalDetails(objectMapper.convertValue(additionDetailsMap,Object.class));
-        }
-        
         String uri = UriComponentsBuilder
                 .fromHttpUrl(transaction.getCallbackUrl())
                 .queryParams(new LinkedMultiValueMap<>(singletonMap(PgConstants.PG_TXN_IN_LABEL,
