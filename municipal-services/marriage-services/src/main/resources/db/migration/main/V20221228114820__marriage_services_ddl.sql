@@ -48,11 +48,7 @@ CREATE TABLE IF NOT EXISTS public.eg_marriage_details
 
     TABLESPACE pg_default;
 
-ALTER TABLE IF EXISTS public.eg_marriage_details
-    OWNER to postgres;
--- Index: idx_eg_birth_details_tenantid
 
--- DROP INDEX IF EXISTS public.idx_eg_marriage_details_tenantid;
 
 CREATE INDEX IF NOT EXISTS idx_eg_marriage_details_tenantid
     ON public.eg_marriage_details USING btree
