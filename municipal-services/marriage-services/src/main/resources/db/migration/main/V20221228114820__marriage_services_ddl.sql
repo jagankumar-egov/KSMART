@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS public.eg_marriage_details
     CONSTRAINT eg_marriage_details_applicationno_key UNIQUE (applicationno),
     CONSTRAINT eg_marriage_details_fm_fileno_ukey UNIQUE (fm_fileno, tenantid),
     CONSTRAINT eg_marriage_details_registrationno_ukey1 UNIQUE (registrationno, tenantid)
-    )
+    );
 
    
 CREATE INDEX IF NOT EXISTS idx_eg_marriage_details_tenantid
