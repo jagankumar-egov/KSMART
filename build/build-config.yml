@@ -624,6 +624,14 @@ config:
         dockerfile: "build/maven/Dockerfile"
       - work-dir: "municipal-services/death-services/src/main/resources/db"
         image-name: "death-services-db"
+  
+  - name: "builds/upyog/municipal-services/marriage-services"
+    build:
+      - work-dir: "municipal-services/marriage-services"
+        image-name: "marriage-services"
+        dockerfile: "build/maven/Dockerfile"
+      - work-dir: "municipal-services/marriage-services/src/main/resources/db"
+        image-name: "marriage-services-db"
         
  # Utilities
  
