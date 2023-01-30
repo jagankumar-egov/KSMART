@@ -46,10 +46,7 @@ CREATE TABLE IF NOT EXISTS public.eg_marriage_details
     CONSTRAINT eg_marriage_details_registrationno_ukey1 UNIQUE (registrationno, tenantid)
     )
 
-    TABLESPACE pg_default;
-
-
-
+   
 CREATE INDEX IF NOT EXISTS idx_eg_marriage_details_tenantid
     ON public.eg_marriage_details USING btree
     (tenantid COLLATE pg_catalog."default" ASC NULLS LAST)
