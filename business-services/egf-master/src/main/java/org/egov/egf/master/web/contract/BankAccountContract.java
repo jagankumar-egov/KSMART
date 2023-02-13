@@ -93,6 +93,10 @@ public class BankAccountContract extends AuditableContract {
 	@NotNull
 	private BankAccountTypeContract type;
 
+	private String moduleId;
+
+	private String serviceId;
+	
 	public BankAccountContract(String id) {
 		this.id = id;
 	}
