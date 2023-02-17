@@ -13,7 +13,7 @@ public class PGRConstants {
 
 
     public static final String PGR_BUSINESSSERVICE = "PGR";
-    //Varsha
+   
     public static final String PGR_BUSINESSSERVICE_ENGG = "pgrengineering";
 
     public static final String PGR_BUSINESSSERVICE_HEALTH = "pgrhealth";
@@ -21,7 +21,7 @@ public class PGRConstants {
     public static final String PGR_SERVICE_ENGG_DEPT = "PWD";
 
     public static final String PGR_SERVICE_HEALTH_DEPT = "HTH";
-    //Varsha
+   
 
 
     public static final String USERTYPE_EMPLOYEE = "EMPLOYEE";
