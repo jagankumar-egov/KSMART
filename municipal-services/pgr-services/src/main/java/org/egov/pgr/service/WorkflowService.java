@@ -40,18 +40,8 @@ public class WorkflowService {
      *
      * */
     public BusinessService getBusinessService(ServiceRequest serviceRequest) {
-        String tenantId = serviceRequest.getService().getTenantId();
-         //Varsha
-        StringBuilder url = null;
-        if (serviceRequest.getService().getDeptCode().equals(PGR_SERVICE_ENGG_DEPT)) {
-         url = getSearchURLWithParams(tenantId, PGR_BUSINESSSERVICE_ENGG);
-        } else if (serviceRequest.getService().getDeptCode().equals(PGR_SERVICE_HEALTH_DEPT)) {
-            url = getSearchURLWithParams(tenantId, PGR_BUSINESSSERVICE_HEALTH);
-        }
-        else {
-            url = null;
-        }
-       //StringBuilder url = getSearchURLWithParams(tenantId, PGR_BUSINESSSERVICE);
+        String tenantId = serviceRequest.getService().getTenantId();    
+        StringBuilder url = getSearchURLWithParams(tenantId, PGR_BUSINESSSERVICE);
         RequestInfoWrapper requestInfoWrapper = RequestInfoWrapper.builder().requestInfo(serviceRequest.getRequestInfo()).build();
         Object result = repository.fetchResult(url, requestInfoWrapper);
         BusinessServiceResponse response = null;
