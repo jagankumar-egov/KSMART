@@ -14,14 +14,6 @@ public class PGRConstants {
 
     public static final String PGR_BUSINESSSERVICE = "PGR";
    
-    public static final String PGR_BUSINESSSERVICE_ENGG = "pgrengineering";
-
-    public static final String PGR_BUSINESSSERVICE_HEALTH = "pgrhealth";
-
-    public static final String PGR_SERVICE_ENGG_DEPT = "PWD";
-
-    public static final String PGR_SERVICE_HEALTH_DEPT = "HTH";
-  
     public static final String USERTYPE_EMPLOYEE = "EMPLOYEE";
    
     public static final String USERTYPE_CITIZEN = "CITIZEN";
