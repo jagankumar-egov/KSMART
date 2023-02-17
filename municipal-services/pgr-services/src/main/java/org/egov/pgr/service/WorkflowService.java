@@ -192,7 +192,14 @@ public class WorkflowService {
         processInstance.setAction(request.getWorkflow().getAction());
         processInstance.setModuleName(PGR_MODULENAME);
         processInstance.setTenantId(service.getTenantId());
-        processInstance.setBusinessService(getBusinessService(request).getBusinessService());
+       if (request.getService().getDeptCode().equals(PGR_SERVICE_ENGG_DEPT)) {
+             processInstance.setBusinessService(PGR_BUSINESSSERVICE_ENGG);
+        } else if (request.getService().getDeptCode().equals(PGR_SERVICE_HEALTH_DEPT)) {
+             processInstance.setBusinessService(PGR_BUSINESSSERVICE_HEALTH);
+        }
+             else {
+                 processInstance.setBusinessService("null");
+            }
         processInstance.setDocuments(request.getWorkflow().getVerificationDocuments());
         processInstance.setComment(workflow.getComments());
 
