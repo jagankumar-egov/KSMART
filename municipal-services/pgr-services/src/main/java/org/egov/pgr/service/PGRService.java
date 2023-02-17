@@ -92,7 +92,7 @@ public class PGRService {
         List<ServiceWrapper> serviceWrappers = repository.getServiceWrappers(criteria);
 
         if(CollectionUtils.isEmpty(serviceWrappers))
-            return new ArrayList<>();;
+            return new ArrayList<>();
 
         userService.enrichUsers(serviceWrappers);
         List<ServiceWrapper> enrichedServiceWrappers = workflowService.enrichWorkflow(requestInfo,serviceWrappers);
