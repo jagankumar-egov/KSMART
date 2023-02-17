@@ -49,6 +49,10 @@ public class Service   {
         @SafeHtml
         @JsonProperty("serviceCode")
         private String serviceCode = null;
+        
+        @SafeHtml
+        @JsonProperty("deptCode")
+        private String deptCode = null;
 
         @SafeHtml
         @JsonProperty("serviceRequestId")
