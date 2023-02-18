@@ -13,13 +13,13 @@ const envVariables = {
 
     repoProvider: process.env.REPO_PROVIDER || 'PostgreSQL',
 
-    whatsAppBusinessNumber : process.env.WHATSAPP_BUSINESS_NUMBER || '917834811114',
+    whatsAppBusinessNumber : process.env.WHATSAPP_BUSINESS_NUMBER || '919188400598',
 
-    rootTenantId: process.env.ROOT_TENANTID || 'pb',
+    rootTenantId: process.env.ROOT_TENANTID || 'kl',
 
-    supportedLocales: process.env.SUPPORTED_LOCALES || 'en_IN,hi_IN',
+    supportedLocales: process.env.SUPPORTED_LOCALES || 'en_IN',
 
-    googleAPIKey: process.env.GOOGLE_MAPS_API_KEY || '',
+    googleAPIKey: process.env.GOOGLE_MAPS_API_KEY || 'AIzaSyB_2cieu90RKipfkKS8I59nHLw48nvUiA4',
 
     dateFormat: process.env.DATEFORMAT || 'DD/MM/YYYY',
     timeZone: process.env.TIMEZONE || 'Asia/Kolkata',
