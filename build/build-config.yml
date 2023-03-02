@@ -632,6 +632,14 @@ config:
         dockerfile: "build/maven/Dockerfile"
       - work-dir: "municipal-services/marriage-services/src/main/resources/db"
         image-name: "marriage-services-db"
+  - name: "builds/upyog/kssm-services/kssm-snehapoorvam"
+    build:
+      - work-dir: "kssm-services/kssm-snehapoorvam"
+        image-name: "kssm-snehapoorvam"
+        dockerfile: "build/maven/Dockerfile"
+      - work-dir: "kssm-services/kssm-snehapoorvam/src/main/resources/db"
+        image-name: "kssm-snehapoorvam-db"
+        
         
  # Utilities
  
