@@ -67,7 +67,7 @@ public class PayGovGateway implements Gateway {
     private final String MESSAGE_TYPE_KEY = "messageType";
     private final String MERCHANT_ID_KEY = "merchantId";
 
-    private final String SERVICE_ID_KEY = "serviceId";
+    private final String SERVICE_ID_KEY = "KSMARTC070100";
     private final String ORDER_ID_KEY = "orderId";
     private final String CUSTOMER_ID_KEY = "customerId";
     private final String TRANSACTION_AMOUNT_KEY = "transactionAmount";
